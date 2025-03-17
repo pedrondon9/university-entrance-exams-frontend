@@ -1,0 +1,62 @@
+.menu-lateral-pg{
+    width: 240px;
+    position: sticky;
+    top: 60px;
+    height:auto;
+    margin-top: 0px;
+
+    
+}
+.menu-lateral-pg-cat{
+    display: flex;
+    height: 40px;
+    align-items: center;
+    background-color: #eaf4f7!important;
+    border-bottom: 2px solid #f8f8f8;
+    
+}
+.menu-lateral-pg-cat span{
+    font-weight: 600;
+    
+}
+.menu-lateral-colapsible-body{
+    padding-top: 0rem !important;
+    padding-right:0rem !important;
+    padding-bottom:0rem !important;
+    padding-left:0rem !important;
+    
+}
+.menu-lateral-colapsible-body .collection-item{
+    background-color: rgb(243, 240, 213) ;
+    cursor: pointer;
+}
+.verExamen{
+    background-color: #fff !important;
+    border-bottom: 1px solid #eee !important;
+    font-weight: 500;
+    font-size: 14px;
+    color: rgb(143, 0, 0);
+}
+@media screen and (max-width:990px) {
+
+    .menu-lateral-pg{
+        display: none;
+        
+    }
+}
+
+.cargar-examenes-spinner-container{
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 40px;
+}
+.cargar-examenes-spinner{
+    display: flex;
+    justify-content: center;
+}
+.cargar-examenes-spinner-container p{
+    font-weight: 700;
+    color: #212121;
+}

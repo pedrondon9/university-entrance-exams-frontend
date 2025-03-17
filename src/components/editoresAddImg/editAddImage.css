@@ -1,0 +1,140 @@
+.conatainer-seleccionar-imagenes-input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.selecionar-imagenes-agencia-1 {
+    display: flex;
+    width: 230px;
+    height: 200px;
+}
+
+.selecionar-imagenes-agencia-1 a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.selecionar-imagenes-agencia-1 a p {
+    color: darkgray !important;
+    font-weight: 600;
+
+}
+
+
+.subir-imagenes-agencia-lista-1 {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.subir-imagenes-agencia-lista-1 img {
+    width: 30%;
+    object-fit: contain;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+@media screen and (max-width:550px) {
+    .subir-imagenes-agencia-lista-1 img {
+        width: 45%;
+        object-fit: contain;
+        border-radius: 10px;
+        margin: 5px;
+    }
+}
+
+/******imagenes de eddCommentResp*******/
+.selecionar-imagenes-agencia-2 {
+    display: flex;
+    width: 180px;
+    height: 150px;
+    margin-top: 20px;
+}
+
+.selecionar-imagenes-agencia-2 a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.selecionar-imagenes-agencia-2 a p {
+    color: darkgray !important;
+    font-weight: 400;
+
+}
+
+.subir-imagenes-agencia-lista-2 {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.subir-imagenes-agencia-lista-2 img {
+    width: 25%;
+    object-fit: contain;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+@media screen and (max-width:550px) {
+    .subir-imagenes-agencia-lista-2 img {
+        width: 45%;
+        object-fit: contain;
+        border-radius: 10px;
+        margin: 5px;
+    }
+}
+
+/******imagenes de eddCommentResp*******/
+.selecionar-imagenes-agencia-3 {
+    display: flex;
+    width: 180px;
+    height: 150px;
+    margin-top: 20px;
+}
+
+.selecionar-imagenes-agencia-3 a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.selecionar-imagenes-agencia-3 a p {
+    color: darkgray !important;
+    font-weight: 400;
+
+}
+
+.subir-imagenes-agencia-lista-3 {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.subir-imagenes-agencia-lista-3 img {
+    width: 25%;
+    object-fit: contain;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+@media screen and (max-width:550px) {
+    .subir-imagenes-agencia-lista-3 img {
+        width: 45%;
+        object-fit: contain;
+        border-radius: 10px;
+        margin: 5px;
+    }
+}

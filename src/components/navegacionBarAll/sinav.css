@@ -1,0 +1,8 @@
+#slide-out-nav{
+    z-index: 2000;
+}
+#slide-out-nav a{
+    font-weight: 600;
+    color: #212121;
+    border-bottom: 2px solid #eee;
+}

@@ -1,0 +1,35 @@
+.side-nav-materias {
+    z-index: 1000;
+    width: 90%;
+}
+
+.cargar-examenes-spinner-side-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+.side-nav-lat span{
+    font-size: 18px;
+}
+.item-anos{
+    font-size: 18px;
+    font-weight: 500;
+}
+.verExamen{
+    font-size: 15px;
+}
+.item-materia{
+    border-bottom: 2px solid #f8f8f8;
+}
+.cargar-examenes-side-spinner{
+    display: flex;
+    justify-content: center;
+}
+.cargar-examenes-spinner-side-container p{
+    font-weight: 700;
+    color: #212121;
+}

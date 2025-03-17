@@ -1,0 +1,92 @@
+.conatainer-home{
+    width: 100%;
+    margin-top: 60px;
+}
+.conatainer-home-resp{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    
+    
+    
+}
+.conatainer-home-menu-lateral{
+    margin-top: 50px;
+    width: 240px;
+    display: flex;
+    position: sticky;
+    top: 60px;
+    height: auto;
+    margin-inline:5px;
+    
+    
+}
+.conatainer-home-pdf-edit-chat{
+    width: 800px;
+    margin-top: 30px;
+}
+.spinner-container-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.spinner-cargar-response-coment-principal-container{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+@media screen and (max-width:990px) {
+
+    .conatainer-home-menu-lateral{
+       display: none;
+    }
+}
+/*****texto-home  ....a continuacion*/
+.texto-home {
+    width: 100%;
+    display: flex;
+}
+.texto-home h4 span{
+    background-color: #fff;
+    padding-inline: 5px;
+    
+}
+@media screen and (max-width:430px) {
+    .texto-home img{
+        width: 100%;
+        object-fit: contain;
+        
+    }
+}
+/****************************/
+/****************** BOTON FLOTANTE ****************/
+.boton-flotante{
+    position: fixed;
+    right: 0px;
+    bottom: 20px;
+    background-color: rgb(241, 218, 3) !important ;
+    color: #212121;
+    font-weight: 700;
+    display: none;
+}
+@media screen and (max-width:990px) {
+    .boton-flotante{
+        display: block;
+    }
+}
+
+
+/****editor*****/
+
+.ql-editor p{
+    font-size: 16px !important;
+}
+
+.ql-editor ul > li{
+    font-size: 16px !important;
+}
+.ql-editor ol li{
+    font-size: 16px !important;
+}

@@ -1,0 +1,559 @@
+body {
+  background-color: #eee;
+}
+/****** para react-simple-image-view******/
+.styles-module_wrapper__1I_qj{
+  z-index: 2000 !important;
+}
+.styles-module_content__2jwZj{
+  width: 100% !important;
+}
+/*********************************/
+.block-chat-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.block-chat-container-resp {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 200px;
+  height: auto;
+  /*background-color: #021E7C;*/
+  
+  
+}
+
+.chat-container {
+  width: 100%;
+  height: auto;
+  /*background-color: #fff;*/
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 20px;
+  border-radius: 10px;
+  /*background-color: #8479C2;*/
+
+}
+
+.chat-user-container {
+  width: 95%;
+  height: auto;
+  /*background-color: #8479C2;*/
+  border-left: 2px solid rgb(112, 101, 0);
+}
+
+.chat-user-anounce {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-user-anounce-foto-perfil {
+  width: 36px;
+  height: 36px;
+  background-color: #eee;
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -12px;
+  margin-top: -8px;
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chat-user-anounce-foto-perfil p{
+  font-weight: 800;
+  font-size: 20px;
+}
+.chat-user-anounce-perfilName-descripAnounce {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.anounce-user-perfilName-date {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /*background-color: #929292;*/
+  height: 36px;
+  align-items: center;
+}
+
+.anounce-user-perfilName-date .user-name {
+  margin-left: 25px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.anounce-user-perfilName-date .anounce-date {
+  margin-left: 20px;
+  font-size: 13px;
+}
+/*** SECCION DE LA DESCRIPCION DEL COMENTARIO ********/
+.anounce-description {
+  width: 96%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.anounce-description-img {
+  display: flex;
+  margin-bottom: 25px;
+  padding: 2px;
+  flex-wrap: wrap;
+}
+.anounce-description-img .imagenes-view{
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+.anounce-description-img  .imagenes-view-big{
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+@media screen and (max-width:420px){
+  .anounce-description-img .imagenes-view-big{
+    width: 270px;
+    height: 150px;
+  }
+}
+@media screen and (max-width:330px){
+  .anounce-description-img .imagenes-view-big{
+    width: 200px;
+    height: 100px;
+  }
+}
+@media screen and (max-width:280px){
+  .anounce-description-img .imagenes-view-big{
+    width: 150px;
+    height: 100px;
+  }
+}
+
+
+
+
+
+
+
+@media screen and (max-width:510px){
+  .anounce-description-img .imagenes-view{
+    width: 160px;
+    height: 150px;
+  }
+}
+@media screen and (max-width:400px){
+  .anounce-description-img .imagenes-view{
+    width: 140px;
+    height: 100px;
+  }
+}
+@media screen and (max-width:345px){
+  .anounce-description-img .imagenes-view{
+    width: 120px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width:290px){
+  .anounce-description-img .imagenes-view{
+    width: 80px;
+    height: 100px;
+  }
+}
+.anounce-description iframe{
+  width: 60%;
+  height: 300px;
+  border-radius: 10px;
+}
+.anounce-description p{
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  margin-block-start: 2px !important;
+  margin-block-end: 2px !important;
+}
+.anounce-description h1{
+  font-size: 19px;
+  font-weight: 600;
+  margin-block-start: 8px !important;
+  margin-block-end: 8px !important;
+}
+.anounce-description ol li{
+  font-size: 15px;
+  font-weight: 600;
+}
+.anounce-description h2{
+  font-size: 16px;
+  font-weight: 500;
+  margin-block-start: 10px !important;
+  margin-block-end: 10px !important;
+}
+/**************************************/
+.anounce-icono {
+  width: 100%;
+  height: 40px;
+  /*background-color: cornflowerblue;*/
+  display: flex;
+}
+
+.anounce-icono a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: blue;
+}
+
+.anounce-respuestas-like {
+  margin-left: 10px;
+}
+
+.anounce-respuestas-like-num {
+  margin-right: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.anounce-respuestas-like-icon {
+  margin-top: -3px;
+}
+
+.anounce-respuestas-num-conatainer {
+  margin-left: 20px;
+}
+
+.anounce-respuestas-num {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.anounce-icono-respuestas {
+  margin-inline: 5px;
+}
+
+.anounce-responder-text {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+/*******************************/
+/******************CHAT USER RESPONSE******************/
+
+.chat-user-response{
+  width: auto;
+  height: auto;
+  /*background-color: #8479C2;*/
+  border-left: 2px solid rgb(112, 101, 0);
+  margin-left: 20px;
+}
+
+.chat-user-response {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-user-response-foto-perfil {
+  width: 30px;
+  height: 30px;
+  background-color: #eee;
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -15px;
+  border: 2px solid #eee;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chat-user-response-foto-perfil p{
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.chat-user-response-perfilName-descripAnounce {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.response-user-perfilName-date {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /*background-color: #929292;*/
+  height: 30px;
+  align-items: center;
+}
+/*
+.response-user-perfilName-date .user-name {
+  margin-left: 0px;
+  font-weight: 600;
+}
+*/
+.response-user-perfilName-date .user-name-response {
+  margin-left: 18px;
+  font-weight: 750;
+  font-size: 13px;
+}
+
+.response-user-perfilName-date .anounce-date-response {
+  margin-left: 20px;
+  font-size: 13px;
+}
+/**************************************/
+.response-description {
+  width: 96%;
+  padding-left: 10px;
+  /*background-color: #efebe9;*/
+}
+.response-description .imagenes-view{
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  background-color: #f5f5f5;
+}
+.response-description .imagenes-view-big{
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  background-color: #f5f5f5;
+}
+@media screen and (max-width:420px){
+  .response-description .imagenes-view-big{
+    width: 270px;
+    height: 150px;
+  }
+}
+@media screen and (max-width:330px){
+  .response-description .imagenes-view-big{
+    width: 200px;
+    height: 100px;
+  }
+}
+@media screen and (max-width:260px){
+  .response-description .imagenes-view-big{
+    width: 150px;
+    height: 100px;
+  }
+}
+
+
+
+
+
+
+
+@media screen and (max-width:510px){
+  .response-description .imagenes-view{
+    width: 160px;
+    height: 150px;
+  }
+}
+@media screen and (max-width:400px){
+  .response-description .imagenes-view{
+    width: 140px;
+    height: 100px;
+  }
+}
+@media screen and (max-width:345px){
+  .response-description .imagenes-view{
+    width: 110px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width:290px){
+  .response-description .imagenes-view{
+    width: 80px;
+    height: 100px;
+  }
+}
+
+
+
+
+.response-description iframe{
+  width: 60%;
+  object-fit: cover;
+  height: 300px;
+  border-radius: 10px;
+}
+.response-description p{
+  font-size: 16px ;
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 2px !important;
+  margin-block-end: 2px !important;
+  font-weight: 500;
+}
+.response-description h1{
+  font-size: 19px;
+  font-weight: 450;
+  margin-block-start: 5px !important;
+  margin-block-end: 5px !important;
+}
+.response-description h2{
+  font-size: 16px;
+  font-weight: 450;
+  margin-block-start: 5px !important;
+  margin-block-end: 5px !important;
+}
+/**************************************/
+.response-icono {
+  width: 100%;
+  height: 40px;
+  /*background-color: cornflowerblue;*/
+  display: flex;
+}
+
+.response-icono a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: blue;
+}
+
+.response-respuestas-like {
+  margin-left: 10px;
+}
+
+.response-respuestas-like-num {
+  margin-right: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.response-respuestas-like-icon {
+  margin-top: -3px;
+}
+
+.response-respuestas-num-conatainer {
+  margin-left: 20px;
+}
+
+.response-respuestas-num {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.response-icono-respuestas {
+  margin-inline: 5px;
+  
+}
+
+.response-responder-text {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+
+
+
+/*********** LINEA HORIZONTAL ********/
+.i{
+  width: 9px;
+  height: 1px;
+  position: relative;
+  margin-left: -10px;
+  margin-top: 15px;
+  
+}
+
+/***************/
+
+.editor-container{
+  width: 98%;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+/***********addRes*/
+.containerButtonAddComment{
+  margin-block: 10px;
+  display: flex;
+  /*justify-content: center;*/
+  
+  
+}
+.addCommentseButton{
+  background-color:#25cef0 !important;
+  color: #000;
+  font-weight: 600;
+  width: 60% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px !important;
+  font-size: 18px;
+
+}
+@media screen and (max-width:750px){
+  .addCommentseButton{
+    margin-left: 5px;
+  
+  }
+}
+.containerButtonAddRespons{
+  margin-block: 10px;
+}
+.addResponseButton{
+  margin-left: 5px;
+  height: 30px;
+  background-color: rgb(241, 218, 3)!important;
+  color: #000;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+
+  
+}
+
+
+
+@media screen and (max-width:750px){
+  .block-chat-container-resp {
+    width: 100% !important;
+    
+  }
+}
+
+/********************************/
+/********************************/
+/********************************/
+/********************************/
+/*********richeText*/
+/********************************/
+/********************************/
+/********************************/
+.ql-snow .ql-editor img {
+  max-width: 50% !important;
+
+}
+.ql-toolbar{
+  background-color: #fff;
+}

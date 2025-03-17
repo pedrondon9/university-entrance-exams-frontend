@@ -1,0 +1,429 @@
+.footer-conatiner {}
+
+.footer-container-principal {
+    width: 100%;
+    background-color: #303846;
+    display: flex;
+    justify-content: center;
+
+}
+
+.footer-container-principal-resp {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+/********* formulario de contacto ************/
+.mumbexMensaje {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.mumbexMensaje>h2 {
+    font-size: 20px;
+    margin-bottom: 13px;
+    color: rgb(209, 212, 212);
+
+}
+
+.formularioMensaje {
+    width: 700px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputFormContainer {
+    width: 100%;
+    display: flex;
+}
+
+.inputFormContainer .inputComment {
+    margin: 5px;
+    border: 2px solid rgb(98, 97, 97) !important;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(47, 48, 48);
+    width: 50%;
+    height: 40px;
+    padding-inline-start: 5px;
+    border-radius: 10px;
+
+}
+
+
+.textArea {
+    margin: 5px;
+    width: 99%;
+    border: 2px solid rgb(98, 97, 97);
+    font-size: 15px;
+    color: white;
+    background-color: rgb(47, 48, 48);
+    padding-inline-start: 5px;
+    padding-top: 5px;
+    border-radius: 10px;
+    height: 130px !important;
+}
+
+.inputComment:focus {
+    outline: none;
+}
+
+.formularioMensaje textarea:focus {
+    outline: none !important;
+}
+
+.botonEnviar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    width: 100px;
+    border: 2px solid #67D6ED;
+    color: #000000;
+    background-color: #67D6ED;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+.botonEnviar:hover {}
+
+@media screen and (max-width: 720px) {
+    .formularioMensaje {
+        width: 100%;
+    }
+}
+
+/********* fin del formulario de contacto ************/
+
+
+
+/********* redes sociales y contactos************/
+
+.footer-redesSociales-contact {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mumbexInfo-info-contact {
+    width: 100%;
+    display: flex;
+    justify-content: space-around
+}
+
+.footer-items {
+    color: white;
+    /*margin: 10px;*/
+}
+
+.mumbexInfo {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+.mumbexInfo>h2 {
+    font-size: 28px;
+    margin-bottom: 13px;
+    color: rgb(209, 212, 212);
+}
+
+.mumbexInfo>h3 {
+    font-size: 18px;
+    color: rgb(130, 127, 124);
+}
+
+.mumbexContacto {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+
+
+}
+
+.mumbexContacto>h2 {
+    font-size: 28px;
+    margin-bottom: 13px;
+    color: rgb(209, 212, 212);
+}
+
+.mumbexContacto>h3 {
+    font-size: 18px;
+    color: rgb(130, 127, 124);
+}
+
+.redesSociales {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.redes-items {
+    text-decoration: none;
+    font-size: 30px;
+    /* margin: 5px; */
+    color: rgb(134, 134, 134);
+    border-radius: 50%;
+    border-color: rgb(137, 136, 135);
+    border: 2px;
+}
+
+@media screen and (max-width:720px) {
+    .mumbexInfo-info-contact {
+        flex-direction: column;
+        padding-left: 10px;
+        width: 600px;
+
+    }
+
+    .mumbexInfo>h2 {
+        font-size: 28px;
+
+    }
+
+    .mumbexInfo>h3 {
+        font-size: 16px;
+    }
+
+    .mumbexContacto>h2 {
+        font-size: 28px;
+    }
+
+    .mumbexContacto>h3 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width:620px) {
+    .mumbexInfo-info-contact {
+        width: 500px;
+
+    }
+}
+
+@media screen and (max-width:520px) {
+    .mumbexInfo-info-contact {
+        width: 430px;
+
+    }
+}
+
+@media screen and (max-width:450px) {
+    .mumbexInfo-info-contact {
+        width: 350px;
+
+    }
+}
+
+
+
+@media screen and (max-width:450px) {
+    .mumbexInfo-info-contact {
+        flex-direction: column;
+        padding-left: 10px;
+    }
+
+    .mumbexInfo>h2 {
+        font-size: 25px;
+
+    }
+
+    .mumbexInfo>h3 {
+        font-size: 15px;
+    }
+
+    .mumbexContacto>h2 {
+        font-size: 25px;
+    }
+
+    .mumbexContacto>h3 {
+        font-size: 15px;
+    }
+}
+@media screen and (max-width:370px) {
+    .mumbexInfo-info-contact {
+        width: 100%;
+
+    }
+}
+/********* fin redes sociales y contactos************/
+
+
+
+.footerFinal {
+    padding-top: 10px;
+    height: 50px;
+    background-color: black;
+    color: rgb(209, 212, 212);
+    display: flex;
+    justify-content: space-around;
+}
+
+.menuFooter {
+    display: flex;
+    justify-content: space-around;
+}
+
+.formularioMensaje {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuFooter>.items {
+    text-decoration: none;
+    padding: 0px 10px;
+    color: rgb(209, 212, 212);
+    font-size: 12px;
+}
+
+.menuFooter>.items:hover {
+    color: white;
+}
+
+.copiright {
+    font-size: 12px;
+}
+
+@media (max-width: 700px) {
+    .footerFinal {
+        display: flex;
+        justify-content: center;
+        flex-direction: column-reverse;
+        padding-top: 0px;
+        margin-top: 0px;
+        height: 100px;
+    }
+
+    .copiright{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 25px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .menuFooter>.items {
+        padding: 0px 1px;
+        font-size: 12px;
+    }
+    .copiright{
+      text-align: center;
+    }
+}
+
+/*
+
+
+
+
+
+
+/* --------------------- RESPONSIVE----------------------- */
+/*
+@media (max-width: 1024px) {
+    .footer{
+        
+        display: block;
+        padding-top: 20px;
+        margin-bottom: 0px;
+        height: 380px;
+        
+
+        
+    }
+    .mumbexInfo{
+       
+        height:auto;
+    }
+    .mumbexContacto{
+        
+        
+    }
+    .mumbexMensaje{
+        width: 100%;
+        margin-top: 3px;
+        margin: 0px;
+        padding: 10px;
+        
+    }
+    .formularioMensaje{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 400px;
+    }
+    .inputForm{
+        width: 100%;
+        flex-direction: row;   
+
+    }
+
+    .inputForm > .correo{
+        margin-left: 5px;
+        margin-bottom: 10px;
+    }
+    .inputForm > .nombre{
+    
+        margin-bottom: 10px;
+    }
+    .input{
+        width: 100%;
+        margin: 0px;
+        
+    }
+    .textArea{
+        width: 100%;
+        height: 60px;
+        margin: 0px;
+    }
+    .botonEnviar{
+        margin: 10px 0px;
+        padding: 5px;
+        width: 25%;
+    }
+    .footerFinal{
+        display: flex;
+        justify-content: center;
+        flex-direction: column-reverse;
+        padding-top: 0px;
+        margin-top: 0px;
+        height: 100px;
+    }
+    .menuFooter{
+        padding: 0px 50px;
+    }
+
+    .copiright{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 25px;
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 344px) {
+    .mumbexMensaje{
+        height: 250px;
+    }
+    .inputForm{
+        width: 100%;
+        flex-direction: column;
+        
+
+    }
+    .inputForm > .correo{
+        margin-left: 0px;
+    }
+}
+*/

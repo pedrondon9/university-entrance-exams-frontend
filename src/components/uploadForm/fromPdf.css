@@ -1,0 +1,40 @@
+.form-upload-pdf-view-cpntainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+.form-upload-pdf-view-cpntainer-resp{
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    
+}
+.form-pload-container{
+    width: 40%;
+}
+.pdf-view-form{
+    width: 60%;
+    display: flex;
+    
+}
+.pdf-view-form-resp{
+    width: 100%;
+    
+}
+
+
+@media screen and (max-width:800px) {
+    .form-upload-pdf-view-cpntainer-resp{
+        justify-content: center;
+    }
+    .pdf-view-form{
+        display: none;
+        
+    }
+    .form-pload-container{
+        width: 98%;
+        margin-bottom: 60px;
+
+    }
+  }

@@ -1,0 +1,127 @@
+.pdf-conatainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.pdf-container-resp{
+    width:100%;
+    height: 500px;
+    /*background-color: rgb(214, 214, 214);*/
+    display: flex;
+    justify-content: center;
+}
+.rpv-core__viewer--light{
+    width: 100% !important;
+    
+}
+
+@media screen and (max-width:850px) {
+    .rpv-core__viewer--light{
+        width: 98% !important;
+        
+    }
+}
+  
+
+
+/***************************************************** personalizar pdf***********************************************/
+.rpv-default-layout__toolbar{
+    background-color: rgb(241, 218, 3) !important;
+}
+/**boton para cambiar el tema**/
+button[data-testid="theme__switch-button"]{
+    display: none;
+}
+button[data-testid="theme__switch-menu"]{
+    display: none;
+}
+/******************************************/
+/*boton para subir archivo*/
+button[data-testid="open__button"]{
+    display: none;
+}
+button[data-testid="open__menu"]{
+    display: none;
+}
+/******************************/
+
+
+/***************BOTON DEL DESPLAZAMIENTO EN HORIZONTAL DURANTE EL SCROLL***************/
+button[data-testid="scroll-mode__horizontal-menu"]{
+    display: none;
+}
+/***************************************/
+
+
+/***************boton desplazamiento en vertical para mobiles***************/
+
+button[data-testid="scroll-mode__vertical-menu"]{
+    display: none;
+}
+/***************************************/
+
+
+
+/***************BOTON DEL DESPLAZAMIENTO EN BLOQUE DURANTE EL SCROLL ***************/
+button[data-testid="scroll-mode__wrapped-menu"]{
+    display: none;
+}
+/***************************************/
+
+
+
+/***************BOTON DEL DESPLAZAMIENTO VERTICAL DURANTE SCROLL ***************/
+button[data-testid="properties__menu"]{
+    display: none;
+}
+/***************************************/
+
+
+
+/***************BOTON PARA VER PROPIEDADES DEL PDF ***************/
+button[data-testid="properties__menu"]{
+    display: none;
+}
+/***************************************/
+
+
+/************************* MENU LATERAL SU CONTENEDOR********************/
+div[class="rpv-default-layout__sidebar-headers"]{
+    display: none;
+}
+
+/************************************************************/
+
+
+
+/****************ROTACION DE PDF *****************************/
+button[data-testid="rotate__forward-menu"]{
+    display: none;
+}
+button[data-testid="rotate__backward-menu"]{
+    display: none;
+}
+/**********************ROTACION*****************/
+
+
+/************SEPARADOR******/
+div[role="separator"]{
+    display: none;
+}
+/**************************/
+
+/***************INDICADOR DE PAGINA Y DEZPLAZAMIENTO PAGINA SIGUIENTE****************/
+.rpv-toolbar__label{
+    display: none;
+}
+button[data-testid="page-navigation__next-button"]{
+    display: none;
+}
+button[data-testid="page-navigation__previous-button"]{
+    display: none;
+}
+/***************FIN DE INDICADOR DE PAGINA Y DEZPLAZAMIENTO PAGINA SIGUIENTE *********************/
+
+
+/***************************************************** personalizar pdf***********************************************/

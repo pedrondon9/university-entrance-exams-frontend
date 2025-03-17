@@ -1,0 +1,106 @@
+.modal-form {
+    width: 350px !important;
+    padding-block: 10px;
+    border-radius: 10px;
+}
+
+/* ------------------------- */
+/* formaulrio de registrarse y iniciar*/
+/* ------------------------- */
+.formulario-login-container-global {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.formulario-login-container {
+    width: 320px;
+}
+
+/****cambiar el formula********/
+.formulario-login-container-cambio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulario-login-container-cambio a {
+    margin-top: 2px !important;
+    margin-left: 10px;
+    color: blue;
+    font-size: 18px !important;
+    font-weight: bold;
+}
+
+.formulario-login-container-cambio p {
+    font-weight: bold;
+    color: #000;
+}
+/****fin de cambiar el formula********/
+
+
+
+.formulario-login-container input {
+    border: 2px solid #212121 !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+    background-color: #fff !important;
+    text-align: center;
+    color: #212121 !important;
+    font-size: 20px !important;
+    height: 35px !important;
+    padding-bottom: 5px !important;
+
+}
+
+.formulario-login-container input::placeholder {
+    color: gray !important;
+
+}
+
+.formulario-login-container-titulo p {
+    font-size: 25px !important;
+    font-weight: bold !important;
+}
+
+.formulario-login-container .error {
+    color: red;
+    font-weight: bold !important;
+
+}
+.formulario-login-error-respuesta p{
+    color: red;
+    font-weight: 500;
+    font-size: 18px !important;
+    text-align: center;
+    margin-bottom: -5px;
+  }
+
+.formulario-login-container-btn {
+    width: 100%;
+    float: right;
+    background-color: rgb(241, 218, 3) !important;
+    box-shadow: none !important;
+    color: #212121 !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.spinner-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:750px) {}
+
+/* ------------------------- */
+/* fin formaulrio de registrarse y iniciar*/
+/* ------------------------- */

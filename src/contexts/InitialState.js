@@ -1,0 +1,23 @@
+
+export const InitialState = {
+    dataRicheText:"",
+    dataComent:[],
+    paginaSiguiente:"",
+    userId :"001",
+    userName:"MX SOFTWARE",
+    userLinkPhoto:"HTTP",
+    validarUser:false,
+    loginSpinner:false,
+    errorResponseLogin:"",
+    userError:false,
+    examId:"",
+    pdfUrl:null,
+    formPdfView:null,
+    spinnerComment:false,
+    spinnerAddComment:false,
+    spinnerAddCommentRespons:false,
+    spinnerCargarCommentRespons:false,
+    spinnerAddResponsRespons:false,
+    spinnerCargarResponsRespons:false,
+    spinnerCargarExamenes:false,
+}

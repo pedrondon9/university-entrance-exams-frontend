@@ -1,0 +1,33 @@
+.pdf-form-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.pdf-form-container-resp{
+    padding-inline: 5px;
+    height: 500px;
+}
+.form-pdf-foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-pdf-foto img{
+    width: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+
+}
+
+@media screen and (max-width:800px) {
+    .pdf-form-container-resp{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        height: 350px;
+    }
+    .form-pdf-foto{
+        display: none;
+    }
+  }

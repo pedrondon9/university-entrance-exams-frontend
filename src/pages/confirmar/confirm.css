@@ -1,0 +1,54 @@
+/*********  CONFIRMAR REGISTRO  *************************/
+.confirmContainer {
+    height: 40rem ;
+    align-items: center;
+  
+  }
+  
+  .confirmContainerResp {
+    height: 100%;
+    align-items: center;
+  }
+  
+  .confirmContainerLoader {
+    height: 100%;
+    /*margin-top: -50px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .confirmContainerLoader p{
+    font-weight: 700;
+    font-size: 15px !important;
+    color: #021E7C;
+  }
+  .loaderSpinnerConfirm {}
+  
+  .containerFormCodigo{
+    height: 100%;
+    /*margin-top: -50px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-inline:5px ;
+  }
+  .containerFormCodigo h1{
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+  }
+  .containerFormCodigo input{
+    width: 250px !important;
+    border: 2px solid blue !important;
+    box-shadow: none !important;
+    border-radius: 5px !important;
+    padding-left: 5px !important;
+    height: 30px !important;
+    text-align: center;
+  }
+  
+  
+  /*********  FIN DE CONFIRMAR REGISTRO  *************************/
