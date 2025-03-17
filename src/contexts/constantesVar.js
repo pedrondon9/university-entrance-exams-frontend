@@ -1,4 +1,4 @@
-export const URL_SERVER = process.env.REACT_APP_URL_API //"http://localhost:5000"
+export const URL_SERVER = process.env.REACT_APP_URL_APISELECT//"http://localhost:5000"
 export const DATA_RICHE_TEXT = "dataRicheText"
 export const PAGINA_SIGUIENTE = "paginaSiguiente"
 export const USER_ID = "userId"
