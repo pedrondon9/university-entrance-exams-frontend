@@ -14,7 +14,7 @@ import M from 'materialize-css';
 
 function Editor3s({ comentId }) {
     const { dispatch, GetDataComentResponse, AddComentResponse, userId, userName, userLinkPhoto, validarUser,
-        AddRespComentResponse, spinnerAddResponsRespons } = useContext(AppContext)
+        AddRespComentResponse, spinnerAddResponsRespons,dataApp } = useContext(AppContext)
     const [value, setValue] = useState('');
     const [imagen1, setImagen1] = useState('')
     const [imagen2, setImagen2] = useState('')
@@ -163,7 +163,9 @@ function Editor3s({ comentId }) {
 
     const GetComResp = () => {
         if (value || imagen1) {
-            AddRespComentResponse(value, userName, userLinkPhoto, userId, "2", comentId, imagen1, imagen2, imagen3, imagen4)
+
+            AddRespComentResponse(value, dataApp.USER_NAME, dataApp.USER_LINK_PHOTO, dataApp.USER_ID, "2", comentId,imagen1,imagen2,imagen3,imagen4)
+
             LimpiarImagenes()
             setValue("")
         } else {
@@ -229,7 +231,7 @@ function Editor3s({ comentId }) {
                 <input type="file" multiple style={{ display: "none" }} id='input-imagenes-agencia-3' onChange={(e) => { ObtenerImagenesInput(e.target.files) }} />
             </div>
             <div className='containerButtonAddRespons'>
-                {validarUser ?
+                {dataApp.VALIDAR_USER ?
                     <Link
                         to={"#!"}
                         onClick={() => {
@@ -239,7 +241,7 @@ function Editor3s({ comentId }) {
                             //     payload: value
                             // })
                             // console.log(value)
-                        }} className='btn-small addCommentseButton' >{!spinnerAddResponsRespons ? "Publicar" : <PulseLoader size={9} color="#212121" />}
+                        }} className='btn-small addCommentseButton' >{!dataApp.ADD_RESPONSE_RESPONSE_SPINNER ? "Publicar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
                     <Link to={"#!"} onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Publicar</Link>

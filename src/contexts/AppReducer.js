@@ -5,7 +5,7 @@ import {
     CARGAR_COMMENT, CARGAR_RESPONSE_COMENT, CARGAR_RESPONSE_RESPONSE, DATA_RICHE_TEXT, ERROR_USER, EXAMEN_ID, LOGIN_SPINNER, PAGINA_SIGUIENTE, PDF_VIEW_FORM,
     RESP_ERROR_LOGIN,
     SPINNER_CARGAR_EXAMENES,
-    URL_PDF, USER_ID, USER_LINK_PHOTO, USER_NAME, VALIDAR_USER
+    URL_PDF, USER_ID, USER_LINK_PHOTO, USER_NAME, VALIDAR_USER,DATA_APP_CONTEXT
 } from './constantesVar'
 
 
@@ -124,6 +124,15 @@ const AppReducer = (state, action) => {
                 ...state,
                 userLinkPhoto: payload,
             };
+        case DATA_APP_CONTEXT :
+            return {
+                ...state,
+                dataApp:{
+                    ...state.dataApp,
+                    ...payload
+
+                }
+            }
         default:
             return state;
     }

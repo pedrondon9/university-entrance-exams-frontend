@@ -20,20 +20,20 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 
 function VerPdf() {
-  const { pdfUrl } = useContext(AppContext)
+  const { dataApp } = useContext(AppContext)
   const defaultLayoutPluginInstance = defaultLayoutPlugin({});
 
   return (
     <>
       {
-        pdfUrl ?
+        dataApp.URL_PDF ?
           <div className='pdf-conatainer'>
 
             < div className='pdf-container-resp' >
               <Worker workerUrl='https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.js'>
                 <Viewer
                   localization={es_ES}
-                  fileUrl={pdfUrl}
+                  fileUrl={dataApp.URL_PDF}
                   plugins={[defaultLayoutPluginInstance]}
                 />
               </Worker>

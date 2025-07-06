@@ -10,7 +10,7 @@ import 'animate.css';
 
 
 function Login() {
-    const { Logins, dispatch, loginSpinner, errorResponseLogin, userError, Registers } = useContext(AppContext)
+    const { Logins, dispatch, loginSpinner, errorResponseLogin, userError, Registers,dataApp } = useContext(AppContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -22,10 +22,8 @@ function Login() {
     const MensageForm = () => {
         return (
             <>
-                {/* <p className='animate__shakeX animate__animated animate__repeat-1'>{respServerUserUndefined && errors === "" ? respServerUserUndefined : ""}</p>
-                <p className='animate__shakeX animate__animated animate__repeat-1'>{respServerUserUndefined === "" && errors ? errors : ""}</p> */}
-                <p className='animate__shakeX animate__animated animate__repeat-1'>{userError&& errors===""? errorResponseLogin : ""}</p>
-                <p className='animate__shakeX animate__animated animate__repeat-1'>{userError===false&& errors? errors :""}</p>
+                <p className='animate__shakeX animate__animated animate__repeat-1'>{dataApp.ERROR_USER&& errors===""? dataApp.RESP_ERROR_LOGIN : ""}</p>
+                <p className='animate__shakeX animate__animated animate__repeat-1'>{dataApp.ERROR_USER===false&& errors? errors :""}</p>
             </>
         )
     }
@@ -177,7 +175,7 @@ function Login() {
                                 }
                             }
                         >
-                            {loginSpinner ? <PulseLoader size={15} color="#212121" /> : <>{cambiarFormulario ? "Registrarse" : "Iniciar"}</>}
+                            {dataApp.LOGIN_SPINNER ? <PulseLoader size={15} color="#212121" /> : <>{cambiarFormulario ? "Registrarse" : "Iniciar"}</>}
                         </button>
                     </form>
                 </div>

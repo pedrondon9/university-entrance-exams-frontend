@@ -16,12 +16,12 @@ import { getFilePlugin } from '@react-pdf-viewer/get-file';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
-//PDF_VIEW QUE PERMITE VISUALIZAR EL PDF DEL EXAMEN ELEGIDO
+//PDF_VIEW QUE PERMITE VISUALIZAR EL PDF DEL EXAMEN ELEGIDO EL EN MENU LATERAL
 
 function PdfForm() {
   const defaultLayoutPluginInstance = defaultLayoutPlugin({});
 
-  const { formPdfView } = useContext(AppContext)
+  const { dataApp } = useContext(AppContext)
 
 
   const getFilePluginInstance = getFilePlugin();
@@ -32,12 +32,12 @@ function PdfForm() {
     <div className='pdf-form-conatainer'>
 
       <div className='pdf-form-container-resp'>
-        {formPdfView ?
+        {dataApp.PDF_VIEW_FORM ?
         //el pdf_view
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.js">
             <Viewer
               localization={es_ES}
-              fileUrl={formPdfView}
+              fileUrl={dataApp.PDF_VIEW_FORM}
 
             />
           </Worker>
