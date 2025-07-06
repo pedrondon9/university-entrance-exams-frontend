@@ -69,6 +69,8 @@ function Editors() {
         }
 
     }
+
+    console.log(dataApp)
     const LimpiarError = () => {
         //limpiar el error anterior
         dispatch({
@@ -310,7 +312,7 @@ function Editors() {
                         }} className='btn-small addCommentseButton' >{!dataApp.ADD_COMMENT_SPINNER ? "Publicar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
-                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Publicar</Link>
+                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Publicar 55</Link>
                 }
 
             </div>

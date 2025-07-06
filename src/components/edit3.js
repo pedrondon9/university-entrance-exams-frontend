@@ -13,8 +13,7 @@ import M from 'materialize-css';
 //import "react-quill/dist/quill.bubble.css"
 
 function Editor3s({ comentId }) {
-    const { dispatch, GetDataComentResponse, AddComentResponse, userId, userName, userLinkPhoto, validarUser,
-        AddRespComentResponse, spinnerAddResponsRespons,dataApp } = useContext(AppContext)
+    const { dispatch, AddRespComentResponse,dataApp } = useContext(AppContext)
     const [value, setValue] = useState('');
     const [imagen1, setImagen1] = useState('')
     const [imagen2, setImagen2] = useState('')

@@ -12,7 +12,7 @@ import M from 'materialize-css';
 
 
 function Editor2s({ comentId }) {
-    const { validarUser, dispatch, GetDataComentResponse, AddComentResponse, userId, userName, userLinkPhoto, examId, spinnerAddCommentRespons,dataApp } = useContext(AppContext)
+    const { dispatch, AddComentResponse,dataApp } = useContext(AppContext)
     const [value, setValue] = useState('');
     const [imagen1, setImagen1] = useState('')
     const [imagen2, setImagen2] = useState('')

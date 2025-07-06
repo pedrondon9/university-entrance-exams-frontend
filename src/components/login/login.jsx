@@ -166,11 +166,11 @@ function Login() {
                                 () => {
                                     dispatch({
                                         type: RESP_ERROR_LOGIN,
-                                        payload: ""
+                                        payload: {"RESP_ERROR_LOGIN":""}
                                     })
                                     dispatch({
                                         type: ERROR_USER,
-                                        payload: false
+                                        payload: {"ERROR_USER":false}
                                     })
                                 }
                             }
