@@ -16,7 +16,7 @@ import "./editAddImage.css"
 //import "react-quill/dist/quill.bubble.css"
 
 function Editors() {
-    const { dispatch, AddComent, userId, userName, userLinkPhoto, examId, spinnerAddComment, validarUser } = useContext(AppContext)
+    const { dispatch, AddComent, dataApp } = useContext(AppContext)
     const [value, setValue] = useState('');
     const [imagen1, setImagen1] = useState('')
     const [imagen2, setImagen2] = useState('')
@@ -50,10 +50,12 @@ function Editors() {
     }
 
     const Add = () => {
-        if (examId) {
-            console.log(examId)
+        if (dataApp.EXAMEN_ID) {
+            console.log(dataApp.EXAMEN_ID)
             if (value || imagen1) {
-                AddComent(value, userName, userLinkPhoto, userId, "1", examId, imagen1, imagen2, imagen3, imagen4)
+                //AddComent(value, userName, userLinkPhoto, userId, "1", examId, imagen1, imagen2, imagen3, imagen4)
+                AddComent(value, dataApp.USER_NAME, dataApp.USER_LINK_PHOTO, dataApp.USER_ID, "1", dataApp.EXAMEN_ID,imagen1,imagen2,imagen3,imagen4)
+
                 setValue("")
                 LimpiarImagenes1()
             } else {
@@ -71,7 +73,7 @@ function Editors() {
         //limpiar el error anterior
         dispatch({
             type: ERROR_USER,
-            payload: false
+            payload: {'ERROR_USER':false}
         })
     }
     const formats = [
@@ -295,7 +297,7 @@ function Editors() {
                 <input type="file" multiple style={{ display: "none" }} id='input-imagenes-agencia' onChange={(e) => { ObtenerImagenesInput(e.target.files) }} />
             </div>
             <div className='containerButtonAddComment'>
-                {validarUser ?
+                {dataApp.VALIDAR_USER ?
                     <Link
                         to="#!"
                         onClick={() => {
@@ -305,7 +307,7 @@ function Editors() {
                             //     payload: value
                             // })
                             // console.log(value)
-                        }} className='btn-small addCommentseButton' >{!spinnerAddComment ? "Publicar" : <PulseLoader size={9} color="#212121" />}
+                        }} className='btn-small addCommentseButton' >{!dataApp.ADD_COMMENT_SPINNER ? "Publicar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
                     <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Publicar</Link>

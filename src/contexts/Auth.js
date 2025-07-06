@@ -5,7 +5,7 @@ import AppReducer from "./AppReducer";
 import axios from "axios";
 import M from "materialize-css";
 
-import { ADD_COMMENT_RESPONSE_SPINNER, ADD_COMMENT_SPINNER, ADD_RESPONSE_RESPONSE_SPINNER, CARGAR_COMMENT, CARGAR_RESPONSE_COMENT, CARGAR_RESPONSE_RESPONSE, ERROR_USER, LOGIN_SPINNER, PAGINA_SIGUIENTE, RESP_ERROR_LOGIN, SPINNER_CARGAR_EXAMENES, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from "./constantesVar";
+import { DATA_APP_CONTEXT, ADD_COMMENT_RESPONSE_SPINNER, ADD_COMMENT_SPINNER, ADD_RESPONSE_RESPONSE_SPINNER, CARGAR_COMMENT, CARGAR_RESPONSE_COMENT, CARGAR_RESPONSE_RESPONSE, ERROR_USER, LOGIN_SPINNER, PAGINA_SIGUIENTE, RESP_ERROR_LOGIN, SPINNER_CARGAR_EXAMENES, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from "./constantesVar";
 
 
 
@@ -34,8 +34,8 @@ export default (props) => {
             setMore(true)
             //activar spinner de carga de comentarios
             dispatch({
-                type: CARGAR_COMMENT,
-                payload: true
+                type: DATA_APP_CONTEXT,
+                payload: { "CARGAR_COMMENT": true }
             })
             try {
 
@@ -47,19 +47,19 @@ export default (props) => {
                     })
                     if (comments.data.docs) {
                         dispatch({
-                            type: PAGINA_SIGUIENTE,
-                            payload: comments.data.nextPage
+                            type: DATA_APP_CONTEXT,
+                            payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
                         })
                         setPaginaNext(comments.data.nextPage)
                         setDataComentario(comments.data.docs)
                         dispatch({
-                            type: CARGAR_COMMENT,
-                            payload: false
+                            type: DATA_APP_CONTEXT,
+                            payload: { "CARGAR_COMMENT": false }
                         })
                     } else {
                         dispatch({
-                            type: CARGAR_COMMENT,
-                            payload: false
+                            type: DATA_APP_CONTEXT,
+                            payload: { "CARGAR_COMMENT": false }
                         })
                     }
                 } else {
@@ -70,19 +70,19 @@ export default (props) => {
                     })
                     if (comments.data.docs) {
                         dispatch({
-                            type: PAGINA_SIGUIENTE,
-                            payload: comments.data.nextPage
+                            type: DATA_APP_CONTEXT,
+                            payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
                         })
                         setPaginaNext(comments.data.nextPage)
                         setDataComentario(comments.data.docs)
                         dispatch({
-                            type: CARGAR_COMMENT,
-                            payload: false
+                            type: DATA_APP_CONTEXT,
+                            payload: { "CARGAR_COMMENT": false }
                         })
                     } else {
                         dispatch({
-                            type: CARGAR_COMMENT,
-                            payload: false
+                            type: DATA_APP_CONTEXT,
+                            payload: { "CARGAR_COMMENT": false }
                         })
                     }
                 }
@@ -91,8 +91,8 @@ export default (props) => {
 
             } catch (error) {
                 dispatch({
-                    type: CARGAR_COMMENT,
-                    payload: false
+                    type: DATA_APP_CONTEXT,
+                    payload: { "CARGAR_COMMENT": false }
                 })
             }
         } else {
@@ -117,7 +117,7 @@ export default (props) => {
                     console.log(comments.data.docs)
                     dispatch({
                         type: PAGINA_SIGUIENTE,
-                        payload: comments.data.nextPage
+                        payload:{"PAGINA_SIGUIENTE":comments.data.nextPage}
                     })
                     setPaginaNext(comments.data.nextPage)
                     setDataComentario(comments.data.docs)
@@ -135,7 +135,7 @@ export default (props) => {
                     console.log(comments.data.docs)
                     dispatch({
                         type: PAGINA_SIGUIENTE,
-                        payload: comments.data.nextPage
+                        payload:{"PAGINA_SIGUIENTE":comments.data.nextPage}
                     })
                     setPaginaNext(comments.data.nextPage)
                     setDataComentario(comments.data.docs)
@@ -150,7 +150,7 @@ export default (props) => {
         } catch (error) {
             dispatch({
                 type: CARGAR_COMMENT,
-                payload: false
+                payload:{"CARGAR_COMMENT":false}
             })
         }
     }
@@ -179,18 +179,20 @@ export default (props) => {
                 setDataComentarioResp(comments.data.docs)
                 dispatch({
                     type: CARGAR_RESPONSE_COMENT,
-                    payload: false
+                    payload:{"CARGAR_RESPONSE_COMENT":false}
                 })
             } else {
                 dispatch({
                     type: CARGAR_RESPONSE_COMENT,
-                    payload: false
+                    payload:{"CARGAR_RESPONSE_COMENT":false}
+
                 })
             }
         } catch (error) {
             dispatch({
                 type: CARGAR_RESPONSE_COMENT,
-                payload: false
+                payload:{"CARGAR_RESPONSE_COMENT":false}
+
             })
         }
     }
@@ -243,18 +245,21 @@ export default (props) => {
                 setDataRespComentarioResp(comments.data.docs)
                 dispatch({
                     type: CARGAR_RESPONSE_RESPONSE,
-                    payload: false
+                    payload:{"CARGAR_RESPONSE_RESPONSE":false}
+                    
                 })
             } else {
                 dispatch({
                     type: CARGAR_RESPONSE_RESPONSE,
-                    payload: false
+                    payload:{"CARGAR_RESPONSE_RESPONSE":false}
+                    
                 })
             }
         } catch (error) {
             dispatch({
                 type: CARGAR_RESPONSE_RESPONSE,
-                payload: false
+                payload:{"CARGAR_RESPONSE_RESPONSE":false}
+            
             })
         }
     }
@@ -282,68 +287,71 @@ export default (props) => {
 
 
     //funcion para añadir primeros comentrios o comentarios principales
-    const AddComent = async (coment, userName, userPhoto, userId, comentCategory, examenId,imagen1,imagen2,imagen3,imagen4) => {
+    const AddComent = async (coment, userName, userPhoto, userId, comentCategory, examenId, imagen1, imagen2, imagen3, imagen4) => {
         dispatch({
             type: ADD_COMMENT_SPINNER,
             payload: true
         })
-        
+
         const fs = new FormData()
-        fs.append("userName",userName)
-        fs.append("userPhoto",userPhoto)
-        fs.append("coment",coment)
-        fs.append("userId",userId)
-        fs.append("comentCategory",comentCategory)
-        fs.append("examenId",examenId )
+        fs.append("userName", userName)
+        fs.append("userPhoto", userPhoto)
+        fs.append("coment", coment)
+        fs.append("userId", userId)
+        fs.append("comentCategory", comentCategory)
+        fs.append("examenId", examenId)
         fs.append("imagen1", imagen1)
         fs.append("imagen2", imagen2)
         fs.append("imagen3", imagen3)
         fs.append("imagen4", imagen4)
         try {
-            const add = await axios.post(`${URL_SERVER}/addComent`, fs, { headers: { "Content-Type": "multipart/form-data" } }) 
+            const add = await axios.post(`${URL_SERVER}/addComent`, fs, { headers: { "Content-Type": "multipart/form-data" } })
             if (add.data == "publicado") {
                 GetDataComentAdd(examenId)//volver a cargar comentarios
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_SPINNER,
-                    payload: false
+                    payload:{"ADD_COMMENT_SPINNER":false}
+                
                 })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_SPINNER,
-                    payload: false
+                    payload:{"ADD_COMMENT_SPINNER":false}
+                
                 })
             }
         } catch (error) {
             dispatch({
                 type: ADD_COMMENT_SPINNER,
-                payload: false
+                payload:{"ADD_COMMENT_SPINNER":false}
+            
             })
         }
     }
 
     //funcion para añadir  segundos comentrios o respuestas del primer comentario
-    const AddComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId,imagen1,imagen2,imagen3,imagen4) => {
+    const AddComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId, imagen1, imagen2, imagen3, imagen4) => {
         dispatch({
             type: ADD_COMMENT_RESPONSE_SPINNER,
             payload: true
-        })
+        })   
         const fs = new FormData()
-        fs.append("userName",userName)
-        fs.append("userPhoto",userPhoto)
-        fs.append("coment",coment)
-        fs.append("userId",userId)
-        fs.append("comentCategory",comentCategory)
-        fs.append("comentId",comentId )
+        fs.append("userName", userName)
+        fs.append("userPhoto", userPhoto)
+        fs.append("coment", coment)
+        fs.append("userId", userId)
+        fs.append("comentCategory", comentCategory)
+        fs.append("comentId", comentId)
         fs.append("imagen1", imagen1)
         fs.append("imagen2", imagen2)
         fs.append("imagen3", imagen3)
         fs.append("imagen4", imagen4)
         try {
-            const add = await axios.post(`${URL_SERVER}/addComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } }) 
+            const add = await axios.post(`${URL_SERVER}/addComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
             if (add.data == "publicado") {
                 GetDataComentResponseAdd(comentRespId)
                 //comentRespId(comentRespId)
@@ -351,43 +359,46 @@ export default (props) => {
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_RESPONSE_SPINNER,
-                    payload: false
+                    payload:{"ADD_COMMENT_RESPONSE_SPINNER":false}
+                
                 })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_RESPONSE_SPINNER,
-                    payload: false
+                    payload:{"ADD_COMMENT_RESPONSE_SPINNER":false}
+                
                 })
             }
         } catch (error) {
             dispatch({
                 type: ADD_COMMENT_RESPONSE_SPINNER,
-                payload: false
+                payload:{"ADD_COMMENT_RESPONSE_SPINNER":false}
+            
             })
         }
     }
 
     //funcion para añadir terceros comentrios o respuestas del segundo comentario
-    const AddRespComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId,imagen1,imagen2,imagen3,imagen4) => {
+    const AddRespComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId, imagen1, imagen2, imagen3, imagen4) => {
         dispatch({
             type: ADD_RESPONSE_RESPONSE_SPINNER,
             payload: true
         })
         const fs = new FormData()
-        fs.append("userName",userName)
-        fs.append("userPhoto",userPhoto)
-        fs.append("coment",coment)
-        fs.append("userId",userId)
-        fs.append("comentCategory",comentCategory)
-        fs.append("comentId",comentId )
+        fs.append("userName", userName)
+        fs.append("userPhoto", userPhoto)
+        fs.append("coment", coment)
+        fs.append("userId", userId)
+        fs.append("comentCategory", comentCategory)
+        fs.append("comentId", comentId)
         fs.append("imagen1", imagen1)
         fs.append("imagen2", imagen2)
         fs.append("imagen3", imagen3)
         fs.append("imagen4", imagen4)
         try {
-            const add = await axios.post(`${URL_SERVER}/addRespComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } }) 
+            const add = await axios.post(`${URL_SERVER}/addRespComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
             if (add.data == "publicado") {
                 GetDataRespComentResponseAdd(respComentRespId)
                 //comentRespId(comentRespId)
@@ -395,20 +406,23 @@ export default (props) => {
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_RESPONSE_RESPONSE_SPINNER,
-                    payload: false
+                    payload:{"ADD_RESPONSE_RESPONSE_SPINNER":false}
+                
                 })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_RESPONSE_RESPONSE_SPINNER,
-                    payload: false
+                    payload:{"ADD_RESPONSE_RESPONSE_SPINNER":false}
+                
                 })
             }
         } catch (error) {
             dispatch({
                 type: ADD_RESPONSE_RESPONSE_SPINNER,
-                payload: false
+                payload:{"ADD_RESPONSE_RESPONSE_SPINNER":false}
+            
             })
         }
     }
@@ -435,7 +449,8 @@ export default (props) => {
                     //console.log(comments.data.docs)
                     dispatch({
                         type: PAGINA_SIGUIENTE,
-                        payload: comments.data.nextPage
+                        payload:{"PAGINA_SIGUIENTE":comments.data.nextPage}
+
                     })
                     setDataComentario([...dataComentario, ...comments.data.docs])
                     setPaginaNext(comments.data.nextPage)
@@ -476,16 +491,16 @@ export default (props) => {
         if (email !== "" && contrasena !== "") {
             dispatch({
                 type: LOGIN_SPINNER,
-                payload: true
+                payload: {"LOGIN_SPINNER":true}
             })
 
             dispatch({
                 type: ERROR_USER,
-                payload: false
+                payload: {"ERROR_USER":false}
             })
             dispatch({
                 type: RESP_ERROR_LOGIN,
-                payload: ""
+                payload:{"RESP_ERROR_LOGIN":""}
             })
 
 
@@ -499,19 +514,19 @@ export default (props) => {
                     //window.sessionStorage.setItem("userInfo",user.data)
                     dispatch({
                         type: LOGIN_SPINNER,
-                        payload: false
+                        payload: {"LOGIN_SPINNER":false}
                     })
                     dispatch({
                         type: ERROR_USER,
-                        payload: true
+                        payload: {"ERROR_USER":true}
                     })
                     dispatch({
                         type: RESP_ERROR_LOGIN,
-                        payload: user.data.mens
+                        payload: {"RESP_ERROR_LOGIN":user.data.mens}
                     })
                     dispatch({
                         type: VALIDAR_USER,
-                        payload: true
+                        payload: {"VALIDAR_USER":true}
                     })
                     window.localStorage.setItem("code", user.data.code)
                     //const userData = await user.data.user
@@ -519,11 +534,11 @@ export default (props) => {
 
                     dispatch({
                         type: USER_NAME,
-                        payload: user.data.user
+                        payload: {"USER_NAME":user.data.user}
                     })
                     dispatch({
                         type: USER_ID,
-                        payload: user.data.id
+                        payload: {"USER_ID":user.data.id}
                     })
                     const elem = document.querySelector(".modal-form")
                     var instance = M.Modal.getInstance(elem);
@@ -531,28 +546,28 @@ export default (props) => {
                 } else {
                     dispatch({
                         type: LOGIN_SPINNER,
-                        payload: false
+                        payload: {"LOGIN_SPINNER":false}
                     })
                     dispatch({
                         type: ERROR_USER,
-                        payload: true
+                        payload: {"ERROR_USER":true}
                     })
                     dispatch({
                         type: RESP_ERROR_LOGIN,
-                        payload: user.data.mens
+                        payload: {"RESP_ERROR_LOGIN":user.data.mens}
                     })
 
                     dispatch({
                         type: VALIDAR_USER,
-                        payload: false
+                        payload: {"VALIDAR_USER":false}
                     })
                     dispatch({
                         type: USER_NAME,
-                        payload: ""
+                        payload: {"USER_NAME":""}
                     })
                     dispatch({
                         type: USER_ID,
-                        payload: ""
+                        payload: {"USER_ID":""}
                     })
 
                 }
@@ -560,25 +575,25 @@ export default (props) => {
             } catch (error) {
                 dispatch({
                     type: LOGIN_SPINNER,
-                    payload: false
+                    payload: {"LOGIN_SPINNER":false}
                 })
                 dispatch({
                     type: ERROR_USER,
-                    payload: true
+                    payload: {"ERROR_USER":true}
                 })
                 dispatch({
                     type: RESP_ERROR_LOGIN,
-                    payload: "Comprueba tu coneccion a internet"
+                    payload: {"RESP_ERROR_LOGIN":"Comprueba tu coneccion a internet"}
                 })
             }
         } else {
             dispatch({
                 type: ERROR_USER,
-                payload: true
+                payload: {"ERROR_USER":true}
             })
             dispatch({
                 type: RESP_ERROR_LOGIN,
-                payload: "Todos los campos son importantes"
+                payload: {"RESP_ERROR_LOGIN":"Todos los campos son importantes"}
             })
         }
 
@@ -595,15 +610,15 @@ export default (props) => {
 
             dispatch({
                 type: LOGIN_SPINNER,
-                payload: true
+                payload: {"LOGIN_SPINNER":true}
             })
             dispatch({
                 type: ERROR_USER,
-                payload: false
+                payload: {"ERROR_USER":false}
             })
             dispatch({
                 type: RESP_ERROR_LOGIN,
-                payload: ""
+                payload: {"RESP_ERROR_LOGIN":""}
             })
 
             try {
@@ -619,58 +634,60 @@ export default (props) => {
                 if (user.data) {
                     dispatch({
                         type: LOGIN_SPINNER,
-                        payload: false
+                        payload: {"LOGIN_SPINNER":false}
                     })
                     dispatch({
                         type: ERROR_USER,
-                        payload: true
+                        payload: {"ERROR_USER":true}
                     })
                     dispatch({
                         type: RESP_ERROR_LOGIN,
-                        payload: user.data
+                        payload: {"RESP_ERROR_LOGIN":user.data}
                     })
                     dispatch({
                         type: VALIDAR_USER,
-                        payload: false
+                        payload:{"VALIDAR_USER": false}
                     })
                     //histo.push("/profil")
                 } else {
                     dispatch({
                         type: LOGIN_SPINNER,
-                        payload: false
+                        payload: {"LOGIN_SPINNER":false}
                     })
                     dispatch({
                         type: ERROR_USER,
-                        payload: true
+                        payload: {"ERROR_USER":true}
                     })
                     dispatch({
                         type: RESP_ERROR_LOGIN,
-                        payload: user.data
+                        payload:{"RESP_ERROR_LOGIN": user.data}
                     })
                 }
 
             } catch (error) {
                 dispatch({
                     type: LOGIN_SPINNER,
-                    payload: false
+                    payload:{"LOGIN_SPINNER":false}
+            
                 })
                 dispatch({
                     type: ERROR_USER,
-                    payload: true
+                    payload:{"ERROR_USER":true}
+                    
                 })
                 dispatch({
                     type: RESP_ERROR_LOGIN,
-                    payload: "Comprueba tu coneccion a internet"
+                    payload: {"RESP_ERROR_LOGIN":"Comprueba tu coneccion a internet"}
                 })
             }
         } else {
             dispatch({
                 type: ERROR_USER,
-                payload: true
+                payload:{"ERROR_USER":true}
             })
             dispatch({
                 type: RESP_ERROR_LOGIN,
-                payload: "Todos los campos deben ser rellenados"
+                payload:{"RESP_ERROR_LOGIN":"Todos los campos deben ser rellenados"}
             })
         }
     }
@@ -682,7 +699,7 @@ export default (props) => {
     const LoadListExam = async () => {
         dispatch({
             type: SPINNER_CARGAR_EXAMENES,
-            payload: true
+            payload:{"SPINNER_CARGAR_EXAMENES":true}
 
         })
         //setAddSpìnner(true)
@@ -693,7 +710,7 @@ export default (props) => {
                 //setAddSpìnner(false)
                 dispatch({
                     type: SPINNER_CARGAR_EXAMENES,
-                    payload: false
+                    payload:{"SPINNER_CARGAR_EXAMENES":false}
 
                 })
             } else {
@@ -701,8 +718,7 @@ export default (props) => {
                 //setAddSpìnner(false)
                 dispatch({
                     type: SPINNER_CARGAR_EXAMENES,
-                    payload: false
-
+                    payload:{"SPINNER_CARGAR_EXAMENES":false}
                 })
             }
         } catch (error) {
@@ -710,7 +726,7 @@ export default (props) => {
             //setAddSpìnner(false)
             dispatch({
                 type: SPINNER_CARGAR_EXAMENES,
-                payload: false
+                payload:{"SPINNER_CARGAR_EXAMENES":false}
 
             })
         }
@@ -762,7 +778,10 @@ export default (props) => {
             errorResponseLogin: state.errorResponseLogin,//el error al inicio de sesion
             userError: state.userError,//login error boolean
             LoadListExam,//traer lista de examenes
-            examenList:examenList,
+            examenList: examenList,
+
+
+            dataApp:state.dataApp
 
         }}>
             {props.children}

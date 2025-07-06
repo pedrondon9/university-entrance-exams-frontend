@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 import { FiCamera } from 'react-icons/fi'
 import M from 'materialize-css';
 
-//import "react-quill/dist/quill.bubble.css"
+
 
 function Editor2s({ comentId }) {
-    const { validarUser, dispatch, GetDataComentResponse, AddComentResponse, userId, userName, userLinkPhoto, examId, spinnerAddCommentRespons } = useContext(AppContext)
+    const { validarUser, dispatch, GetDataComentResponse, AddComentResponse, userId, userName, userLinkPhoto, examId, spinnerAddCommentRespons,dataApp } = useContext(AppContext)
     const [value, setValue] = useState('');
     const [imagen1, setImagen1] = useState('')
     const [imagen2, setImagen2] = useState('')
@@ -158,7 +158,7 @@ function Editor2s({ comentId }) {
 
     const GetComResp = () => {
         if (value||imagen1) {
-            AddComentResponse(value, userName, userLinkPhoto, userId, "2", comentId,imagen1,imagen2,imagen3,imagen4)
+            AddComentResponse(value, dataApp.USER_NAME, dataApp.USER_LINK_PHOTO, dataApp.USER_ID, "2", comentId,imagen1,imagen2,imagen3,imagen4)
             LimpiarImagenes2()
             setValue("")
         } else {
@@ -224,7 +224,7 @@ function Editor2s({ comentId }) {
                 <input type="file" multiple style={{ display: "none" }} id='input-imagenes-agencia1' onChange={(e) => { ObtenerImagenesInput(e.target.files) }} />
             </div>
             <div className='containerButtonAddRespons'>
-                {validarUser ?
+                {dataApp.VALIDAR_USER ?
                     <Link 
                     to={"#!"}
                     onClick={() => {
@@ -234,7 +234,7 @@ function Editor2s({ comentId }) {
                         //     payload: value
                         // })
                         // console.log(value)
-                    }} className='btn-small addCommentseButton' >{!spinnerAddCommentRespons ? "Publicar" : <PulseLoader size={9} color="#212121" />}
+                    }} className='btn-small addCommentseButton' >{!dataApp.ADD_COMMENT_RESPONSE_SPINNER ? "Publicar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
                     <Link to={"#!"} onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Publicar</Link>

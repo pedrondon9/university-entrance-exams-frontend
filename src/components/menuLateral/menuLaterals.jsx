@@ -17,47 +17,7 @@ function MenuLaterals() {
     const [pdfLink, setPdfLink] = useState(false)
 
 
-    //funcion para cargar los array de los examenes
-    /*
-    const LoadListExam = async () => {
-        dispatch({
-            type: SPINNER_CARGAR_EXAMENES,
-            payload: true
-
-        })
-        //setAddSpìnner(true)
-        try {
-            const add = await axios.get(`${URL_SERVER}/getExamenList`)
-            if (add.data) {
-                console.log(add.data)
-                setExamenList(add.data)
-                //setAddSpìnner(false)
-                dispatch({
-                    type: SPINNER_CARGAR_EXAMENES,
-                    payload: false
-    
-                })
-            } else {
-                setExamenList([])
-                //setAddSpìnner(false)
-                dispatch({
-                    type: SPINNER_CARGAR_EXAMENES,
-                    payload: false
-    
-                })
-            }
-        } catch (error) {
-            setExamenList([])
-            //setAddSpìnner(false)
-            dispatch({
-                type: SPINNER_CARGAR_EXAMENES,
-                payload: false
-
-            })
-        }
-
-    }
-*/
+ 
     /********* cambiar pdf ***************** */
     const CambiarPdf = (pdf, id) => {
         dispatch({

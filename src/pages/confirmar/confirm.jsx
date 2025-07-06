@@ -26,15 +26,15 @@ function Confir() {
             if (datos.data) {
                 dispatch({
                     type: VALIDAR_USER,
-                    payload: true
+                    payload: {"VALIDAR_USER":true}
                 })
                 dispatch({
                     type: USER_ID,
-                    payload: datos.data.id
+                    payload: {"USER_ID":datos.data.id}
                 })
                 dispatch({
                     type: USER_NAME,
-                    payload: datos.data.user
+                    payload: {"USER_NAME":datos.data.user}
                 })
                 
                 window.localStorage.setItem("code",datos.data.code)
@@ -44,29 +44,29 @@ function Confir() {
                 console.log("wefhuf sdf sbnd fsbdff")
                 dispatch({
                     type: VALIDAR_USER,
-                    payload: false
+                    payload: {"VALIDAR_USER":false}
                 })
                 dispatch({
                     type: USER_ID,
-                    payload: ""
+                    payload: {"USER_ID":""}
                 })
                 dispatch({
                     type: USER_NAME,
-                    payload: ""
+                    payload: {"USER_NAME":""}
                 })
             }
         } catch (error) {
             dispatch({
                 type: VALIDAR_USER,
-                payload: false
+                payload: {"VALIDAR_USER":false}
             })
             dispatch({
                 type: USER_ID,
-                payload: ""
+                payload: {"USER_ID":""}
             })
             dispatch({
                 type: USER_NAME,
-                payload: ""
+                payload: {"USER_NAME":""}
             })
         }
 

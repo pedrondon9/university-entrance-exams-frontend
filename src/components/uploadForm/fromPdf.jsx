@@ -3,7 +3,7 @@ import FormUpload from './formUpload'
 import "./fromPdf.css"
 import PdfForm from '../pdfForm/pdfForm'
 
-//COMPONENTE QUE CONTIENE EL FORMULARIO QUE PERMITE SUBIR UN NUEVO EXAMEN Y TAMBIEN EL PDF_VIEW QUE VISUALIZA EL PDF DEL EXAMEN ELEGIDO
+//COMPONENTE QUE CONTIENE EL FORMULARIO QUE PERMITE SUBIR UN NUEVO EXAMEN Y TAMBIEN EL PDF_VIEW QUE PREVISUALIZA EL PDF DEL EXAMEN ELEGIDO
 function FromPdf() {
   return (
     <div className='form-upload-pdf-view-cpntainer'>

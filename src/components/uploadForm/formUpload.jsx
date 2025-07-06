@@ -14,7 +14,7 @@ import Login from '../login/login'
 
 
 function FormUpload() {
-    const { dispatch, userId, userName, userLinkPhoto, validarUser } = useContext(AppContext)
+    const { dispatch, userId, userName, userLinkPhoto, validarUser ,dataApp} = useContext(AppContext)
     const [pdf, setPdf] = useState("")
     const [año, setAño] = useState("")
     const [mes, setMes] = useState("")
@@ -32,7 +32,7 @@ function FormUpload() {
             //insertar o cambiar el pdf que se muestra
             dispatch({
                 type: PDF_VIEW_FORM,
-                payload: e.target.result
+                payload: {"PDF_VIEW_FORM":e.target.result}
             })
         }
     }
@@ -241,7 +241,7 @@ function FormUpload() {
                     }
 
                     <div className='boton-submit-container'>
-                        {validarUser ?
+                        {dataApp.VALIDAR_USER ?
                             <>
                                 {true?
                                     <button className='btn-small' type='submit'>{addSpìnner ? <ScaleLoader size={20} /> : "compartir el examen"}</button>

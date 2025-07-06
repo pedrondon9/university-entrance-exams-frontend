@@ -31,7 +31,7 @@ import ImageView from '../../components/viewImagesComments/imageView';
 export default function Home() {
   const { dataRicheText, GetDataComent, dataComentario, GetDataComentResponse, ScrollInfinito, dispatch, LoadListExam,
     datosGetComentResponse, dataComentarioResp, GetDataRespComentResponse, examId, more, spinnerCargarExamenes,
-    dataRespComentarioResp, spinnerComment, spinnerCargarCommentRespons, spinnerCargarResponsRespons, pdfUrl } = useContext(AppContext)
+    dataRespComentarioResp, spinnerComment, spinnerCargarCommentRespons, spinnerCargarResponsRespons, pdfUrl, dataApp } = useContext(AppContext)
   const [text, setText] = useState("")
   const code = window.localStorage.getItem("code")
   const [verResp1, setverResp1] = useState("")
@@ -56,42 +56,48 @@ export default function Home() {
 
   //verificacion automatico de sesion
   const UserConfirm = async () => {
-    const datos = await axios({
-      method: 'post',
-      data: {
-        'id': code,
-      },
-      url: `${URL_SERVER}/user_confirm_init`
-    })
 
 
-    if (datos.data) {
-      dispatch({
-        type: VALIDAR_USER,
-        payload: true
+    try {
+      const datos = await axios({
+        method: 'post',
+        data: {
+          'id': code,
+        },
+        url: `${URL_SERVER}/user_confirm_init`
       })
-      dispatch({
-        type: USER_ID,
-        payload: datos.data.id
-      })
-      dispatch({
-        type: USER_NAME,
-        payload: datos.data.user
-      })
-      window.localStorage.setItem("code", datos.data.code)
-    } else {
-      dispatch({
-        type: VALIDAR_USER,
-        payload: false
-      })
-      dispatch({
-        type: USER_ID,
-        payload: ""
-      })
-      dispatch({
-        type: USER_NAME,
-        payload: ""
-      })
+      if (datos.data) {
+        dispatch({
+          type: VALIDAR_USER,
+          payload: { "VALIDAR_USER": true }
+        })
+        dispatch({
+          type: USER_ID,
+          payload: { "USER_ID": datos.data.id }
+        })
+        dispatch({
+          type: USER_NAME,
+          payload: { "USER_NAME": datos.data.user }
+        })
+        window.localStorage.setItem("code", datos.data.code)
+      } else {
+        dispatch({
+          type: VALIDAR_USER,
+          payload: { "VALIDAR_USER": false }
+        })
+        dispatch({
+          type: USER_ID,
+          payload: { "USER_ID": "" }
+        })
+        dispatch({
+          type: USER_NAME,
+          payload: { "USER_NAME": "" }
+        })
+      }
+    } catch (error) {
+
+      console.log(error)
+
     }
 
   }
@@ -138,11 +144,11 @@ export default function Home() {
     //borrar la ruta del pdf actual
     dispatch({
       type: EXAMEN_ID,
-      payload: null
+      payload: { "EXAMEN_ID": null }
     })
     dispatch({
       type: URL_PDF,
-      payload: null
+      payload: { "URL_PDF": null }
     })
 
   }, [])
@@ -158,7 +164,7 @@ export default function Home() {
             <div className='conatainer-home-menu-lateral'>
               {/* menu lateral para elegir examen segun la convocatoria */}
               <div>
-                {!spinnerCargarExamenes ?
+                {!dataApp.SPINNER_CARGAR_EXAMENES ?
                   <MenuLaterals />
                   :
                   <div className='cargar-examenes-spinner-container'>
@@ -172,12 +178,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div className='conatainer-home-pdf-edit-chat'>
+           
+
+ <div className='conatainer-home-pdf-edit-chat'>
               {/* <Elegir /> */}
               {/* el pdf del examen */}
               <VerPdf />
 
-              <div className='texto-home' style={{display:"none"}}>
+              <div className='texto-home' style={{ display: "none" }}>
                 <img src={"https://res.cloudinary.com/mumbex/image/upload/v1669741148/imgf_jykhwy.png"} alt="" />
                 {/* <h4 className=''><span>a continuacion puedes publicar la duda que tienes sobre el examen o responder a las dudas publicadas</span></h4> */}
               </div>
@@ -191,9 +199,9 @@ export default function Home() {
                   {/* editor del comentrio principal */}
                   <Editors />
                   {/* infinity scroll de comentarios */}
-                  {!spinnerComment ?
+                  {!dataApp?.SPINNER_CARGAR_EXAMENES ?
                     <>
-                      {pdfUrl ?
+                      {dataApp?.URL_PDF ?
                         <InfiniteScroll
                           dataLength={dataComentario.length}
                           loader={<h1></h1>}
@@ -321,7 +329,7 @@ export default function Home() {
                                       <>
 
 
-                                        {spinnerCargarCommentRespons ?
+                                        {dataApp?.CARGAR_RESPONSE_COMENT ?
                                           <div className='spinner-cargar-response-coment-principal-container'>
                                             <MoonLoader size={25} color={"#212121"} />
                                           </div>
@@ -432,7 +440,7 @@ export default function Home() {
                                                     </div> 
                                                     */}
 
-                                                    {spinnerCargarResponsRespons ?
+                                                    {dataApp?.CARGAR_RESPONSE_RESPONSE ?
                                                       <div className='spinner-cargar-response-coment-principal-container'>
                                                         <MoonLoader size={25} color={"#212121"} />
                                                       </div>
@@ -595,11 +603,15 @@ export default function Home() {
 
             </div>
 
+
+
+
           </div>
           <Link to="#!" className='btn btn-small boton-flotante sidenav-trigger' data-target="slide-out-nav-mat">Examenes</Link>
         </div>
       </>
 
     </>
+
   )
 }
