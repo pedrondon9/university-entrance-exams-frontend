@@ -6,6 +6,7 @@ import axios from "axios";
 import M from "materialize-css";
 
 import { DATA_APP_CONTEXT, ADD_COMMENT_RESPONSE_SPINNER, ADD_COMMENT_SPINNER, ADD_RESPONSE_RESPONSE_SPINNER, CARGAR_COMMENT, CARGAR_RESPONSE_COMENT, CARGAR_RESPONSE_RESPONSE, ERROR_USER, LOGIN_SPINNER, PAGINA_SIGUIENTE, RESP_ERROR_LOGIN, SPINNER_CARGAR_EXAMENES, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from "./constantesVar";
+import { ErrorG } from "../components/errorGestion";
 
 
 
@@ -604,90 +605,85 @@ export default (props) => {
 
 
     /**** LOGIN PARA REGISTRO DE USUARIOS */
-    const Registers = async (email, contrasena, nombre) => {
+    const Registers = async (email, contrasena, nombre,navigate) => {
         if (email !== "" && contrasena !== "" && nombre !== "") {
             //console.log(email, contrasena, nombre, paiz, genero)
 
             dispatch({
-                type: LOGIN_SPINNER,
-                payload: {"LOGIN_SPINNER":true}
+                type: DATA_APP_CONTEXT,
+                payload: {"LOGIN_SPINNER":true,"ERROR_USER":false,"RESP_ERROR_LOGIN":""}
             })
-            dispatch({
-                type: ERROR_USER,
-                payload: {"ERROR_USER":false}
-            })
-            dispatch({
-                type: RESP_ERROR_LOGIN,
-                payload: {"RESP_ERROR_LOGIN":""}
-            })
+          
 
             try {
                 const user = await axios({
                     method: "post",
                     data: {
                         "email": email,
-                        "contrasena": contrasena,
-                        "nombre": nombre,
+                        "password": contrasena,
+                        "fullname": nombre,
                     },
-                    url: `${URL_SERVER}/registro_post`
+                    url: `${URL_SERVER}/customer/registro_post`
                 })
-                if (user.data) {
+
+                console.log(user)
+                if (user.data.success) {
+
                     dispatch({
-                        type: LOGIN_SPINNER,
-                        payload: {"LOGIN_SPINNER":false}
+                        type: DATA_APP_CONTEXT,
+                        payload: { 
+                            "LOGIN_SPINNER": false ,
+                            "ERROR_USER": true,
+                            "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
+                            "VALIDAR_USER": false,
+                            "VERIFICAR_EMAIL":false,
+                            "SEND_EMAIL":true,
+                        }
+            
                     })
-                    dispatch({
-                        type: ERROR_USER,
-                        payload: {"ERROR_USER":true}
-                    })
-                    dispatch({
-                        type: RESP_ERROR_LOGIN,
-                        payload: {"RESP_ERROR_LOGIN":user.data}
-                    })
-                    dispatch({
-                        type: VALIDAR_USER,
-                        payload:{"VALIDAR_USER": false}
-                    })
-                    //histo.push("/profil")
+
+                    window.sessionStorage.setItem("userData",JSON.stringify(
+                    {
+                        token: user.data.token,
+                        SEND_EMAIL:true,
+                        VERIFICAR_EMAIL:false
+                    }))
+
+                    navigate("/resendEmail")
+
+                    const elem = document.querySelector(".modal-form")
+                    var instance = M.Modal.getInstance(elem);
+                    instance.close()
+               
+
                 } else {
+
                     dispatch({
-                        type: LOGIN_SPINNER,
-                        payload: {"LOGIN_SPINNER":false}
-                    })
-                    dispatch({
-                        type: ERROR_USER,
-                        payload: {"ERROR_USER":true}
-                    })
-                    dispatch({
-                        type: RESP_ERROR_LOGIN,
-                        payload:{"RESP_ERROR_LOGIN": user.data}
+                        type: DATA_APP_CONTEXT,
+                        payload: { 
+                            "LOGIN_SPINNER": false ,
+                            "ERROR_USER": true,
+                            "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
+                            "VALIDAR_USER": false
+                        }
+            
                     })
                 }
 
             } catch (error) {
-                dispatch({
-                    type: LOGIN_SPINNER,
-                    payload:{"LOGIN_SPINNER":false}
-            
-                })
-                dispatch({
-                    type: ERROR_USER,
-                    payload:{"ERROR_USER":true}
-                    
-                })
-                dispatch({
-                    type: RESP_ERROR_LOGIN,
-                    payload: {"RESP_ERROR_LOGIN":"Comprueba tu coneccion a internet"}
-                })
+                console.log("error", error)
+                ErrorG(dispatch,error)
+
             }
         } else {
+
             dispatch({
-                type: ERROR_USER,
-                payload:{"ERROR_USER":true}
-            })
-            dispatch({
-                type: RESP_ERROR_LOGIN,
-                payload:{"RESP_ERROR_LOGIN":"Todos los campos deben ser rellenados"}
+                type: DATA_APP_CONTEXT,
+                payload: { 
+                    "ERROR_USER": true,
+                    "RESP_ERROR_LOGIN": "Todos los campos deben ser rellenados",
+                }
+    
             })
         }
     }

@@ -4,7 +4,7 @@ import { MoonLoader } from "react-spinners";
 import "animate.css"
 import axios from 'axios';
 import AppContext from '../../contexts/ServiceContext';
-import { URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from '../../contexts/constantesVar';
+import { DATA_APP_CONTEXT, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from '../../contexts/constantesVar';
 import "./confirm.css"
 
 
@@ -17,56 +17,56 @@ function Confir() {
 
     const Confirmar = async () => {
         try {
-            const datos = await axios({
+            const user = await axios({
                 method: "post",
-                data: { "tokenId": id },
+                data: { "token": id },
                 url: `${URL_SERVER}/confirmar`
             })
-            console.log(datos)
-            if (datos.data) {
+            if (user.data.success) {
                 dispatch({
-                    type: VALIDAR_USER,
-                    payload: {"VALIDAR_USER":true}
-                })
-                dispatch({
-                    type: USER_ID,
-                    payload: {"USER_ID":datos.data.id}
-                })
-                dispatch({
-                    type: USER_NAME,
-                    payload: {"USER_NAME":datos.data.user}
+                    type: DATA_APP_CONTEXT,
+                    payload: {
+                        "VALIDAR_USER":true,
+                        "USER_ID":user.data._id,
+                        "USER_NAME":user.data.fullname,
+                        'TOKEN': user.data.token,
+
+                    }
                 })
                 
-                window.localStorage.setItem("code",datos.data.code)
+                
+                window.localStorage.setItem("dataUser",JSON.stringify(
+                    {
+                        'token': user.data.token,
+                        'SEND_EMAIL':true,
+                        'VERIFICAR_EMAIL':false,
+                        "VALIDAR_USER":true,
+                        "USER_ID":user.data._id,
+                        "USER_NAME":user.data.fullname,
+                    }
+                ))
                 navigate("/")
             } else {
                 
                 console.log("wefhuf sdf sbnd fsbdff")
                 dispatch({
-                    type: VALIDAR_USER,
-                    payload: {"VALIDAR_USER":false}
-                })
-                dispatch({
-                    type: USER_ID,
-                    payload: {"USER_ID":""}
-                })
-                dispatch({
-                    type: USER_NAME,
-                    payload: {"USER_NAME":""}
+                    type: DATA_APP_CONTEXT,
+                    payload: {
+                        "VALIDAR_USER":false,
+                        "USER_ID":'',
+                        "USER_NAME":'',
+
+                    }
                 })
             }
         } catch (error) {
             dispatch({
-                type: VALIDAR_USER,
-                payload: {"VALIDAR_USER":false}
-            })
-            dispatch({
-                type: USER_ID,
-                payload: {"USER_ID":""}
-            })
-            dispatch({
-                type: USER_NAME,
-                payload: {"USER_NAME":""}
+                type: DATA_APP_CONTEXT,
+                payload: {
+                    "VALIDAR_USER":false,
+                    "USER_ID":'',
+                    "USER_NAME":'',
+                }
             })
         }
 

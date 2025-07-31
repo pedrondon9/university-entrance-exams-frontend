@@ -15,9 +15,9 @@ import Sinav from '../../components/navegacionBarAll/sideNav';
 import Elegir from '../../components/elegirTipo/elegir';
 import { ScaleLoader, MoonLoader, PulseLoader } from "react-spinners";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { EXAMEN_ID, URL_PDF, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from '../../contexts/constantesVar';
+import { DATA_APP_CONTEXT, EXAMEN_ID, URL_PDF, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from '../../contexts/constantesVar';
 import SinavMat from '../../components/sinavMaterias/sinavMat';
-import Login from '../../components/login/login';
+import Login from '../../components/login.register/login.regsiter';
 import axios from 'axios';
 import Editors from '../../components/editoresAddImg/edits';
 import ImageView from '../../components/viewImagesComments/imageView';
@@ -138,18 +138,15 @@ export default function Home() {
   useEffect(() => {
     LoadListExam()
     //confirmacion automatica del inicio de sesion
-    UserConfirm()
+    //UserConfirm()
     //GetDataComent()
 
     //borrar la ruta del pdf actual
     dispatch({
-      type: EXAMEN_ID,
-      payload: { "EXAMEN_ID": null }
+      type: DATA_APP_CONTEXT,
+      payload: { "EXAMEN_ID": null,"URL_PDF": null }
     })
-    dispatch({
-      type: URL_PDF,
-      payload: { "URL_PDF": null }
-    })
+   
 
   }, [])
   return (
@@ -178,9 +175,9 @@ export default function Home() {
               </div>
             </div>
 
-           
 
- <div className='conatainer-home-pdf-edit-chat'>
+
+            <div className='conatainer-home-pdf-edit-chat'>
               {/* <Elegir /> */}
               {/* el pdf del examen */}
               <VerPdf />

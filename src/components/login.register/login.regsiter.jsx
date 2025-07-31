@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import "./login.css"
 import M from 'materialize-css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AppContext from '../../contexts/ServiceContext'
 import { ERROR_USER, RESP_ERROR_LOGIN } from '../../contexts/constantesVar'
 import { PulseLoader } from "react-spinners"
@@ -10,6 +10,7 @@ import 'animate.css';
 
 
 function Login() {
+    const navigate =  useNavigate()
     const { Logins, dispatch, loginSpinner, errorResponseLogin, userError, Registers,dataApp } = useContext(AppContext)
 
     const [email, setEmail] = useState("")
@@ -35,8 +36,8 @@ function Login() {
         setErrors("")
         if (cambiarFormulario) {
             //Registrarse
-            const nombre = e.target.nombre.value.trim()
-            const password2 = e.target.contrasena.value.trim()
+            const nombre = e.target.fullname.value.trim()
+            const password2 = e.target.password.value.trim()
             const email2 = e.target.email.value.trim()
 
 
@@ -44,7 +45,7 @@ function Login() {
 
             if (email2.match(mailformat)) {
                 if (email2 && password2 && nombre) {
-                    Registers(email2, password2, nombre)
+                    Registers(email2, password2, nombre,navigate)
                     setErrors("")
                 } else {
                     setErrors("todos los campos son obligatorios")
@@ -55,7 +56,7 @@ function Login() {
 
         } else {
             //Iniciar sesion
-            const password2 = e.target.contrasena.value.trim()
+            const password2 = e.target.password.value.trim()
             const email2 = e.target.email.value.trim()
 
 
@@ -96,7 +97,7 @@ function Login() {
                                 <input
                                     type="text"
                                     className="input-text"
-                                    name="nombre" required
+                                    name="fullname" required
                                     id="nombre"
                                     placeholder="tu nombre"
                                 />
@@ -118,7 +119,7 @@ function Login() {
                             <input
                                 type="password"
                                 className="input-text"
-                                name="contrasena"
+                                name="password"
                                 placeholder="tu contraseña"
 
                             />

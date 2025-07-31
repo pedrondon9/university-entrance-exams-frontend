@@ -7,7 +7,7 @@ import PdfForm from '../pdfForm/pdfForm'
 import M from 'materialize-css'
 import { ScaleLoader } from "react-spinners";
 import axios from 'axios'
-import Login from '../login/login'
+import Login from '../login.register/login.regsiter'
 
 
 //FORMULARIO PARA SUBIR UN NUEVO  EXAMEN

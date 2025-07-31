@@ -1,6 +1,6 @@
 
 export const InitialState = {
-    dataApp:{
+    dataApp:JSON.parse(window.sessionStorage.getItem('userData'))?JSON.parse(window.sessionStorage.getItem('userData')):{
         URL_SERVER:false,
         DATA_RICHE_TEXT:"",
         PAGINA_SIGUIENTE :"",
@@ -21,26 +21,9 @@ export const InitialState = {
         ADD_RESPONSE_RESPONSE_SPINNER :false,
         CARGAR_RESPONSE_RESPONSE :false,
         SPINNER_CARGAR_EXAMENES:false,
+        VERIFICAR_EMAIL:false,
+        SEND_EMAIL:false,
         
     },
-    dataRicheText:"",
-    dataComent:[],
-    paginaSiguiente:"",
-    userId :"001",
-    userName:"MX SOFTWARE",
-    userLinkPhoto:"HTTP",
-    validarUser:false,
-    loginSpinner:false,
-    errorResponseLogin:"",
-    userError:false,
-    examId:"",
-    pdfUrl:null,
-    formPdfView:null,
-    spinnerComment:false,
-    spinnerAddComment:false,
-    spinnerAddCommentRespons:false,
-    spinnerCargarCommentRespons:false,
-    spinnerAddResponsRespons:false,
-    spinnerCargarResponsRespons:false,
-    spinnerCargarExamenes:false,
+
 }
