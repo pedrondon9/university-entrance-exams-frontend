@@ -118,7 +118,7 @@ export default (props) => {
                     console.log(comments.data.docs)
                     dispatch({
                         type: PAGINA_SIGUIENTE,
-                        payload:{"PAGINA_SIGUIENTE":comments.data.nextPage}
+                        payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
                     })
                     setPaginaNext(comments.data.nextPage)
                     setDataComentario(comments.data.docs)
@@ -136,7 +136,7 @@ export default (props) => {
                     console.log(comments.data.docs)
                     dispatch({
                         type: PAGINA_SIGUIENTE,
-                        payload:{"PAGINA_SIGUIENTE":comments.data.nextPage}
+                        payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
                     })
                     setPaginaNext(comments.data.nextPage)
                     setDataComentario(comments.data.docs)
@@ -151,7 +151,7 @@ export default (props) => {
         } catch (error) {
             dispatch({
                 type: CARGAR_COMMENT,
-                payload:{"CARGAR_COMMENT":false}
+                payload: { "CARGAR_COMMENT": false }
             })
         }
     }
@@ -180,19 +180,19 @@ export default (props) => {
                 setDataComentarioResp(comments.data.docs)
                 dispatch({
                     type: CARGAR_RESPONSE_COMENT,
-                    payload:{"CARGAR_RESPONSE_COMENT":false}
+                    payload: { "CARGAR_RESPONSE_COMENT": false }
                 })
             } else {
                 dispatch({
                     type: CARGAR_RESPONSE_COMENT,
-                    payload:{"CARGAR_RESPONSE_COMENT":false}
+                    payload: { "CARGAR_RESPONSE_COMENT": false }
 
                 })
             }
         } catch (error) {
             dispatch({
                 type: CARGAR_RESPONSE_COMENT,
-                payload:{"CARGAR_RESPONSE_COMENT":false}
+                payload: { "CARGAR_RESPONSE_COMENT": false }
 
             })
         }
@@ -246,21 +246,21 @@ export default (props) => {
                 setDataRespComentarioResp(comments.data.docs)
                 dispatch({
                     type: CARGAR_RESPONSE_RESPONSE,
-                    payload:{"CARGAR_RESPONSE_RESPONSE":false}
-                    
+                    payload: { "CARGAR_RESPONSE_RESPONSE": false }
+
                 })
             } else {
                 dispatch({
                     type: CARGAR_RESPONSE_RESPONSE,
-                    payload:{"CARGAR_RESPONSE_RESPONSE":false}
-                    
+                    payload: { "CARGAR_RESPONSE_RESPONSE": false }
+
                 })
             }
         } catch (error) {
             dispatch({
                 type: CARGAR_RESPONSE_RESPONSE,
-                payload:{"CARGAR_RESPONSE_RESPONSE":false}
-            
+                payload: { "CARGAR_RESPONSE_RESPONSE": false }
+
             })
         }
     }
@@ -313,23 +313,23 @@ export default (props) => {
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_SPINNER,
-                    payload:{"ADD_COMMENT_SPINNER":false}
-                
+                    payload: { "ADD_COMMENT_SPINNER": false }
+
                 })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_SPINNER,
-                    payload:{"ADD_COMMENT_SPINNER":false}
-                
+                    payload: { "ADD_COMMENT_SPINNER": false }
+
                 })
             }
         } catch (error) {
             dispatch({
                 type: ADD_COMMENT_SPINNER,
-                payload:{"ADD_COMMENT_SPINNER":false}
-            
+                payload: { "ADD_COMMENT_SPINNER": false }
+
             })
         }
     }
@@ -339,7 +339,7 @@ export default (props) => {
         dispatch({
             type: ADD_COMMENT_RESPONSE_SPINNER,
             payload: true
-        })   
+        })
         const fs = new FormData()
         fs.append("userName", userName)
         fs.append("userPhoto", userPhoto)
@@ -360,23 +360,23 @@ export default (props) => {
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_RESPONSE_SPINNER,
-                    payload:{"ADD_COMMENT_RESPONSE_SPINNER":false}
-                
+                    payload: { "ADD_COMMENT_RESPONSE_SPINNER": false }
+
                 })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_COMMENT_RESPONSE_SPINNER,
-                    payload:{"ADD_COMMENT_RESPONSE_SPINNER":false}
-                
+                    payload: { "ADD_COMMENT_RESPONSE_SPINNER": false }
+
                 })
             }
         } catch (error) {
             dispatch({
                 type: ADD_COMMENT_RESPONSE_SPINNER,
-                payload:{"ADD_COMMENT_RESPONSE_SPINNER":false}
-            
+                payload: { "ADD_COMMENT_RESPONSE_SPINNER": false }
+
             })
         }
     }
@@ -407,23 +407,23 @@ export default (props) => {
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_RESPONSE_RESPONSE_SPINNER,
-                    payload:{"ADD_RESPONSE_RESPONSE_SPINNER":false}
-                
+                    payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
+
                 })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
                     type: ADD_RESPONSE_RESPONSE_SPINNER,
-                    payload:{"ADD_RESPONSE_RESPONSE_SPINNER":false}
-                
+                    payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
+
                 })
             }
         } catch (error) {
             dispatch({
                 type: ADD_RESPONSE_RESPONSE_SPINNER,
-                payload:{"ADD_RESPONSE_RESPONSE_SPINNER":false}
-            
+                payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
+
             })
         }
     }
@@ -450,7 +450,7 @@ export default (props) => {
                     //console.log(comments.data.docs)
                     dispatch({
                         type: PAGINA_SIGUIENTE,
-                        payload:{"PAGINA_SIGUIENTE":comments.data.nextPage}
+                        payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
 
                     })
                     setDataComentario([...dataComentario, ...comments.data.docs])
@@ -491,17 +491,8 @@ export default (props) => {
     const Logins = async (email, contrasena) => {
         if (email !== "" && contrasena !== "") {
             dispatch({
-                type: LOGIN_SPINNER,
-                payload: {"LOGIN_SPINNER":true}
-            })
-
-            dispatch({
-                type: ERROR_USER,
-                payload: {"ERROR_USER":false}
-            })
-            dispatch({
-                type: RESP_ERROR_LOGIN,
-                payload:{"RESP_ERROR_LOGIN":""}
+                type: DATA_APP_CONTEXT,
+                payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
             })
 
 
@@ -509,92 +500,67 @@ export default (props) => {
                 const user = await axios({
                     method: "post",
                     data: { "email": email, "contrasena": contrasena },
-                    url: `${URL_SERVER}/login_post`
+                    url: `${URL_SERVER}/customer/login_post`
                 })
-                if (user.data.code) {
-                    //window.sessionStorage.setItem("userInfo",user.data)
-                    dispatch({
-                        type: LOGIN_SPINNER,
-                        payload: {"LOGIN_SPINNER":false}
-                    })
-                    dispatch({
-                        type: ERROR_USER,
-                        payload: {"ERROR_USER":true}
-                    })
-                    dispatch({
-                        type: RESP_ERROR_LOGIN,
-                        payload: {"RESP_ERROR_LOGIN":user.data.mens}
-                    })
-                    dispatch({
-                        type: VALIDAR_USER,
-                        payload: {"VALIDAR_USER":true}
-                    })
-                    window.localStorage.setItem("code", user.data.code)
-                    //const userData = await user.data.user
-                    //const keys = await user.data.clave
+                if (user.data.success) {
 
                     dispatch({
-                        type: USER_NAME,
-                        payload: {"USER_NAME":user.data.user}
+                        type: DATA_APP_CONTEXT,
+                        payload: {
+                            "VALIDAR_USER": true,
+                            "USER_ID": user.data.userData._id,
+                            "USER_NAME": user.data.userData.fullname,
+                            'token': user.data.token,
+                            'SEND_EMAIL': false,
+                            "LOGIN_SPINNER": false,
+                            "RESP_ERROR_LOGIN": "",
+                            "ERROR_USER": false,
+
+                        }
                     })
-                    dispatch({
-                        type: USER_ID,
-                        payload: {"USER_ID":user.data.id}
-                    })
+
+                    window.localStorage.setItem("dataUser", JSON.stringify(
+                        {
+                            'token': user.data.token,
+                            'SEND_EMAIL': false,
+                            "VALIDAR_USER": true,
+                            "USER_ID": user.data.userData._id,
+                            "USER_NAME": user.data.userData.fullname,
+                            "LOGIN_SPINNER": false,
+                            "RESP_ERROR_LOGIN": "",
+                            "ERROR_USER": false,
+
+                        }
+                    ))
+
                     const elem = document.querySelector(".modal-form")
                     var instance = M.Modal.getInstance(elem);
                     instance.close()
+
                 } else {
                     dispatch({
-                        type: LOGIN_SPINNER,
-                        payload: {"LOGIN_SPINNER":false}
-                    })
-                    dispatch({
-                        type: ERROR_USER,
-                        payload: {"ERROR_USER":true}
-                    })
-                    dispatch({
-                        type: RESP_ERROR_LOGIN,
-                        payload: {"RESP_ERROR_LOGIN":user.data.mens}
-                    })
+                        type: DATA_APP_CONTEXT,
+                        payload: {
+                            "LOGIN_SPINNER": false,
+                            "ERROR_USER": true,
+                            "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
+                            "VALIDAR_USER": false
+                        }
 
-                    dispatch({
-                        type: VALIDAR_USER,
-                        payload: {"VALIDAR_USER":false}
-                    })
-                    dispatch({
-                        type: USER_NAME,
-                        payload: {"USER_NAME":""}
-                    })
-                    dispatch({
-                        type: USER_ID,
-                        payload: {"USER_ID":""}
                     })
 
                 }
 
             } catch (error) {
-                dispatch({
-                    type: LOGIN_SPINNER,
-                    payload: {"LOGIN_SPINNER":false}
-                })
-                dispatch({
-                    type: ERROR_USER,
-                    payload: {"ERROR_USER":true}
-                })
-                dispatch({
-                    type: RESP_ERROR_LOGIN,
-                    payload: {"RESP_ERROR_LOGIN":"Comprueba tu coneccion a internet"}
-                })
+                ErrorG(dispatch, error)
             }
         } else {
             dispatch({
-                type: ERROR_USER,
-                payload: {"ERROR_USER":true}
-            })
-            dispatch({
-                type: RESP_ERROR_LOGIN,
-                payload: {"RESP_ERROR_LOGIN":"Todos los campos son importantes"}
+                type: DATA_APP_CONTEXT,
+                payload: {
+                    "RESP_ERROR_LOGIN": "Todos los campos son importantes",
+                    "ERROR_USER": true
+                }
             })
         }
 
@@ -605,15 +571,15 @@ export default (props) => {
 
 
     /**** LOGIN PARA REGISTRO DE USUARIOS */
-    const Registers = async (email, contrasena, nombre,navigate) => {
+    const Registers = async (email, contrasena, nombre, navigate) => {
         if (email !== "" && contrasena !== "" && nombre !== "") {
             //console.log(email, contrasena, nombre, paiz, genero)
 
             dispatch({
                 type: DATA_APP_CONTEXT,
-                payload: {"LOGIN_SPINNER":true,"ERROR_USER":false,"RESP_ERROR_LOGIN":""}
+                payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
             })
-          
+
 
             try {
                 const user = await axios({
@@ -631,71 +597,229 @@ export default (props) => {
 
                     dispatch({
                         type: DATA_APP_CONTEXT,
-                        payload: { 
-                            "LOGIN_SPINNER": false ,
+                        payload: {
+                            "LOGIN_SPINNER": false,
                             "ERROR_USER": true,
                             "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
                             "VALIDAR_USER": false,
-                            "VERIFICAR_EMAIL":false,
-                            "SEND_EMAIL":true,
+                            "VERIFICAR_EMAIL": false,
+                            "SEND_EMAIL": true,
                         }
-            
+
                     })
 
-                    window.sessionStorage.setItem("userData",JSON.stringify(
-                    {
-                        token: user.data.token,
-                        SEND_EMAIL:true,
-                        VERIFICAR_EMAIL:false
-                    }))
+                    window.sessionStorage.setItem("userData", JSON.stringify(
+                        {
+                            token: user.data.token,
+                            SEND_EMAIL: true,
+                            VERIFICAR_EMAIL: false
+                        }))
 
-                    navigate("/resendEmail")
+                    //navigate("/resendEmail")
 
-                    const elem = document.querySelector(".modal-form")
-                    var instance = M.Modal.getInstance(elem);
-                    instance.close()
-               
+                    //const elem = document.querySelector(".modal-form")
+                    //var instance = M.Modal.getInstance(elem);
+                    //instance.close()
+
 
                 } else {
 
                     dispatch({
                         type: DATA_APP_CONTEXT,
-                        payload: { 
-                            "LOGIN_SPINNER": false ,
+                        payload: {
+                            "LOGIN_SPINNER": false,
                             "ERROR_USER": true,
                             "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
                             "VALIDAR_USER": false
                         }
-            
+
                     })
                 }
 
             } catch (error) {
                 console.log("error", error)
-                ErrorG(dispatch,error)
+                ErrorG(dispatch, error)
 
             }
         } else {
 
             dispatch({
                 type: DATA_APP_CONTEXT,
-                payload: { 
+                payload: {
                     "ERROR_USER": true,
                     "RESP_ERROR_LOGIN": "Todos los campos deben ser rellenados",
                 }
-    
+
             })
         }
     }
     /************************** */
 
 
+    const resendEmail = async () => {
+        const userData = JSON.parse(window.sessionStorage.getItem('userData'));
+
+        console.log("userData", userData)
+
+        dispatch({
+            type: DATA_APP_CONTEXT,
+            payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
+        })
+
+
+        if (!userData?.SEND_EMAIL) return;
+
+        if (!userData) {
+            dispatch({
+                type: DATA_APP_CONTEXT,
+                payload: {
+                    "RESP_ERROR_LOGIN": "No se ha encontrado información de usuario. Por favor, inicia sesión o registrate nuevamente.",
+                }
+
+            })
+            return;
+        }
+        const token = userData.token;
+
+        try {
+            const response = await axios.post(`${URL_SERVER}/customer/resend-email`, { token });
+            if (response.data.success) {
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: { "RESP_ERROR_LOGIN": response.data.message }
+                })
+
+            } else {
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: { "RESP_ERROR_LOGIN": response.data.message }
+                })
+            }
+        } catch (error) {
+
+            if (error.response?.status === 403) {
+
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: { "RESP_ERROR_LOGIN": error.response.data.message }
+                })
+                return;
+
+            }
+            if (error.response?.status === 503) {
+
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: { "RESP_ERROR_LOGIN": error.response.data.message }
+                })
+
+                return;
+
+            }
+            if (error.response?.status === 401) {
+                window.sessionStorage.removeItem('userData');
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: {
+                        'token': '',
+                        'SEND_EMAIL': false,
+                        'VERIFICAR_EMAIL': false,
+                        "VALIDAR_USER": false,
+                        "USER_ID": '',
+                        "USER_NAME": '',
+                    }
+                })
+                window.localStorage.setItem("dataUser", JSON.stringify(
+                    {
+                        'token': '',
+                        'SEND_EMAIL': false,
+                        'VERIFICAR_EMAIL': false,
+                        "VALIDAR_USER": false,
+                        "USER_ID": '',
+                        "USER_NAME": '',
+                    }
+                ))
+
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: { "RESP_ERROR_LOGIN": error.response.data.message }
+                })
+                return;
+
+            }
+        } finally {
+            dispatch({
+                type: DATA_APP_CONTEXT,
+                payload: { "LOGIN_SPINNER": false, "ERROR_USER": true }
+            })
+        }
+
+    }
+    const changePasswordContext = async (data) => {
+
+        console.log("userData", data)
+
+        dispatch({
+            type: DATA_APP_CONTEXT,
+            payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
+        })
+
+
+        try {
+
+            const response = await axios.post(`${URL_SERVER}/customer/change-pasword`, data);
+
+            if (response.data.success) {
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: {
+                        "LOGIN_SPINNER": false,
+                        "ERROR_USER": true,
+                        "RESP_ERROR_LOGIN": response.data.message || "Error de autenticacion",
+                        "VALIDAR_USER": false,
+                        "VERIFICAR_EMAIL": false,
+                        "SEND_EMAIL": true,
+                    }
+
+                })
+
+                window.sessionStorage.setItem("userData", JSON.stringify(
+                    {
+                        token: response.data.token,
+                        SEND_EMAIL: true,
+                        VERIFICAR_EMAIL: false
+                    }))
+
+            } else {
+
+                dispatch({
+                    type: DATA_APP_CONTEXT,
+                    payload: {
+                        "LOGIN_SPINNER": false,
+                        "ERROR_USER": true,
+                        "RESP_ERROR_LOGIN": response.data.message || "Error de autenticacion",
+                        "VALIDAR_USER": false
+                    }
+
+                })
+            }
+        } catch (error) {
+            ErrorG(dispatch, error)
+        } finally {
+            dispatch({
+                type: DATA_APP_CONTEXT,
+                payload: { "LOGIN_SPINNER": false, "ERROR_USER": true }
+            })
+        }
+
+    }
+
 
     //funcion para cargar los array de los examenes
     const LoadListExam = async () => {
         dispatch({
             type: SPINNER_CARGAR_EXAMENES,
-            payload:{"SPINNER_CARGAR_EXAMENES":true}
+            payload: { "SPINNER_CARGAR_EXAMENES": true }
 
         })
         //setAddSpìnner(true)
@@ -706,7 +830,7 @@ export default (props) => {
                 //setAddSpìnner(false)
                 dispatch({
                     type: SPINNER_CARGAR_EXAMENES,
-                    payload:{"SPINNER_CARGAR_EXAMENES":false}
+                    payload: { "SPINNER_CARGAR_EXAMENES": false }
 
                 })
             } else {
@@ -714,7 +838,7 @@ export default (props) => {
                 //setAddSpìnner(false)
                 dispatch({
                     type: SPINNER_CARGAR_EXAMENES,
-                    payload:{"SPINNER_CARGAR_EXAMENES":false}
+                    payload: { "SPINNER_CARGAR_EXAMENES": false }
                 })
             }
         } catch (error) {
@@ -722,14 +846,12 @@ export default (props) => {
             //setAddSpìnner(false)
             dispatch({
                 type: SPINNER_CARGAR_EXAMENES,
-                payload:{"SPINNER_CARGAR_EXAMENES":false}
+                payload: { "SPINNER_CARGAR_EXAMENES": false }
 
             })
         }
 
     }
-
-
 
 
     return (
@@ -777,7 +899,9 @@ export default (props) => {
             examenList: examenList,
 
 
-            dataApp:state.dataApp
+            dataApp: state.dataApp,
+            resendEmail,
+            changePasswordContext
 
         }}>
             {props.children}

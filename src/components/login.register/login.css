@@ -17,6 +17,7 @@
 
 .formulario-login-container {
     width: 320px;
+    min-height: 180px;
 }
 
 /****cambiar el formula********/
