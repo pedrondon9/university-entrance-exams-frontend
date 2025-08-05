@@ -612,6 +612,7 @@ export default (props) => {
                             "VALIDAR_USER": false,
                             "VERIFICAR_EMAIL": false,
                             "SEND_EMAIL": true,
+                            "token": user.data.token,
                         }
 
                     })
