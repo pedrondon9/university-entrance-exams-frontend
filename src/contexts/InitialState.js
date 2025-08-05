@@ -28,9 +28,8 @@
  * @property {string} dataApp.PAGINA_SIGUIENTE - The next page to navigate to.
  */
 export const InitialState = {
-    dataApp: JSON.parse(window.sessionStorage.getItem('userData')) ? JSON.parse(window.sessionStorage.getItem('userData')) : {
+    dataApp: JSON.parse(window.localStorage.getItem('userData')) ? JSON.parse(window.localStorage.getItem('userData')) : {
         DATA_RICHE_TEXT: "",
-
         token: "",
         USER_ID: "",
         USER_NAME: "",
@@ -53,7 +52,6 @@ export const InitialState = {
         ADD_RESPONSE_RESPONSE_SPINNER: false,
         CARGAR_RESPONSE_RESPONSE: false,
         SPINNER_CARGAR_EXAMENES: false,
-
 
         PAGINA_SIGUIENTE: "",
 
