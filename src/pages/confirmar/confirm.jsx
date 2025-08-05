@@ -6,6 +6,7 @@ import axios from 'axios';
 import AppContext from '../../contexts/ServiceContext';
 import { DATA_APP_CONTEXT, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from '../../contexts/constantesVar';
 import "./confirm.css"
+import axiosConfigs from '../../components/axiosConfig';
 
 
 function Confir() {
@@ -20,7 +21,7 @@ function Confir() {
         setErrorMessage("")
         setSpinner(true)
         try {
-            const user = await axios({
+            const user = await axiosConfigs({
                 method: "post",
                 data: { "token": id },
                 url: `${URL_SERVER}/customer/active-count`
