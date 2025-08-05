@@ -2,9 +2,10 @@
 
 .footer-container-principal {
     width: 100%;
-    background-color: #303846;
+    background-color: #eaf4f7;
     display: flex;
     justify-content: center;
+    border-top: 1px solid #b3b3b3;
 
 }
 
@@ -29,7 +30,7 @@
 .mumbexMensaje>h2 {
     font-size: 20px;
     margin-bottom: 13px;
-    color: rgb(209, 212, 212);
+    color: #212121;
 
 }
 
@@ -49,8 +50,8 @@
     margin: 5px;
     border: 2px solid rgb(98, 97, 97) !important;
     font-size: 15px;
-    color: white;
-    background-color: rgb(47, 48, 48);
+    color: #212121;
+    background-color: #eeeeee;
     width: 50%;
     height: 40px;
     padding-inline-start: 5px;
@@ -64,8 +65,8 @@
     width: 99%;
     border: 2px solid rgb(98, 97, 97);
     font-size: 15px;
-    color: white;
-    background-color: rgb(47, 48, 48);
+    color: #212121;
+    background-color: #eeeeee;
     padding-inline-start: 5px;
     padding-top: 5px;
     border-radius: 10px;
@@ -116,7 +117,9 @@
 .mumbexInfo-info-contact {
     width: 100%;
     display: flex;
-    justify-content: space-around
+    justify-content: center;
+    text-align: center;
+
 }
 
 .footer-items {
@@ -132,26 +135,22 @@
 
 .mumbexInfo>h2 {
     font-size: 28px;
-    margin-bottom: 13px;
-    color: rgb(209, 212, 212);
+    color: #212121;
 }
 
 .mumbexInfo>h3 {
     font-size: 18px;
     color: rgb(130, 127, 124);
+        margin-block: 2px;
+
 }
 
 .mumbexContacto {
     display: flex;
-    flex-direction: column;
-    height: 200px;
-
-
 }
 
 .mumbexContacto>h2 {
     font-size: 28px;
-    margin-bottom: 13px;
     color: rgb(209, 212, 212);
 }
 
@@ -162,8 +161,8 @@
 
 .redesSociales {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .redes-items {

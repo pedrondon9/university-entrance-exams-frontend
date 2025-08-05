@@ -7,6 +7,7 @@ import { EXAMEN_ID, SPINNER_CARGAR_EXAMENES, URL_PDF, URL_SERVER } from '../../c
 import { ScaleLoader, MoonLoader, PulseLoader } from "react-spinners";
 import "./admins.css"
 import BarradeNavegacion from '../../components/navegacionBarAll/barradeNavegacion'
+import axiosConfigs from '../../components/axiosConfig'
 
 function Admins() {
     const { dispatch, AddComent, GetDataComent, spinnerCargarExamenes } = useContext(AppContext)
@@ -23,7 +24,7 @@ function Admins() {
 
     const LoadListExam = async () => {
         try {
-            const add = await axios.get(`${URL_SERVER}/getExamenList`)
+            const add = await axiosConfigs.get(`/customer/getExamenList`)
             if (add.data) {
                 console.log(add.data)
                 setExamenList(add.data)

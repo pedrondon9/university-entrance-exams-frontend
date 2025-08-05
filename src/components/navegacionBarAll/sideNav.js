@@ -6,7 +6,7 @@ import "./sinav.css"
 
 
 const Sinav = () => {
-    const { } = useContext(AppContext)
+    const { dataApp} = useContext(AppContext)
 
     const BuscarConLink = (linkId) => {
 
@@ -41,7 +41,14 @@ const Sinav = () => {
             <li>
                 <div className="collection">
                     <Link onClick={() => { Destruir() }} to="/" className="collection-item  ">Inicio</Link>
-                    {/*<Link onClick={() => { Destruir() }} to="/upload" className="collection-item ">Agregar Examen</Link>*/}  
+                    <Link onClick={() => { Destruir() }} to="/upload" className="collection-item ">Agregar Examen</Link>
+                    {dataApp?.VALIDAR_USER ?
+                        <Link className="collection-item " onClick={()=>{Destruir()}} style={{ marginTop: "50px" }} to="/deleteExammm">Cerrar</Link>
+
+                        :
+                        <Link className="collection-item " onClick={()=>{Destruir()}} style={{ marginTop: "50px" }} to="/deleteExammm">Login</Link>
+
+                    }
                 </div>
             </li>
         </ul>

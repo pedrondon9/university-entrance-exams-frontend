@@ -1,4 +1,4 @@
-.horizontal-nav-bar{
+.horizontal-nav-bar {
     position: fixed;
     top: 0px;
     margin: auto;
@@ -8,65 +8,107 @@
     z-index: 1000 !important;
     height: 50px;
     box-shadow: none !important;
-    
+
 }
 
-.horizontal-nav-bar-resp{
+.horizontal-nav-bar-resp {
     width: 100% !important;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
-.logo-container{
-    width: 150px;
+
+.container-logo-username {
+    display: flex;
+    flex-direction: row;
     height: 50px;
+    width: 350px;
+}
+
+.logo-container {
+    height: 50px;
+    width: 170px;
     display: flex;
     align-items: center;
+
 }
-.logo-container a{
-    height: 50px;
+
+.logo-container a {
+    width: 170px;
     display: flex;
     align-items: center;
-    margin-bottom: 5px;/***********/
+    /***********/
     color: #212121;
     font-weight: 600;
-    
+
 }
-.nav-link-container{
+
+.logo-container img {
+    width: 100%;
+}
+
+.user-name-container {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.user-name-container span {
+
+    color: #212121;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+
+.nav-link-container {
     height: 50px;
     display: flex;
     align-items: center;
     margin-left: 50px;
+    justify-content: flex-end;
+
+    width: 40%;
 }
-.nav-link-container a{
-    height: 50px;
+
+
+.nav-container {
     display: flex;
-    align-items: center;
-    color: #212121;
-    font-weight: 500;
 }
-.nav-link-container a:hover{
+
+.nav-container a {
+    color: #212121;
+    font-weight: 700;
+    margin-inline-end: 10px;
+}
+
+.nav-container a:hover {
     background-color: transparent;
 }
 
-.horizontal-nav-bar-icon-list{
+.horizontal-nav-bar-icon-list {
     height: 50px;
     align-items: center;
-    justify-content: flex-end;
     display: none;
 }
-.horizontal-nav-bar-icon-list a{
+
+.horizontal-nav-bar-icon-list a {
     height: 50px;
     display: flex;
     align-items: center;
     color: #212121;
     font-weight: 500;
+
 }
 
-@media screen and (max-width:990px) {
+@media screen and (max-width:700px) {
 
-    .horizontal-nav-bar-icon-list{
-        width: 90%;
-       display: flex;
-       
+    .horizontal-nav-bar-icon-list {
+        display: flex;
+
     }
-  }
+
+    .nav-container {
+        display: none;
+    }
+}

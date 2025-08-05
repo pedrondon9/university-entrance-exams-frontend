@@ -34,7 +34,7 @@ function Confir() {
                         "VALIDAR_USER": true,
                         "USER_ID": user.data.userData._id,
                         "USER_NAME": user.data.userData.fullname,
-                        'TOKEN': user.data.token,
+                        'token': user.data.token,
                         'SEND_EMAIL': false,
                     }
                 })
@@ -44,7 +44,6 @@ function Confir() {
                     {
                         'token': user.data.token,
                         'SEND_EMAIL': false,
-                        'VERIFICAR_EMAIL': false,
                         "VALIDAR_USER": true,
                         "USER_ID": user.data.userData._id,
                         "USER_NAME": user.data.userData.fullname,

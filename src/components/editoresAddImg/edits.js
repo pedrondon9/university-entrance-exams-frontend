@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
-import { DATA_RICHE_TEXT, ERROR_USER } from '../../contexts/constantesVar';
+import { DATA_APP_CONTEXT} from '../../contexts/constantesVar';
 import AppContext from '../../contexts/ServiceContext';
 import { ScaleLoader, PulseLoader } from "react-spinners";
 import M from 'materialize-css';
@@ -72,7 +72,7 @@ function Editors() {
     const LimpiarError = () => {
         //limpiar el error anterior
         dispatch({
-            type: ERROR_USER,
+            type: DATA_APP_CONTEXT,
             payload: {'ERROR_USER':false}
         })
     }

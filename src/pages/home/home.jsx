@@ -15,12 +15,13 @@ import Sinav from '../../components/navegacionBarAll/sideNav';
 import Elegir from '../../components/elegirTipo/elegir';
 import { ScaleLoader, MoonLoader, PulseLoader } from "react-spinners";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { DATA_APP_CONTEXT, EXAMEN_ID, URL_PDF, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from '../../contexts/constantesVar';
+import { DATA_APP_CONTEXT, URL_SERVER } from '../../contexts/constantesVar';
 import SinavMat from '../../components/sinavMaterias/sinavMat';
 import Login from '../../components/login.register/login.regsiter';
 import axios from 'axios';
 import Editors from '../../components/editoresAddImg/edits';
 import ImageView from '../../components/viewImagesComments/imageView';
+import Footer from '../../components/footer/footer';
 
 
 
@@ -54,53 +55,6 @@ export default function Home() {
   };
 
 
-  //verificacion automatico de sesion
-  const UserConfirm = async () => {
-
-
-    try {
-      const datos = await axios({
-        method: 'post',
-        data: {
-          'id': code,
-        },
-        url: `${URL_SERVER}/user_confirm_init`
-      })
-      if (datos.data) {
-        dispatch({
-          type: VALIDAR_USER,
-          payload: { "VALIDAR_USER": true }
-        })
-        dispatch({
-          type: USER_ID,
-          payload: { "USER_ID": datos.data.id }
-        })
-        dispatch({
-          type: USER_NAME,
-          payload: { "USER_NAME": datos.data.user }
-        })
-        window.localStorage.setItem("code", datos.data.code)
-      } else {
-        dispatch({
-          type: VALIDAR_USER,
-          payload: { "VALIDAR_USER": false }
-        })
-        dispatch({
-          type: USER_ID,
-          payload: { "USER_ID": "" }
-        })
-        dispatch({
-          type: USER_NAME,
-          payload: { "USER_NAME": "" }
-        })
-      }
-    } catch (error) {
-
-      console.log(error)
-
-    }
-
-  }
 
 
 
@@ -144,9 +98,9 @@ export default function Home() {
     //borrar la ruta del pdf actual
     dispatch({
       type: DATA_APP_CONTEXT,
-      payload: { "EXAMEN_ID": null,"URL_PDF": null }
+      payload: { "EXAMEN_ID": null, "URL_PDF": null }
     })
-   
+
 
   }, [])
   return (
@@ -191,10 +145,14 @@ export default function Home() {
               <div className='block-chat-container'>
 
                 <div className='block-chat-container-resp'>
-
+                  <div>
+                    <h5>Publica tu duda</h5>
+                    <p>Para recibir ayuda de los demas !</p>
+                  </div>
 
                   {/* editor del comentrio principal */}
                   <Editors />
+
                   {/* infinity scroll de comentarios */}
                   {!dataApp?.SPINNER_CARGAR_EXAMENES ?
                     <>
@@ -607,7 +565,7 @@ export default function Home() {
           <Link to="#!" className='btn btn-small boton-flotante sidenav-trigger' data-target="slide-out-nav-mat">Examenes</Link>
         </div>
       </>
-
+      <Footer />
     </>
 
   )

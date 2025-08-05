@@ -12,11 +12,11 @@ const Footer = () => {
             <div className='footer-container-principal'>
                 <div className='footer-container-principal-resp'>
                     <div className="mumbexMensaje">
-                        <h2>Mensaje</h2>
+                        <h2>Tu comentario nos importa</h2>
                         <form className='formularioMensaje' >
                             <div className='inputFormContainer'>
-                                <input type="text" className='inputComment nombre' required name='nombre' placeholder='Nombre...' />
-                                <input type="mail" className='inputComment correo' required name='correo' placeholder='Correo...' />
+                                <input type="tex" className='inputComment nombre ' required name='nombre' placeholder='Nombre...' />
+                                <input type="emai" className='inputComment correo' required name='correo' placeholder='Correo...' />
                             </div>
                             <textarea name="mensaje" required className='textArea' placeholder='Mensaje...' ></textarea>
                             <button type='submit' className='botonEnviar'>Enviar</button>
@@ -26,19 +26,10 @@ const Footer = () => {
                     <div className="footer-redesSociales-contact">
                         <div className="mumbexInfo-info-contact ">
                             <div className="mumbexInfo ">
-                                <h2>mumbeX</h2>
-                                <h3>Empresa de tecnología</h3>
+                                <h2>Building by mumbX mumbx.com</h2>
+                                <h3>Pedro Ndong Ondo Avomo</h3>
                                 <h3>Especializada en software</h3>
-                                <h3>Asistencia técnica en TI</h3>
-                                <h3>Somos tu mejor opción</h3>
 
-                            </div>
-                            <div className="mumbexContacto ">
-                                <h2>Contacto</h2>
-                                <h3><span><FaMapMarkerAlt /></span> Guinea Ecuatoria, Malabo</h3>
-                                <h3><span><FaMobileAlt /></span> +240 222 058 540 /+240 222 122 832</h3>
-                                <h3><span><HiMail /></span> mumbex2022@outlook.com</h3>
-                                <h3><span><FaCalendarAlt /></span> Siempre disponibles</h3>
                             </div>
                         </div>
                         <div className="redesSociales">

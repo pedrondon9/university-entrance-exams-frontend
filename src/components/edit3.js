@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 import AppContext from '../contexts/ServiceContext';
 import { PulseLoader } from 'react-spinners';
-import { ERROR_USER } from '../contexts/constantesVar';
+import { DATA_APP_CONTEXT } from '../contexts/constantesVar';
 import { Link } from 'react-router-dom';
 import { FiCamera } from 'react-icons/fi'
 import M from 'materialize-css';
@@ -177,8 +177,8 @@ function Editor3s({ comentId }) {
     const LimpiarError = () => {
         //limpiar el error anterior
         dispatch({
-            type: ERROR_USER,
-            payload: false
+            type: DATA_APP_CONTEXT,
+            payload: {ERROR_USER:false}
         })
     }
     const LimpiarImagenes = () => {

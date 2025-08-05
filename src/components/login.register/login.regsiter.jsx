@@ -394,13 +394,13 @@ function Login() {
 
                                 () => {
                                     dispatch({
-                                        type: RESP_ERROR_LOGIN,
-                                        payload: ""
+                                        type: DATA_APP_CONTEXT,
+                                        payload: {
+                                            RESP_ERROR_LOGIN:"",
+                                            ERROR_USER:false
+                                        }
                                     })
-                                    dispatch({
-                                        type: ERROR_USER,
-                                        payload: false
-                                    })
+                                    
                                 }
                             }
                         >

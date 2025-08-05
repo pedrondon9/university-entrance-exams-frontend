@@ -2,19 +2,20 @@ import { useState, useEffect, useContext } from 'react'
 import React from 'react'
 import "./formUpload.css"
 import AppContext from '../../contexts/ServiceContext'
-import { PDF_VIEW_FORM, URL_SERVER } from '../../contexts/constantesVar'
+import { DATA_APP_CONTEXT, URL_SERVER } from '../../contexts/constantesVar'
 import PdfForm from '../pdfForm/pdfForm'
 import M from 'materialize-css'
 import { ScaleLoader } from "react-spinners";
 import axios from 'axios'
 import Login from '../login.register/login.regsiter'
+import LogOut from '../logOut'
 
 
 //FORMULARIO PARA SUBIR UN NUEVO  EXAMEN
 
 
 function FormUpload() {
-    const { dispatch, userId, userName, userLinkPhoto, validarUser ,dataApp} = useContext(AppContext)
+    const { dispatch, userId, userName, userLinkPhoto, validarUser, axiosConfigs, dataApp } = useContext(AppContext)
     const [pdf, setPdf] = useState("")
     const [año, setAño] = useState("")
     const [mes, setMes] = useState("")
@@ -31,8 +32,8 @@ function FormUpload() {
         reader.onloadend = (e) => {
             //insertar o cambiar el pdf que se muestra
             dispatch({
-                type: PDF_VIEW_FORM,
-                payload: {"PDF_VIEW_FORM":e.target.result}
+                type: DATA_APP_CONTEXT,
+                payload: { "PDF_VIEW_FORM": e.target.result }
             })
         }
     }
@@ -59,19 +60,26 @@ function FormUpload() {
                 fs.append("face", face)
                 fs.append("materia", materia)
                 fs.append("pdf", pdf)
+                fs.append("token", dataApp.token)
 
-                const add = await axios.post(`${URL_SERVER}/addExamen`, fs)
-                if (add.data === "publicado") {
+                const add = await axiosConfigs.post(`/customer/auth/addExamen`, fs)
+                if (add.data.success) {
 
-                    var toastHTML = '<span className = "text-red">' + add.data + '</span>';
+                    var toastHTML = '<span className = "text-red">' + add.data.message + '</span>';
                     M.toast({ html: toastHTML });
                     setAddSpìnner(false)
                 } else {
-                    var toastHTML = '<span className = "text-red">' + add.data + '</span>';
+                    var toastHTML = '<span className = "text-red">' + add.data.message + '</span>';
                     M.toast({ html: toastHTML });
                     setAddSpìnner(false)
                 }
             } catch (error) {
+                var toastHTML = '<span className = "text-red">' + error.response?.data?.message + '</span>';
+                M.toast({ html: toastHTML });
+                if(error.response?.status === 401){
+                    LogOut(dispatch)
+                }
+                console.log(error)
                 setAddSpìnner(false)
             }
         } else {
@@ -243,7 +251,7 @@ function FormUpload() {
                     <div className='boton-submit-container'>
                         {dataApp.VALIDAR_USER ?
                             <>
-                                {true?
+                                {true ?
                                     <button className='btn-small' type='submit'>{addSpìnner ? <ScaleLoader size={20} /> : "compartir el examen"}</button>
                                     :
                                     <></>

@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 import AppContext from '../contexts/ServiceContext';
 import { PulseLoader } from 'react-spinners';
-import { ERROR_USER } from '../contexts/constantesVar';
+import { DATA_APP_CONTEXT } from '../contexts/constantesVar';
 import { Link } from 'react-router-dom';
 import { FiCamera } from 'react-icons/fi'
 import M from 'materialize-css';
@@ -12,7 +12,7 @@ import M from 'materialize-css';
 
 
 function Editor2s({ comentId }) {
-    const { validarUser, dispatch, GetDataComentResponse, AddComentResponse, userId, userName, userLinkPhoto, examId, spinnerAddCommentRespons,dataApp } = useContext(AppContext)
+    const { validarUser, dispatch, GetDataComentResponse, AddComentResponse, userId, userName, userLinkPhoto, examId, spinnerAddCommentRespons, dataApp } = useContext(AppContext)
     const [value, setValue] = useState('');
     const [imagen1, setImagen1] = useState('')
     const [imagen2, setImagen2] = useState('')
@@ -157,8 +157,8 @@ function Editor2s({ comentId }) {
     ]
 
     const GetComResp = () => {
-        if (value||imagen1) {
-            AddComentResponse(value, dataApp.USER_NAME, dataApp.USER_LINK_PHOTO, dataApp.USER_ID, "2", comentId,imagen1,imagen2,imagen3,imagen4)
+        if (value || imagen1) {
+            AddComentResponse(value, dataApp.USER_NAME, dataApp.USER_LINK_PHOTO, dataApp.USER_ID, "2", comentId, imagen1, imagen2, imagen3, imagen4)
             LimpiarImagenes2()
             setValue("")
         } else {
@@ -170,8 +170,8 @@ function Editor2s({ comentId }) {
     const LimpiarError = () => {
         //limpiar el error anterior
         dispatch({
-            type: ERROR_USER,
-            payload: false
+            type: DATA_APP_CONTEXT,
+            payload: { ERROR_USER: false }
         })
     }
     const LimpiarImagenes2 = () => {
@@ -225,16 +225,16 @@ function Editor2s({ comentId }) {
             </div>
             <div className='containerButtonAddRespons'>
                 {dataApp.VALIDAR_USER ?
-                    <Link 
-                    to={"#!"}
-                    onClick={() => {
-                        GetComResp();
-                        // dispatch({
-                        //     type: DATA_RICHE_TEXT,
-                        //     payload: value
-                        // })
-                        // console.log(value)
-                    }} className='btn-small addCommentseButton' >{!dataApp.ADD_COMMENT_RESPONSE_SPINNER ? "Publicar" : <PulseLoader size={9} color="#212121" />}
+                    <Link
+                        to={"#!"}
+                        onClick={() => {
+                            GetComResp();
+                            // dispatch({
+                            //     type: DATA_RICHE_TEXT,
+                            //     payload: value
+                            // })
+                            // console.log(value)
+                        }} className='btn-small addCommentseButton' >{!dataApp.ADD_COMMENT_RESPONSE_SPINNER ? "Publicar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
                     <Link to={"#!"} onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Publicar</Link>

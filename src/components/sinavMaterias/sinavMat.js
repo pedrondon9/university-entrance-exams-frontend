@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../contexts/ServiceContext'
 import M from 'materialize-css'
 import "./sinavMat.css"
-import { EXAMEN_ID, URL_PDF } from '../../contexts/constantesVar'
+import { DATA_APP_CONTEXT } from '../../contexts/constantesVar'
 import { PulseLoader } from 'react-spinners'
 
 
@@ -24,14 +24,14 @@ const SinavMat = () => {
         var instance = M.Sidenav.getInstance(elem);
         instance.close()
         dispatch({
-            type: URL_PDF,
-            payload: {"URL_PDF":pdf}
+            type: DATA_APP_CONTEXT,
+            payload: {
+                "URL_PDF":pdf,
+                "EXAMEN_ID":id
+            }
         })
 
-        dispatch({
-            type: EXAMEN_ID,
-            payload: {"EXAMEN_ID":id}
-        })
+       
         //ejecutar la funcion que trae los cpmentarios del nuevo examen
         GetDataComent(id)
 

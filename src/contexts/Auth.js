@@ -1,3 +1,36 @@
+
+/**
+ * Auth context provider component for managing authentication, comments, and exam data.
+ * 
+ * Provides context values and functions for:
+ * - User authentication (login, registration, resend email, change password)
+ * - Fetching, adding, and paginating comments and their responses (nested up to 3 levels)
+ * - Loading exam lists
+ * - Managing UI state (spinners, error messages, infinite scroll)
+ * 
+ * @param {object} props - React component props.
+ * @param {React.ReactNode} props.children - Child components to be rendered within the provider.
+ * @returns {JSX.Element} AppContext.Provider with authentication and comment management functions.
+ * 
+ * @context
+ * @property {Function} dispatch - Reducer dispatch function for state management.
+ * @property {Function} GetDataComent - Fetches main comments for a given exam.
+ * @property {Function} AddComent - Adds a new main comment to an exam.
+ * @property {Function} AddComentResponse - Adds a response to a main comment.
+ * @property {Function} GetDataComentResponse - Fetches responses for a main comment.
+ * @property {Function} GetDataRespComentResponse - Fetches responses to a comment response (third-level).
+ * @property {Function} AddRespComentResponse - Adds a response to a comment response (third-level).
+ * @property {Function} ScrollInfinito - Loads more comments for infinite scroll.
+ * @property {boolean} more - Indicates if more comments can be loaded (infinite scroll).
+ * @property {Function} Logins - Handles user login.
+ * @property {Function} Registers - Handles user registration.
+ * @property {Function} LoadListExam - Loads the list of available exams.
+ * @property {Array} examenList - List of exams.
+ * @property {object} dataApp - Application state data.
+ * @property {Function} resendEmail - Resends verification email to the user.
+ * @property {Function} changePasswordContext - Handles password change requests.
+ */
+
 import React, { useReducer, useState } from "react"
 import AppContext from "./ServiceContext";
 import { InitialState } from './InitialState';
@@ -5,7 +38,7 @@ import AppReducer from "./AppReducer";
 import axios from "axios";
 import M from "materialize-css";
 
-import { DATA_APP_CONTEXT, ADD_COMMENT_RESPONSE_SPINNER, ADD_COMMENT_SPINNER, ADD_RESPONSE_RESPONSE_SPINNER, CARGAR_COMMENT, CARGAR_RESPONSE_COMENT, CARGAR_RESPONSE_RESPONSE, ERROR_USER, LOGIN_SPINNER, PAGINA_SIGUIENTE, RESP_ERROR_LOGIN, SPINNER_CARGAR_EXAMENES, URL_SERVER, USER_ID, USER_NAME, VALIDAR_USER } from "./constantesVar";
+import { DATA_APP_CONTEXT, URL_SERVER } from "./constantesVar";
 import { ErrorG } from "../components/errorGestion";
 
 
@@ -15,21 +48,22 @@ export default (props) => {
 
     const [state, dispatch] = useReducer(AppReducer, InitialState);
     const [dataComentario, setDataComentario] = useState([])
-    const [dataComentarioResps, setDataComentarioResps] = useState([])
-    const [dataComentarioResp, setDataComentarioResp] = useState([])
     const [dataRespComentarioResp, setDataRespComentarioResp] = useState([])
+    const [dataComentarioResp, setDataComentarioResp] = useState([])
     const [paginaNext, setPaginaNext] = useState("")
     const [comentRespId, setComentRespId] = useState("")
-    const [idExamen, setIdExamen] = useState("")
     const [respComentRespId, setRespComentRespId] = useState("")
     const [more, setMore] = useState(false)
     const [examenList, setExamenList] = useState([])
 
+    const axiosConfigs = axios.create({
+        baseURL: URL_SERVER,
+        headers: {
+            'x-access-token': state.dataApp.token,
+        },
+    });
 
 
-    var datosGetComentResponse = []
-
-    //funcion para obtener primeros comentrios o comentarios principales
     const GetDataComent = async (examenId) => {
         if (examenId) {
             setMore(true)
@@ -41,56 +75,53 @@ export default (props) => {
             try {
 
                 if (paginaNext === "") {
-                    const comments = await axios({
+                    const comments = await axiosConfigs({
                         method: "GET",
                         data: { "examenId": examenId },
-                        url: `${URL_SERVER}/getComent/${examenId}`
+                        url: `/customer/getComent/${examenId}`
                     })
                     if (comments.data.docs) {
                         dispatch({
                             type: DATA_APP_CONTEXT,
-                            payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
+                            payload: {
+                                "PAGINA_SIGUIENTE": comments.data.nextPage,
+                                "CARGAR_COMMENT": false,
+
+                            }
                         })
                         setPaginaNext(comments.data.nextPage)
                         setDataComentario(comments.data.docs)
-                        dispatch({
-                            type: DATA_APP_CONTEXT,
-                            payload: { "CARGAR_COMMENT": false }
-                        })
+
                     } else {
-                        dispatch({
-                            type: DATA_APP_CONTEXT,
-                            payload: { "CARGAR_COMMENT": false }
-                        })
+
                     }
                 } else {
-                    const comments = await axios({
+                    const comments = await axiosConfigs({
                         method: "GET",
                         data: { "paginaNext": paginaNext, "examenId": "examenId" },
-                        url: `${URL_SERVER}/getComent/${examenId}`
+                        url: `/customer/getComent/${examenId}`
                     })
                     if (comments.data.docs) {
                         dispatch({
                             type: DATA_APP_CONTEXT,
-                            payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
+                            payload: {
+                                "PAGINA_SIGUIENTE": comments.data.nextPage,
+                                "CARGAR_COMMENT": false
+                            }
                         })
                         setPaginaNext(comments.data.nextPage)
                         setDataComentario(comments.data.docs)
-                        dispatch({
-                            type: DATA_APP_CONTEXT,
-                            payload: { "CARGAR_COMMENT": false }
-                        })
+
                     } else {
-                        dispatch({
-                            type: DATA_APP_CONTEXT,
-                            payload: { "CARGAR_COMMENT": false }
-                        })
+
                     }
                 }
 
 
 
             } catch (error) {
+
+            } finally {
                 dispatch({
                     type: DATA_APP_CONTEXT,
                     payload: { "CARGAR_COMMENT": false }
@@ -104,21 +135,24 @@ export default (props) => {
 
     const GetDataComentAdd = async (examenId) => {
         setMore(true)
-        console.log("WWWWWWWWWWWWWW", examenId)
+        //console.log("WWWWWWWWWWWWWW", examenId)
         //activar spinner de carga de comentarios
         try {
 
             if (paginaNext == "") {
-                const comments = await axios({
+                const comments = await axiosConfigs({
                     method: "GET",
                     data: { "examenId": examenId },
-                    url: `${URL_SERVER}/getComent/${examenId}`
+                    url: `/customer/getComent/${examenId}`
                 })
                 if (comments.data.docs) {
                     console.log(comments.data.docs)
                     dispatch({
-                        type: PAGINA_SIGUIENTE,
-                        payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
+                        type: DATA_APP_CONTEXT,
+                        payload: {
+                            "PAGINA_SIGUIENTE": comments.data.nextPage,
+
+                        }
                     })
                     setPaginaNext(comments.data.nextPage)
                     setDataComentario(comments.data.docs)
@@ -127,15 +161,15 @@ export default (props) => {
 
                 }
             } else {
-                const comments = await axios({
+                const comments = await axiosConfigs({
                     method: "GET",
                     data: { "paginaNext": paginaNext, "examenId": "examenId" },
-                    url: `${URL_SERVER}/getComent/${examenId}`
+                    url: `/customer/getComent/${examenId}`
                 })
                 if (comments.data.docs) {
                     console.log(comments.data.docs)
                     dispatch({
-                        type: PAGINA_SIGUIENTE,
+                        type: DATA_APP_CONTEXT,
                         payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
                     })
                     setPaginaNext(comments.data.nextPage)
@@ -149,25 +183,26 @@ export default (props) => {
 
 
         } catch (error) {
+        } finally {
             dispatch({
-                type: CARGAR_COMMENT,
+                type: DATA_APP_CONTEXT,
                 payload: { "CARGAR_COMMENT": false }
             })
+
         }
     }
 
-    //funcion para obtener segundos comentrios o respuestas del primer comentario
     const GetDataComentResponse = async (comentId) => {
         console.log(comentId, "el id llega")
         dispatch({
-            type: CARGAR_RESPONSE_COMENT,
-            payload: true
+            type: DATA_APP_CONTEXT,
+            payload: { "CARGAR_RESPONSE_COMENT": true }
         })
         try {
-            const comments = await axios({
+            const comments = await axiosConfigs({
                 method: "GET",
                 data: { "id": comentId },
-                url: `${URL_SERVER}/getComentResp/${comentId}`
+                url: `/customer/getComentResp/${comentId}`
             })
 
             console.log(comments)
@@ -178,20 +213,15 @@ export default (props) => {
                 setComentRespId(comentId)
                 console.log(comments.data.docs)
                 setDataComentarioResp(comments.data.docs)
-                dispatch({
-                    type: CARGAR_RESPONSE_COMENT,
-                    payload: { "CARGAR_RESPONSE_COMENT": false }
-                })
-            } else {
-                dispatch({
-                    type: CARGAR_RESPONSE_COMENT,
-                    payload: { "CARGAR_RESPONSE_COMENT": false }
 
-                })
+            } else {
+
             }
         } catch (error) {
+
+        } finally {
             dispatch({
-                type: CARGAR_RESPONSE_COMENT,
+                type: DATA_APP_CONTEXT,
                 payload: { "CARGAR_RESPONSE_COMENT": false }
 
             })
@@ -202,10 +232,10 @@ export default (props) => {
         console.log(comentId, "el id llega")
 
         try {
-            const comments = await axios({
+            const comments = await axiosConfigs({
                 method: "GET",
                 data: { "id": comentId },
-                url: `${URL_SERVER}/getComentResp/${comentId}`
+                url: `/customer/getComentResp/${comentId}`
             })
 
             console.log(comments)
@@ -225,17 +255,16 @@ export default (props) => {
         }
     }
 
-    //funcion para obtener terceros comentrios o respuestas del segundo comentario
     const GetDataRespComentResponse = async (comentId) => {
         dispatch({
-            type: CARGAR_RESPONSE_RESPONSE,
-            payload: true
+            type: DATA_APP_CONTEXT,
+            payload: { "CARGAR_RESPONSE_RESPONSE": true }
         })
         try {
-            const comments = await axios({
+            const comments = await axiosConfigs({
                 method: "GET",
                 data: { "id": comentId },
-                url: `${URL_SERVER}/getRespComentResp/${comentId}`
+                url: `/customer/getRespComentResp/${comentId}`
             })
 
 
@@ -244,21 +273,15 @@ export default (props) => {
             if (comments.data.docs) {
                 setRespComentRespId(comentId)
                 setDataRespComentarioResp(comments.data.docs)
-                dispatch({
-                    type: CARGAR_RESPONSE_RESPONSE,
-                    payload: { "CARGAR_RESPONSE_RESPONSE": false }
 
-                })
             } else {
-                dispatch({
-                    type: CARGAR_RESPONSE_RESPONSE,
-                    payload: { "CARGAR_RESPONSE_RESPONSE": false }
 
-                })
             }
         } catch (error) {
+
+        } finally {
             dispatch({
-                type: CARGAR_RESPONSE_RESPONSE,
+                type: DATA_APP_CONTEXT,
                 payload: { "CARGAR_RESPONSE_RESPONSE": false }
 
             })
@@ -266,10 +289,10 @@ export default (props) => {
     }
     const GetDataRespComentResponseAdd = async (comentId) => {
         try {
-            const comments = await axios({
+            const comments = await axiosConfigs({
                 method: "GET",
                 data: { "id": comentId },
-                url: `${URL_SERVER}/getRespComentResp/${comentId}`
+                url: `/customer/getRespComentResp/${comentId}`
             })
 
 
@@ -287,11 +310,10 @@ export default (props) => {
     }
 
 
-    //funcion para añadir primeros comentrios o comentarios principales
     const AddComent = async (coment, userName, userPhoto, userId, comentCategory, examenId, imagen1, imagen2, imagen3, imagen4) => {
         dispatch({
-            type: ADD_COMMENT_SPINNER,
-            payload: true
+            type: DATA_APP_CONTEXT,
+            payload: { "ADD_COMMENT_SPINNER": true }
         })
 
         const fs = new FormData()
@@ -306,38 +328,31 @@ export default (props) => {
         fs.append("imagen3", imagen3)
         fs.append("imagen4", imagen4)
         try {
-            const add = await axios.post(`${URL_SERVER}/addComent`, fs, { headers: { "Content-Type": "multipart/form-data" } })
+            const add = await axiosConfigs.post(`/customer/auth/addComent`, fs, { headers: { "Content-Type": "multipart/form-data" } })
             if (add.data == "publicado") {
                 GetDataComentAdd(examenId)//volver a cargar comentarios
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
-                dispatch({
-                    type: ADD_COMMENT_SPINNER,
-                    payload: { "ADD_COMMENT_SPINNER": false }
 
-                })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
-                dispatch({
-                    type: ADD_COMMENT_SPINNER,
-                    payload: { "ADD_COMMENT_SPINNER": false }
 
-                })
             }
         } catch (error) {
+
+        } finally {
             dispatch({
-                type: ADD_COMMENT_SPINNER,
+                type: DATA_APP_CONTEXT,
                 payload: { "ADD_COMMENT_SPINNER": false }
 
             })
         }
     }
 
-    //funcion para añadir  segundos comentrios o respuestas del primer comentario
     const AddComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId, imagen1, imagen2, imagen3, imagen4) => {
         dispatch({
-            type: ADD_COMMENT_RESPONSE_SPINNER,
+            type: DATA_APP_CONTEXT,
             payload: true
         })
         const fs = new FormData()
@@ -352,40 +367,33 @@ export default (props) => {
         fs.append("imagen3", imagen3)
         fs.append("imagen4", imagen4)
         try {
-            const add = await axios.post(`${URL_SERVER}/addComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
+            const add = await axiosConfigs.post(`/customer/auth/addComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
             if (add.data == "publicado") {
                 GetDataComentResponseAdd(comentRespId)
-                //comentRespId(comentRespId)
+                comentRespId(comentRespId)
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
-                dispatch({
-                    type: ADD_COMMENT_RESPONSE_SPINNER,
-                    payload: { "ADD_COMMENT_RESPONSE_SPINNER": false }
 
-                })
             } else {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
-                dispatch({
-                    type: ADD_COMMENT_RESPONSE_SPINNER,
-                    payload: { "ADD_COMMENT_RESPONSE_SPINNER": false }
 
-                })
             }
         } catch (error) {
+
+        } finally {
             dispatch({
-                type: ADD_COMMENT_RESPONSE_SPINNER,
+                type: DATA_APP_CONTEXT,
                 payload: { "ADD_COMMENT_RESPONSE_SPINNER": false }
 
             })
         }
     }
 
-    //funcion para añadir terceros comentrios o respuestas del segundo comentario
     const AddRespComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId, imagen1, imagen2, imagen3, imagen4) => {
         dispatch({
-            type: ADD_RESPONSE_RESPONSE_SPINNER,
-            payload: true
+            type: DATA_APP_CONTEXT,
+            payload: { "ADD_RESPONSE_RESPONSE_SPINNER": true }
         })
         const fs = new FormData()
         fs.append("userName", userName)
@@ -399,14 +407,14 @@ export default (props) => {
         fs.append("imagen3", imagen3)
         fs.append("imagen4", imagen4)
         try {
-            const add = await axios.post(`${URL_SERVER}/addRespComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
+            const add = await axiosConfigs.post(`/customer/auth/addRespComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
             if (add.data == "publicado") {
                 GetDataRespComentResponseAdd(respComentRespId)
-                //comentRespId(comentRespId)
+                comentRespId(comentRespId)
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
-                    type: ADD_RESPONSE_RESPONSE_SPINNER,
+                    type: DATA_APP_CONTEXT,
                     payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
 
                 })
@@ -414,14 +422,14 @@ export default (props) => {
                 var toastHTML = '<span className = "text-red">' + add.data + '</span>';
                 M.toast({ html: toastHTML });
                 dispatch({
-                    type: ADD_RESPONSE_RESPONSE_SPINNER,
+                    type: DATA_APP_CONTEXT,
                     payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
 
                 })
             }
         } catch (error) {
             dispatch({
-                type: ADD_RESPONSE_RESPONSE_SPINNER,
+                type: DATA_APP_CONTEXT,
                 payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
 
             })
@@ -430,7 +438,6 @@ export default (props) => {
 
 
 
-    //funcion la paginacion de comentarios de tipo infinity scroll
     const ScrollInfinito = async (examenId) => {
         setMore(true)
         //activar spinner de carga de comentarios
@@ -439,17 +446,17 @@ export default (props) => {
         //     payload: true
         // })
         try {
-            const comments = await axios({
+            const comments = await axiosConfigs({
                 method: "POST",
                 data: { "examenId": examenId, "paginaNext": paginaNext },
-                url: `${URL_SERVER}/getComentInfinityScroll/${examenId}`
+                url: `/customer/getComentInfinityScroll/${examenId}`
             })
             if (comments.data.docs) {
 
                 if (paginaNext !== null) {
                     //console.log(comments.data.docs)
                     dispatch({
-                        type: PAGINA_SIGUIENTE,
+                        type: DATA_APP_CONTEXT,
                         payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
 
                     })
@@ -488,8 +495,9 @@ export default (props) => {
 
 
     /***************** LOGIN PARA INICIO DE SESION *******************************/
-    const Logins = async (email, contrasena) => {
-        if (email !== "" && contrasena !== "") {
+    const Logins = async (email, password) => {
+        console.log(email, password)
+        if (email !== "" && password !== "") {
             dispatch({
                 type: DATA_APP_CONTEXT,
                 payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
@@ -497,10 +505,10 @@ export default (props) => {
 
 
             try {
-                const user = await axios({
+                const user = await axiosConfigs({
                     method: "post",
-                    data: { "email": email, "contrasena": contrasena },
-                    url: `${URL_SERVER}/customer/login_post`
+                    data: { email, password },
+                    url: `/customer/login_post`
                 })
                 if (user.data.success) {
 
@@ -582,14 +590,14 @@ export default (props) => {
 
 
             try {
-                const user = await axios({
+                const user = await axiosConfigs({
                     method: "post",
                     data: {
                         "email": email,
                         "password": contrasena,
                         "fullname": nombre,
                     },
-                    url: `${URL_SERVER}/customer/registro_post`
+                    url: `/customer/registro_post`
                 })
 
                 console.log(user)
@@ -682,7 +690,7 @@ export default (props) => {
         const token = userData.token;
 
         try {
-            const response = await axios.post(`${URL_SERVER}/customer/resend-email`, { token });
+            const response = await axiosConfigs.post(`/customer/resend-email`, { token });
             if (response.data.success) {
                 dispatch({
                     type: DATA_APP_CONTEXT,
@@ -767,7 +775,7 @@ export default (props) => {
 
         try {
 
-            const response = await axios.post(`${URL_SERVER}/customer/change-pasword`, data);
+            const response = await axiosConfigs.post(`/customer/change-pasword`, data);
 
             if (response.data.success) {
                 dispatch({
@@ -818,18 +826,18 @@ export default (props) => {
     //funcion para cargar los array de los examenes
     const LoadListExam = async () => {
         dispatch({
-            type: SPINNER_CARGAR_EXAMENES,
+            type: DATA_APP_CONTEXT,
             payload: { "SPINNER_CARGAR_EXAMENES": true }
 
         })
         //setAddSpìnner(true)
         try {
-            const add = await axios.get(`${URL_SERVER}/getExamenList`)
+            const add = await axiosConfigs.get(`/customer/getExamenList`)
             if (add.data) {
                 setExamenList(add.data)
                 //setAddSpìnner(false)
                 dispatch({
-                    type: SPINNER_CARGAR_EXAMENES,
+                    type: DATA_APP_CONTEXT,
                     payload: { "SPINNER_CARGAR_EXAMENES": false }
 
                 })
@@ -837,7 +845,7 @@ export default (props) => {
                 setExamenList([])
                 //setAddSpìnner(false)
                 dispatch({
-                    type: SPINNER_CARGAR_EXAMENES,
+                    type: DATA_APP_CONTEXT,
                     payload: { "SPINNER_CARGAR_EXAMENES": false }
                 })
             }
@@ -845,7 +853,7 @@ export default (props) => {
             setExamenList([])
             //setAddSpìnner(false)
             dispatch({
-                type: SPINNER_CARGAR_EXAMENES,
+                type: DATA_APP_CONTEXT,
                 payload: { "SPINNER_CARGAR_EXAMENES": false }
 
             })
@@ -854,54 +862,34 @@ export default (props) => {
     }
 
 
+
     return (
         <AppContext.Provider value={{
+
             dispatch,
-            dataRicheText: state.dataRicheText,
-            dataComentario,
-            paginaNext,
             GetDataComent,
-            paginaSiguiente: state.paginaSiguiente,
             AddComent,
-            userId: state.userId,
-            userName: state.userName,
-            userLinkPhoto: state.userLinkPhoto,
             AddComentResponse,
             GetDataComentResponse,
+            dataComentario,
             dataComentarioResp,
-            datosGetComentResponse,
-            examId: state.examId,//el id del examen
-            /**** variables de respuestas de las respuestas de los comentarios */
+            dataRespComentarioResp,
+            respComentRespId,
+            comentRespId,
+            respComentRespId,
             GetDataRespComentResponse,
             AddRespComentResponse,
-            dataRespComentarioResp,
             /******************************* */
-            formPdfView: state.formPdfView,
-            pdfUrl: state.pdfUrl,//para guardar el pdf
-            /******************spinner********************** */
-            spinnerComment: state.spinnerComment,// mostrar spinner durante la carga de  comentarios
-            spinnerAddComment: state.spinnerAddComment,//añadir comentario
-            spinnerAddCommentRespons: state.spinnerAddCommentRespons,//añadir respuesta al coment principal
-            spinnerCargarCommentRespons: state.spinnerCargarCommentRespons,//cargar respuestas del comentario principal
-            spinnerAddResponsRespons: state.spinnerAddResponsRespons,//añadir respuesta a la respueta del comentario principal
-            spinnerCargarResponsRespons: state.spinnerCargarResponsRespons,//cargar respuestas de la respueta del comentario principal
-            /************************************** */
-            ScrollInfinito,//para traer los comentarios con infinity scroll
+            ScrollInfinito,
             more: more,//para activar el infinityScroll
-            spinnerCargarExamenes: state.spinnerCargarExamenes,//spinner para cargar examenes,
-            validarUser: state.validarUser,//validar si el usuario ya inicio sesion
-            Logins,//funcion para login del usuario
-            Registers,//funcion para resgistrarse
-            loginSpinner: state.loginSpinner,//para activar el spinner durante el inicio de sesion
-            errorResponseLogin: state.errorResponseLogin,//el error al inicio de sesion
-            userError: state.userError,//login error boolean
-            LoadListExam,//traer lista de examenes
+            Logins,
+            Registers,
+            LoadListExam,
             examenList: examenList,
-
-
             dataApp: state.dataApp,
             resendEmail,
-            changePasswordContext
+            changePasswordContext,
+            axiosConfigs
 
         }}>
             {props.children}

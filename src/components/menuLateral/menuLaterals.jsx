@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import "./menuLateral.css"
 import AppContext from '../../contexts/ServiceContext'
-import { EXAMEN_ID, SPINNER_CARGAR_EXAMENES, URL_PDF, URL_SERVER } from '../../contexts/constantesVar'
+import { DATA_APP_CONTEXT } from '../../contexts/constantesVar'
 import { ScaleLoader, MoonLoader, PulseLoader } from "react-spinners";
 
 
 function MenuLaterals() {
-    const { dispatch, AddComent, GetDataComent, spinnerCargarExamenes ,examenList} = useContext(AppContext)
+    const { dispatch, AddComent, GetDataComent, spinnerCargarExamenes, examenList } = useContext(AppContext)
     const [addSpìnner, setAddSpìnner] = useState(false)
     const [changeExam, setChangeExam] = useState(false)
     const [id, setId] = useState(false)
@@ -17,18 +17,17 @@ function MenuLaterals() {
     const [pdfLink, setPdfLink] = useState(false)
 
 
- 
+
     /********* cambiar pdf ***************** */
     const CambiarPdf = (pdf, id) => {
         dispatch({
-            type: URL_PDF,
-            payload: pdf
+            type: DATA_APP_CONTEXT,
+            payload: {
+                URL_PDF: pdf,
+                EXAMEN_ID: id
+            }
         })
 
-        dispatch({
-            type: EXAMEN_ID,
-            payload: id
-        })
         //ejecutar la funcion que trae los cpmentarios del nuevo examen
         GetDataComent(id)
 
