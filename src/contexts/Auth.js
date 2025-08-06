@@ -617,7 +617,7 @@ export default (props) => {
 
                     })
 
-                    window.sessionStorage.setItem("userData", JSON.stringify(
+                    window.localStorage.setItem("userData", JSON.stringify(
                         {
                             token: user.data.token,
                             SEND_EMAIL: true,
@@ -792,7 +792,7 @@ export default (props) => {
 
                 })
 
-                window.sessionStorage.setItem("userData", JSON.stringify(
+                window.localStorage.setItem("userData", JSON.stringify(
                     {
                         token: response.data.token,
                         SEND_EMAIL: true,
