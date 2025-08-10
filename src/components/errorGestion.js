@@ -4,7 +4,25 @@ const ErrorG = (dispatch, error) => {
 
     console.log("ErrorG", error)
 
+    if (error.response?.status === 401) {
 
+        dispatch({
+            type: DATA_APP_CONTEXT,
+            payload: { 
+                "LOGIN_SPINNER": false ,
+                "ERROR_USER": true,
+                "RESP_ERROR_LOGIN": error.response.data.message || "Error de autenticacion"},
+                "token": '',
+                "SEND_EMAIL": false,
+                "VALIDAR_USER": false,
+                "USER_ID": '',
+                "USER_NAME": '',
+
+        })
+      
+        return
+
+    }
     if (error.response?.status === 403) {
 
         dispatch({

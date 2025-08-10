@@ -17,6 +17,8 @@ function Confir() {
     const { id } = useParams()
     let navigate = useNavigate();
 
+    console.log(id, "id de confirmacion")
+
     const Confirmar = async () => {
         setErrorMessage("")
         setSpinner(true)
@@ -29,28 +31,25 @@ function Confir() {
 
             console.log(user)
             if (user.data.success) {
+                const dataUser = {
+                    'token': "",
+                    'SEND_EMAIL': false,
+                    "VALIDAR_USER": false,
+                    "USER_ID": "",
+                    "USER_NAME": "",
+                }
                 dispatch({
                     type: DATA_APP_CONTEXT,
-                    payload: {
-                        "VALIDAR_USER": true,
-                        "USER_ID": user.data.userData._id,
-                        "USER_NAME": user.data.userData.fullname,
-                        'token': user.data.token,
-                        'SEND_EMAIL': false,
-                    }
+                    payload:dataUser
                 })
 
 
-                window.localStorage.setItem("dataUser", JSON.stringify(
+                window.localStorage.setItem("dataUser", JSON.stringify(dataUser))
+                window.sessionStorage.setItem("logUp", JSON.stringify(
                     {
-                        'token': user.data.token,
-                        'SEND_EMAIL': false,
-                        "VALIDAR_USER": true,
-                        "USER_ID": user.data.userData._id,
-                        "USER_NAME": user.data.userData.fullname,
+
                     }
                 ))
-                navigate("/")
             } else {
                 setErrorMessage(user.data.message || "Error de autenticacion")
                 console.log("wefhuf sdf sbnd fsbdff")
@@ -76,6 +75,9 @@ function Confir() {
                     "USER_ID": '',
                     "USER_NAME": '',
                     "SEND_EMAIL": false,
+                    "token": '',
+                    "USER_ID": '',
+                    "USER_NAME": '',
                 }
             })
 

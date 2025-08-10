@@ -143,9 +143,7 @@ function Login() {
                 aria-label="Cerrar"
                 onClick={() => {
                     // If you want to reset form state on close, do it here
-                    setCambiarFormulario(cambiarFormulario);
-                    setErrors("");
-                    
+                    setCambiarFormulario(cambiarFormulario);                    
                    
                     // Materialize will close modal automatically with .modal-close
                 }}

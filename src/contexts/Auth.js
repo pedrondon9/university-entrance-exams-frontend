@@ -59,7 +59,7 @@ export default (props) => {
     const axiosConfigs = axios.create({
         baseURL: URL_SERVER,
         headers: {
-            'x-access-token': state.dataApp.token,
+            'x-access-token': JSON.parse(window.localStorage.getItem("dataUser"))?.token,
         },
     });
 
@@ -602,27 +602,20 @@ export default (props) => {
 
                 console.log(user)
                 if (user.data.success) {
-
+                    const dataLogUp = {
+                        "LOGIN_SPINNER": false,
+                        "ERROR_USER": true,
+                        "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
+                        "SEND_EMAIL": true,
+                        "token": user.data.token,
+                    }
                     dispatch({
                         type: DATA_APP_CONTEXT,
-                        payload: {
-                            "LOGIN_SPINNER": false,
-                            "ERROR_USER": true,
-                            "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
-                            "VALIDAR_USER": false,
-                            "VERIFICAR_EMAIL": false,
-                            "SEND_EMAIL": true,
-                            "token": user.data.token,
-                        }
+                        payload: dataLogUp
 
                     })
 
-                    window.localStorage.setItem("userData", JSON.stringify(
-                        {
-                            token: user.data.token,
-                            SEND_EMAIL: true,
-                            VERIFICAR_EMAIL: false
-                        }))
+                    window.sessionStorage.setItem("logUp", JSON.stringify(dataLogUp))
 
                     //navigate("/resendEmail")
 
@@ -639,7 +632,8 @@ export default (props) => {
                             "LOGIN_SPINNER": false,
                             "ERROR_USER": true,
                             "RESP_ERROR_LOGIN": user.data.message || "Error de autenticacion",
-                            "VALIDAR_USER": false
+                            "SEND_EMAIL": false,
+                            "token": '',
                         }
 
                     })
@@ -657,6 +651,9 @@ export default (props) => {
                 payload: {
                     "ERROR_USER": true,
                     "RESP_ERROR_LOGIN": "Todos los campos deben ser rellenados",
+                    "LOGIN_SPINNER": false,
+                    "SEND_EMAIL": false,
+                    "token": '',
                 }
 
             })
@@ -666,7 +663,7 @@ export default (props) => {
 
 
     const resendEmail = async () => {
-        const userData = JSON.parse(window.sessionStorage.getItem('userData'));
+        const userData = JSON.parse(window.sessionStorage.getItem('logUp'));
 
         console.log("userData", userData)
 
@@ -676,18 +673,17 @@ export default (props) => {
         })
 
 
-        if (!userData?.SEND_EMAIL) return;
-
-        if (!userData) {
+        if (!userData?.SEND_EMAIL) {
             dispatch({
                 type: DATA_APP_CONTEXT,
                 payload: {
                     "RESP_ERROR_LOGIN": "No se ha encontrado información de usuario. Por favor, inicia sesión o registrate nuevamente.",
                 }
-
             })
-            return;
-        }
+
+            return
+        };
+
         const token = userData.token;
 
         try {
@@ -706,60 +702,16 @@ export default (props) => {
             }
         } catch (error) {
 
-            if (error.response?.status === 403) {
+            ErrorG(dispatch, error)
 
-                dispatch({
-                    type: DATA_APP_CONTEXT,
-                    payload: { "RESP_ERROR_LOGIN": error.response.data.message }
-                })
-                return;
-
-            }
-            if (error.response?.status === 503) {
-
-                dispatch({
-                    type: DATA_APP_CONTEXT,
-                    payload: { "RESP_ERROR_LOGIN": error.response.data.message }
-                })
-
-                return;
-
-            }
-            if (error.response?.status === 401) {
-                window.sessionStorage.removeItem('userData');
-                dispatch({
-                    type: DATA_APP_CONTEXT,
-                    payload: {
-                        'token': '',
-                        'SEND_EMAIL': false,
-                        'VERIFICAR_EMAIL': false,
-                        "VALIDAR_USER": false,
-                        "USER_ID": '',
-                        "USER_NAME": '',
-                    }
-                })
-                window.localStorage.setItem("dataUser", JSON.stringify(
-                    {
-                        'token': '',
-                        'SEND_EMAIL': false,
-                        'VERIFICAR_EMAIL': false,
-                        "VALIDAR_USER": false,
-                        "USER_ID": '',
-                        "USER_NAME": '',
-                    }
-                ))
-
-                dispatch({
-                    type: DATA_APP_CONTEXT,
-                    payload: { "RESP_ERROR_LOGIN": error.response.data.message }
-                })
-                return;
-
-            }
         } finally {
+            const dataLogUp = {
+                "LOGIN_SPINNER": false,
+                "ERROR_USER": true,
+            }
             dispatch({
                 type: DATA_APP_CONTEXT,
-                payload: { "LOGIN_SPINNER": false, "ERROR_USER": true }
+                payload: dataLogUp
             })
         }
 
@@ -779,25 +731,20 @@ export default (props) => {
             const response = await axiosConfigs.post(`/customer/change-pasword`, data);
 
             if (response.data.success) {
+                const dataLogUp = {
+                    "LOGIN_SPINNER": false,
+                    "ERROR_USER": true,
+                    "RESP_ERROR_LOGIN": response.data.message || "Error de autenticacion",
+                    "SEND_EMAIL": true,
+                    "token": response.data.token,
+                }
                 dispatch({
                     type: DATA_APP_CONTEXT,
-                    payload: {
-                        "LOGIN_SPINNER": false,
-                        "ERROR_USER": true,
-                        "RESP_ERROR_LOGIN": response.data.message || "Error de autenticacion",
-                        "VALIDAR_USER": false,
-                        "VERIFICAR_EMAIL": false,
-                        "SEND_EMAIL": true,
-                    }
+                    payload: dataLogUp
 
                 })
 
-                window.localStorage.setItem("userData", JSON.stringify(
-                    {
-                        token: response.data.token,
-                        SEND_EMAIL: true,
-                        VERIFICAR_EMAIL: false
-                    }))
+                window.sessionStorage.setItem("logUp", JSON.stringify(dataLogUp))
 
             } else {
 
@@ -807,7 +754,8 @@ export default (props) => {
                         "LOGIN_SPINNER": false,
                         "ERROR_USER": true,
                         "RESP_ERROR_LOGIN": response.data.message || "Error de autenticacion",
-                        "VALIDAR_USER": false
+                        "SEND_EMAIL": false,
+                        "token": '',
                     }
 
                 })
@@ -817,7 +765,13 @@ export default (props) => {
         } finally {
             dispatch({
                 type: DATA_APP_CONTEXT,
-                payload: { "LOGIN_SPINNER": false, "ERROR_USER": true }
+                payload: {
+                    "LOGIN_SPINNER": false,
+                    "ERROR_USER": true,
+                    "RESP_ERROR_LOGIN": "Comprueba tu coneccion a internet",
+                    "SEND_EMAIL": false,
+                    "token": '',
+                }
             })
         }
 
