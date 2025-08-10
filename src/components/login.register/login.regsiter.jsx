@@ -3,15 +3,16 @@ import "./login.css"
 import M from 'materialize-css'
 import { Link, useNavigate } from 'react-router-dom'
 import AppContext from '../../contexts/ServiceContext'
-import { DATA_APP_CONTEXT, ERROR_USER, RESP_ERROR_LOGIN } from '../../contexts/constantesVar'
+import { DATA_APP_CONTEXT, DATA_APP_REGISTER_CONTEXT, ERROR_USER, RESP_ERROR_LOGIN } from '../../contexts/constantesVar'
 import { PulseLoader } from "react-spinners"
 import 'animate.css';
 
 
 
 function Login() {
+
     const navigate = useNavigate()
-    const { Logins, dispatch, loginSpinner, errorResponseLogin, userError, Registers, dataApp, resendEmail,changePasswordContext } = useContext(AppContext)
+    const { Logins, dispatch, dataAppRegister, errorResponseLogin, userError, Registers, dataApp, resendEmail, changePasswordContext } = useContext(AppContext)
 
     const [email, setEmail] = useState("")
     const [textBottonSutmit, setTextBottonSubmit] = useState("Iniciar")
@@ -24,8 +25,8 @@ function Login() {
     const MensageForm = () => {
         return (
             <>
-                <p className='animate__shakeX animate__animated animate__repeat-1'>{dataApp.ERROR_USER && errors === "" ? dataApp.RESP_ERROR_LOGIN : ""}</p>
-                <p className='animate__shakeX animate__animated animate__repeat-1'>{dataApp.ERROR_USER === false && errors ? errors : ""}</p>
+                <p className='animate__shakeX animate__animated animate__repeat-1'>{dataAppRegister.ERROR_USER && errors === "" ? dataAppRegister.RESP_ERROR_LOGIN : ""}</p>
+                <p className='animate__shakeX animate__animated animate__repeat-1'>{dataAppRegister.ERROR_USER === false && errors ? errors : ""}</p>
             </>
         )
     }
@@ -33,13 +34,15 @@ function Login() {
 
 
     const Enviar = async (e) => {
+        console.log(dataAppRegister, "dataAppRegister")
         e.preventDefault();
         setErrors("")
-        if (dataApp.SEND_EMAIL) {
+        if (dataAppRegister?.SEND_EMAIL) {
             await resendEmail();
             return;
         }
         if (cambiarFormulario === "signUp") {
+
             //Registrarse
             const nombre = e.target.fullname.value.trim()
             const password2 = e.target.password.value.trim()
@@ -60,7 +63,6 @@ function Login() {
             }
 
             return;
-
         }
         if (cambiarFormulario === "signIn") {
             //Iniciar sesion
@@ -143,8 +145,8 @@ function Login() {
                 aria-label="Cerrar"
                 onClick={() => {
                     // If you want to reset form state on close, do it here
-                    setCambiarFormulario(cambiarFormulario);                    
-                   
+                    setCambiarFormulario(cambiarFormulario);
+
                     // Materialize will close modal automatically with .modal-close
                 }}
             >
@@ -156,7 +158,7 @@ function Login() {
                     {/* Close Button */}
                     <form onSubmit={(e) => { Enviar(e) }}>
 
-                        {dataApp?.SEND_EMAIL ?
+                        {dataAppRegister?.SEND_EMAIL ?
                             <></>
                             :
                             <>
@@ -263,10 +265,10 @@ function Login() {
 
                             </>
                         }
-                        <div className="formulario-login-error-respuesta" style={dataApp.SEND_EMAIL ? { minHeight: "120px" } : { minHeight: "auto" }}>
+                        <div className="formulario-login-error-respuesta" style={dataAppRegister.SEND_EMAIL ? { minHeight: "120px" } : { minHeight: "auto" }}>
                             {<MensageForm />}
                         </div>
-                        {dataApp?.SEND_EMAIL ?
+                        {dataAppRegister?.SEND_EMAIL ?
                             <></>
                             :
                             <>
@@ -276,7 +278,7 @@ function Login() {
                                             <p style={{ marginBlock: "3px", fontSize: "15px", fontWeight: "bold" }}>Si no tienes una cuenta
                                                 <Link style={{ marginLeft: 6 }} onClick={() => {
                                                     dispatch({
-                                                        type: DATA_APP_CONTEXT,
+                                                        type: DATA_APP_REGISTER_CONTEXT,
                                                         payload: {
                                                             RESP_ERROR_LOGIN: "",
                                                             ERROR_USER: false,
@@ -290,7 +292,7 @@ function Login() {
                                             <p style={{ marginBlock: "3px", fontSize: "15px", fontWeight: "bold", marginBottom: 18 }}>No recuerdas tu contraseña?
                                                 <Link style={{ marginLeft: 6 }} onClick={() => {
                                                     dispatch({
-                                                        type: DATA_APP_CONTEXT,
+                                                        type: DATA_APP_REGISTER_CONTEXT,
                                                         payload: {
                                                             RESP_ERROR_LOGIN: "",
                                                             ERROR_USER: false,
@@ -313,7 +315,7 @@ function Login() {
                                             <p style={{ marginBlock: "3px", fontSize: "15px", fontWeight: "bold", marginBottom: 18 }}>Si no tienes una cuenta
                                                 <Link style={{ marginLeft: 6 }} onClick={() => {
                                                     dispatch({
-                                                        type: DATA_APP_CONTEXT,
+                                                        type: DATA_APP_REGISTER_CONTEXT,
                                                         payload: {
                                                             RESP_ERROR_LOGIN: "",
                                                             ERROR_USER: false,
@@ -338,7 +340,7 @@ function Login() {
                                             <p style={{ marginBlock: "3px", fontSize: "15px", fontWeight: "bold" }}>Si no tienes una cuenta
                                                 <Link style={{ marginLeft: 6 }} onClick={() => {
                                                     dispatch({
-                                                        type: DATA_APP_CONTEXT,
+                                                        type: DATA_APP_REGISTER_CONTEXT,
                                                         payload: {
                                                             RESP_ERROR_LOGIN: "",
                                                             ERROR_USER: false,
@@ -353,7 +355,7 @@ function Login() {
                                                 <p style={{ marginBlock: "3px", fontSize: "15px", fontWeight: "bold", marginBottom: 18 }}>Si no tienes una cuenta
                                                     <Link style={{ marginLeft: 6 }} onClick={() => {
                                                         dispatch({
-                                                            type: DATA_APP_CONTEXT,
+                                                            type: DATA_APP_REGISTER_CONTEXT,
                                                             payload: {
                                                                 RESP_ERROR_LOGIN: "",
                                                                 ERROR_USER: false,
@@ -392,17 +394,17 @@ function Login() {
 
                                 () => {
                                     dispatch({
-                                        type: DATA_APP_CONTEXT,
+                                        type: DATA_APP_REGISTER_CONTEXT,
                                         payload: {
-                                            RESP_ERROR_LOGIN:"",
-                                            ERROR_USER:false
+                                            RESP_ERROR_LOGIN: "",
+                                            ERROR_USER: false
                                         }
                                     })
-                                    
+
                                 }
                             }
                         >
-                            {dataApp.LOGIN_SPINNER ? <PulseLoader size={15} color="#212121" /> : <>{dataApp.SEND_EMAIL ? "Volver a enviar el link" : <>{textBottonSutmit}</>}</>}
+                            {dataAppRegister.LOGIN_SPINNER ? <PulseLoader size={15} color="#212121" /> : <>{dataAppRegister.SEND_EMAIL ? "Volver a enviar el link" : <>{textBottonSutmit}</>}</>}
                         </button>
                     </form>
                 </div>

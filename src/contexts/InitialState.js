@@ -36,12 +36,6 @@ export const InitialState = {
         USER_LINK_PHOTO: "",
         VALIDAR_USER: false,
 
-        VERIFICAR_EMAIL: false,
-        SEND_EMAIL: false,
-        LOGIN_SPINNER: false,
-        RESP_ERROR_LOGIN: "",
-        ERROR_USER: false,
-
         PDF_VIEW_FORM: null,
         URL_PDF: null,
         EXAMEN_ID: "",
@@ -56,6 +50,16 @@ export const InitialState = {
         PAGINA_SIGUIENTE: "",
 
 
+
+    },
+
+        dataAppRegister: JSON.parse(window.sessionStorage.getItem('logUp')) ? JSON.parse(window.sessionStorage.getItem('logUp')) : {
+        token: "",
+        VERIFICAR_EMAIL: false,
+        SEND_EMAIL: false,
+        LOGIN_SPINNER: false,
+        RESP_ERROR_LOGIN: "",
+        ERROR_USER: false,
 
     },
 

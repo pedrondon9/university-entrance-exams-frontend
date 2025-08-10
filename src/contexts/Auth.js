@@ -38,7 +38,7 @@ import AppReducer from "./AppReducer";
 import axios from "axios";
 import M from "materialize-css";
 
-import { DATA_APP_CONTEXT, URL_SERVER } from "./constantesVar";
+import { DATA_APP_CONTEXT, DATA_APP_REGISTER_CONTEXT, URL_SERVER } from "./constantesVar";
 import { ErrorG } from "../components/errorGestion";
 
 
@@ -499,7 +499,7 @@ export default (props) => {
         console.log(email, password)
         if (email !== "" && password !== "") {
             dispatch({
-                type: DATA_APP_CONTEXT,
+                type: DATA_APP_REGISTER_CONTEXT,
                 payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
             })
 
@@ -519,6 +519,14 @@ export default (props) => {
                             "USER_ID": user.data.userData._id,
                             "USER_NAME": user.data.userData.fullname,
                             'token': user.data.token,
+
+                        }
+                    })
+
+                    dispatch({
+                        type: DATA_APP_REGISTER_CONTEXT,
+                        payload: {
+                            'token': '',
                             'SEND_EMAIL': false,
                             "LOGIN_SPINNER": false,
                             "RESP_ERROR_LOGIN": "",
@@ -530,10 +538,16 @@ export default (props) => {
                     window.localStorage.setItem("dataUser", JSON.stringify(
                         {
                             'token': user.data.token,
-                            'SEND_EMAIL': false,
                             "VALIDAR_USER": true,
                             "USER_ID": user.data.userData._id,
                             "USER_NAME": user.data.userData.fullname,
+
+                        }
+                    ))
+                    window.sessionStorage.setItem("logUp", JSON.stringify(
+                        {
+                            'token': '',
+                            'SEND_EMAIL': false,
                             "LOGIN_SPINNER": false,
                             "RESP_ERROR_LOGIN": "",
                             "ERROR_USER": false,
@@ -547,7 +561,7 @@ export default (props) => {
 
                 } else {
                     dispatch({
-                        type: DATA_APP_CONTEXT,
+                        type: DATA_APP_REGISTER_CONTEXT,
                         payload: {
                             "LOGIN_SPINNER": false,
                             "ERROR_USER": true,
@@ -564,7 +578,7 @@ export default (props) => {
             }
         } else {
             dispatch({
-                type: DATA_APP_CONTEXT,
+                type: DATA_APP_REGISTER_CONTEXT,
                 payload: {
                     "RESP_ERROR_LOGIN": "Todos los campos son importantes",
                     "ERROR_USER": true
@@ -584,7 +598,7 @@ export default (props) => {
             //console.log(email, contrasena, nombre, paiz, genero)
 
             dispatch({
-                type: DATA_APP_CONTEXT,
+                type: DATA_APP_REGISTER_CONTEXT,
                 payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
             })
 
@@ -610,7 +624,7 @@ export default (props) => {
                         "token": user.data.token,
                     }
                     dispatch({
-                        type: DATA_APP_CONTEXT,
+                        type: DATA_APP_REGISTER_CONTEXT,
                         payload: dataLogUp
 
                     })
@@ -627,7 +641,7 @@ export default (props) => {
                 } else {
 
                     dispatch({
-                        type: DATA_APP_CONTEXT,
+                        type: DATA_APP_REGISTER_CONTEXT,
                         payload: {
                             "LOGIN_SPINNER": false,
                             "ERROR_USER": true,
@@ -647,7 +661,7 @@ export default (props) => {
         } else {
 
             dispatch({
-                type: DATA_APP_CONTEXT,
+                type: DATA_APP_REGISTER_CONTEXT,
                 payload: {
                     "ERROR_USER": true,
                     "RESP_ERROR_LOGIN": "Todos los campos deben ser rellenados",
@@ -668,14 +682,14 @@ export default (props) => {
         console.log("userData", userData)
 
         dispatch({
-            type: DATA_APP_CONTEXT,
+            type: DATA_APP_REGISTER_CONTEXT,
             payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
         })
 
 
         if (!userData?.SEND_EMAIL) {
             dispatch({
-                type: DATA_APP_CONTEXT,
+                type: DATA_APP_REGISTER_CONTEXT,
                 payload: {
                     "RESP_ERROR_LOGIN": "No se ha encontrado información de usuario. Por favor, inicia sesión o registrate nuevamente.",
                 }
@@ -690,13 +704,13 @@ export default (props) => {
             const response = await axiosConfigs.post(`/customer/resend-email`, { token });
             if (response.data.success) {
                 dispatch({
-                    type: DATA_APP_CONTEXT,
+                    type: DATA_APP_REGISTER_CONTEXT,
                     payload: { "RESP_ERROR_LOGIN": response.data.message }
                 })
 
             } else {
                 dispatch({
-                    type: DATA_APP_CONTEXT,
+                    type: DATA_APP_REGISTER_CONTEXT,
                     payload: { "RESP_ERROR_LOGIN": response.data.message }
                 })
             }
@@ -710,7 +724,7 @@ export default (props) => {
                 "ERROR_USER": true,
             }
             dispatch({
-                type: DATA_APP_CONTEXT,
+                type: DATA_APP_REGISTER_CONTEXT,
                 payload: dataLogUp
             })
         }
@@ -721,7 +735,7 @@ export default (props) => {
         console.log("userData", data)
 
         dispatch({
-            type: DATA_APP_CONTEXT,
+            type: DATA_APP_REGISTER_CONTEXT,
             payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
         })
 
@@ -739,7 +753,7 @@ export default (props) => {
                     "token": response.data.token,
                 }
                 dispatch({
-                    type: DATA_APP_CONTEXT,
+                    type: DATA_APP_REGISTER_CONTEXT,
                     payload: dataLogUp
 
                 })
@@ -749,7 +763,7 @@ export default (props) => {
             } else {
 
                 dispatch({
-                    type: DATA_APP_CONTEXT,
+                    type: DATA_APP_REGISTER_CONTEXT,
                     payload: {
                         "LOGIN_SPINNER": false,
                         "ERROR_USER": true,
@@ -764,7 +778,7 @@ export default (props) => {
             ErrorG(dispatch, error)
         } finally {
             dispatch({
-                type: DATA_APP_CONTEXT,
+                type: DATA_APP_REGISTER_CONTEXT,
                 payload: {
                     "LOGIN_SPINNER": false,
                     "ERROR_USER": true,
@@ -842,6 +856,7 @@ export default (props) => {
             LoadListExam,
             examenList: examenList,
             dataApp: state.dataApp,
+            dataAppRegister: state.dataAppRegister,
             resendEmail,
             changePasswordContext,
             axiosConfigs

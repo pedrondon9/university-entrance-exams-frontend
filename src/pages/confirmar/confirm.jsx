@@ -50,6 +50,7 @@ function Confir() {
 
                     }
                 ))
+                navigate("/")
             } else {
                 setErrorMessage(user.data.message || "Error de autenticacion")
                 console.log("wefhuf sdf sbnd fsbdff")
