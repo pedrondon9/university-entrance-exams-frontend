@@ -26,10 +26,8 @@ const Footer = () => {
                     <div className="footer-redesSociales-contact">
                         <div className="mumbexInfo-info-contact ">
                             <div className="mumbexInfo ">
-                                <h2>Building by mumbX mumbx.com</h2>
-                                <h3>Pedro Ndong Ondo Avomo</h3>
-                                <h3>Especializada en software</h3>
-
+                            <h2>Pedro Ndong Ondo Avomo</h2>
+                            <h3>Building by mumbX mumbx.com</h3>
                             </div>
                         </div>
                         <div className="redesSociales">
@@ -46,7 +44,7 @@ const Footer = () => {
             </div>
             { <div className="footerFinal">
                 <div className="copiright">
-                    mumbeX todos los derechos reservados © 2022
+                    mumbeX todos los derechos reservados © 2025 (Pedro Ndong Ondo Avomo)
                 </div>
                 <div className="menuFooter">
                     <Link className='items' to="/">Inicio</Link>

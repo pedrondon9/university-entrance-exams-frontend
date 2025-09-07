@@ -27,14 +27,14 @@
 
 .logo-container {
     height: 50px;
-    width: 170px;
+    width: 250px;
     display: flex;
     align-items: center;
 
 }
 
 .logo-container a {
-    width: 170px;
+    width: 250px;
     display: flex;
     align-items: center;
     /***********/

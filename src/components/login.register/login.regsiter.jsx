@@ -42,10 +42,17 @@ function Login() {
             return;
         }
         if (cambiarFormulario === "signUp") {
+            const password2 = e.target.password.value.trim()
+            const password = e.target.password2.value.trim()
+
+            if (password2 !== password) {
+                setErrors("las contraseñas no coinciden")
+                return;
+                
+            }
 
             //Registrarse
             const nombre = e.target.fullname.value.trim()
-            const password2 = e.target.password.value.trim()
             const email2 = e.target.email.value.trim()
 
 
@@ -165,6 +172,7 @@ function Login() {
                                 {
                                     cambiarFormulario === "signUp" ?
                                         <>
+                                        <h4 style={{textAlign:"center",marginBlock:"20px"}}>Registrarse</h4>
                                             <div className="input-field contenedor-input  col s12">
                                                 < input
                                                     type="text"
@@ -194,6 +202,15 @@ function Login() {
 
                                                 />
                                             </div>
+                                            <div className="input-field contenedor-input  col s12" >
+                                                <input
+                                                    type="password"
+                                                    className="input-text"
+                                                    name="password2"
+                                                    placeholder="Repite la contraseña"
+
+                                                />
+                                            </div>
                                         </>
                                         :
                                         <></>
@@ -202,6 +219,8 @@ function Login() {
                                 {
                                     cambiarFormulario === "signIn" ?
                                         <>
+                                        <h4 style={{textAlign:"center",marginBlock:"20px"}}>Iniciar sesion</h4>
+
                                             <div className="input-field contenedor-input  col s12">
                                                 <input
                                                     type="email"
@@ -229,6 +248,8 @@ function Login() {
                                 {
                                     cambiarFormulario === "forgotPassword" ?
                                         <>
+                                        <h4 style={{textAlign:"center",marginBlock:"20px"}}>Modificar la contraseña</h4>
+
                                             <div className="input-field contenedor-input  col s12">
                                                 <input
                                                     type="email"
@@ -244,7 +265,7 @@ function Login() {
                                                     type="password"
                                                     className="input-text"
                                                     name="password"
-                                                    placeholder="Nuevo contraseña"
+                                                    placeholder="Nueva contraseña"
 
                                                 />
                                             </div>
