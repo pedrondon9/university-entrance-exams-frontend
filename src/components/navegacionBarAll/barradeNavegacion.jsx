@@ -48,8 +48,8 @@ function BarradeNavegacion() {
                     </div>
                     <div className='nav-link-container'>
                         <div className='nav-container'>
-                            <Link to="/upload">Subir examen</Link>
-                            <Link to="/deleteExammm">Borrar Examenes</Link>
+                            <Link to="/upload">Subir un examen</Link>
+                            <Link to="/deleteExammm">Administrar tus  Examenes</Link>
                             {dataApp?.VALIDAR_USER ?
                                 <Link onClick={LogOut } style={{ marginLeft: "50px" }} to="#">Cerrar</Link>
 
