@@ -147,7 +147,7 @@ export default function Home() {
                 <div className='block-chat-container-resp'>
                   <div>
                     <h3>Publica tu duda</h3>
-                    <h5>Para recibir ayuda de los demas !</h5>
+                    <h6>Para recibir ayuda de los demas !</h6>
                   </div>
 
                   {/* editor del comentrio principal */}

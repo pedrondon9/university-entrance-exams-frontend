@@ -51,6 +51,7 @@
     height: 50px;
     display: flex;
     align-items: center;
+    width: 30%;
 }
 
 .user-name-container span {
@@ -109,6 +110,9 @@
     }
 
     .nav-container {
+        display: none;
+    }
+    .user-name-container {
         display: none;
     }
 }

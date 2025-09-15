@@ -42,7 +42,7 @@ function BarradeNavegacion() {
                         </div>
                         <div className="user-name-container" >
                             <span style={{ color: '#212121', fontWeight: 'bold', }}>
-                                {dataApp.USER_NAME ? `Hi!, ${dataApp.USER_NAME.slice(0, 10)}` : ''}
+                                {dataApp.USER_NAME ? `Hi!, ${dataApp.USER_NAME.slice(0, 7)}..` : ''}
                             </span>
                         </div>
                     </div>

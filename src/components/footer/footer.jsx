@@ -27,7 +27,7 @@ const Footer = () => {
                         <div className="mumbexInfo-info-contact ">
                             <div className="mumbexInfo ">
                             <h2>Pedro Ndong Ondo Avomo</h2>
-                            <h3>Building by mumbX mumbx.com</h3>
+                            <h3>Building by Pedro Ndong Ondo Avomo</h3>
                             </div>
                         </div>
                         <div className="redesSociales">
