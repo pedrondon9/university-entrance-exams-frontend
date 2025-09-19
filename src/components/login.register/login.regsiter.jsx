@@ -48,7 +48,7 @@ function Login() {
             if (password2 !== password) {
                 setErrors("las contraseñas no coinciden")
                 return;
-                
+
             }
 
             //Registrarse
@@ -166,13 +166,36 @@ function Login() {
                     <form onSubmit={(e) => { Enviar(e) }}>
 
                         {dataAppRegister?.SEND_EMAIL ?
-                            <></>
+                            <>
+                                <div className="formulario-login-container-cambi">
+                                    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", insetInline: "0px" }}>
+                                        <p style={{ marginBlock: "3px", fontSize: "15px", fontWeight: "bold", marginBottom: 18 }}>Volver atras
+                                            <Link style={{ marginLeft: 6 }} onClick={() => {
+                                                dispatch({
+                                                    type: DATA_APP_REGISTER_CONTEXT,
+                                                    payload: {
+                                                        RESP_ERROR_LOGIN: "",
+                                                        ERROR_USER: false,
+                                                        "LOGIN_SPINNER": false,
+                                                        "SEND_EMAIL": false,
+                                                        "token": "",
+                                                    }
+                                                })
+                                                setCambiarFormulario(true)
+                                                setTextBottonSubmit("(Volver)")
+                                                setCambiarFormulario("signUp")
+                                            }} to="#!">Iniciar sesion !</Link>
+                                        </p >
+
+                                    </div>
+                                </div>
+                            </>
                             :
                             <>
                                 {
                                     cambiarFormulario === "signUp" ?
                                         <>
-                                        <h4 style={{textAlign:"center",marginBlock:"20px"}}>Registrarse</h4>
+                                            <h4 style={{ textAlign: "center", marginBlock: "20px" }}>Registrarse</h4>
                                             <div className="input-field contenedor-input  col s12">
                                                 < input
                                                     type="text"
@@ -219,7 +242,7 @@ function Login() {
                                 {
                                     cambiarFormulario === "signIn" ?
                                         <>
-                                        <h4 style={{textAlign:"center",marginBlock:"20px"}}>Iniciar sesion</h4>
+                                            <h4 style={{ textAlign: "center", marginBlock: "20px" }}>Iniciar sesion</h4>
 
                                             <div className="input-field contenedor-input  col s12">
                                                 <input
@@ -248,7 +271,7 @@ function Login() {
                                 {
                                     cambiarFormulario === "forgotPassword" ?
                                         <>
-                                        <h4 style={{textAlign:"center",marginBlock:"20px"}}>Modificar la contraseña</h4>
+                                            <h4 style={{ textAlign: "center", marginBlock: "20px" }}>Modificar la contraseña</h4>
 
                                             <div className="input-field contenedor-input  col s12">
                                                 <input

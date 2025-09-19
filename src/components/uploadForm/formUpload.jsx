@@ -22,6 +22,7 @@ function FormUpload() {
     const [face, setFace] = useState("")
     const [estado, setEstado] = useState("")
     const [materia, setMateria] = useState("")
+    const [materias, setMaterias] = useState("")
     const [addSpìnner, setAddSpìnner] = useState(false)
 
     //funcion para obtener el pdf y leerlo
@@ -38,12 +39,29 @@ function FormUpload() {
         }
     }
 
+    const get_materias = async () => {
+        try {
+            const materias = await axiosConfigs.get(`/customer/getMaterias`)
+
+            if (materias.data.success) {
+                console.log(materias.data.response.docs)
+                setMaterias(materias.data.response.docs)
+            }else{
+                setMaterias([])
+            }
+        } catch (error) {
+            setMaterias([])
+            console.log(error)
+        }
+    }
+
+
 
     //funcion para agregar un nuevo examen
     const EnviarDatos = async (e) => {
         e.preventDefault()
 
-        if (materia && año && mes && face && pdf && estado) {
+        if (materia && año && mes && face && pdf && estado &&  dataApp.USER_ID) {
             //console.log(materia, año, mes, face, pdf ,estado)
 
             setAddSpìnner(true)//para mostrar una animacion durate se agrega el nueva examen
@@ -51,9 +69,9 @@ function FormUpload() {
 
             try {
                 const fs = new FormData()
-                fs.append("userName", userName)
-                fs.append("userId", userId)
-                fs.append("userPhoto", userLinkPhoto)
+                fs.append("userName", dataApp.USER_NAME)
+                fs.append("userId", dataApp.USER_ID)
+                fs.append("userPhoto", dataApp.USER_LINK_PHOTO)
                 fs.append("mes", mes)
                 fs.append("año", año)
                 fs.append("estado", estado)
@@ -64,7 +82,6 @@ function FormUpload() {
 
                 const add = await axiosConfigs.post(`/customer/auth/addExamen`, fs)
                 if (add.data.success) {
-
                     var toastHTML = '<span className = "text-red">' + add.data.message + '</span>';
                     M.toast({ html: toastHTML });
                     setAddSpìnner(false)
@@ -91,6 +108,12 @@ function FormUpload() {
     useEffect(() => {
 
     }, [pdf])
+
+    useEffect(() => {
+        get_materias()
+    }, [])
+
+
     return (
         <div className='form-conatainer'>
             <Login />
@@ -129,28 +152,10 @@ function FormUpload() {
                                         }
                                     }} >
                                     <option disabled selected>Elige la materia</option>
-                                    <option value="lengua y literatura española" >lengua y literatura española</option>
-                                    <option value="frances" >Frances</option>
-                                    <option value="ingles" >Ingles</option>
-                                    <option value="historia de africa y de G.E" >historia de Africa y de G.E</option>
-                                    <option value="matematicas II" >Matematicas II</option>
-                                    <option value="Electrotecnia" >Electrotecnia</option>
-                                    <option value="Tecnología industrial" >Tecnología industrial</option>
-                                    <option value="Química" >Química</option>
-                                    <option value="Física" >Física</option>
-                                    <option value="Geologia" >Geologia</option>
-                                    <option value="Dibujo técnico II" >Dibujo técnico II</option>
-                                    <option value="Economía de la Empresa" >Economía de la Empresa</option>
-                                    <option value="Ciencias de la tierra y m.a" >Ciencias de la tierra y m.a</option>
-                                    <option value="Biología" >Biología</option>
-                                    <option value="Ciencias de la nat. y salud" >Ciencias de la nat. y salud</option>
-                                    <option value="Historia del mundo actual" >Historia del mundo actual</option>
-                                    <option value="Historia de la filosofía" >Historia de la filosofía</option>
-                                    <option value="Griego" >Griego</option>
-                                    <option value="Latín" >Latín</option>
-                                    <option value="Historia del Arte" >Historia del Arte</option>
-                                    <option value="Geografía de los grandes espacios" >Geografía de los grandes espacios</option>
-                                    <option value="Matemáticas Aplicadas a las C.S II" >Matemáticas Aplicadas a las C.S II</option>
+                                    {materias.map((item)=>
+                                        <option value={item.name} key={item._id} >{item.name}</option>
+                                    )}
+                                    
                                 </select>
                             </div>
 

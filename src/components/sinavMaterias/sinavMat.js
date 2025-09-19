@@ -62,18 +62,18 @@ const SinavMat = () => {
         <ul className="collapsible sidenav sideNavMat side-nav-materias" id="slide-out-nav-mat">
             {!dataApp.SPINNER_CARGAR_EXAMENES ?
                 <>
-                    {examenList.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
+                    {examenList?.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
 
                         <li className='item-materia' key={i._id}>
-                            <div className="collapsible-header menu-lateral-pg-cat side-nav-lat"><span>{i.materia}</span></div>
+                            <div className="collapsible-header menu-lateral-pg-cat side-nav-lat"><span>{i.name}</span></div>
                             <div className='collapsible-body menu-lateral-colapsible-body' >
                                 <ul className="collection">
-                                    {i.info.map((a, b) =>//recorrer el array de años y dentro de este se encuentra los examenes segun su face , mes , estado"corregido o no" etc
-                                        <div key={a.año}>
-                                            <li className="collection-item item-anos" onClick={() => { setAño(a.año); setId(i._id) }}>{a.año}</li>
-                                            {a.info_año.map((x, y) =>//recorrer los examenes
+                                    {i.examenUploadId?.map((a, b) =>//recorrer el array de años y dentro de este se encuentra los examenes segun su face , mes , estado"corregido o no" etc
+                                        <div key={a.year}>
+                                            <li className="collection-item item-anos" onClick={() => { setAño(a.year); setId(i._id) }}>{a.year}</li>
+                                            {a.exams.map((x, y) =>//recorrer los examenes
                                                 <div key={y.toString()}>
-                                                    {a.año === año && i._id === id ?
+                                                    {a.year === año && i._id === id ?
                                                         <ul className="collection" >
                                                             <li onClick={() => {
                                                                 CambiarPdf(x.pdfLink, x.examenId)

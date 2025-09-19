@@ -58,9 +58,12 @@ export default (props) => {
 
     const axiosConfigs = axios.create({
         baseURL: URL_SERVER,
-        headers: {
-            'x-access-token': JSON.parse(window.localStorage.getItem("dataUser"))?.token,
-        },
+    });
+
+    axiosConfigs.interceptors.request.use((config) => {
+        config.headers['x-access-token'] = state.dataApp.token;
+        config.headers['x-user-id'] = state.dataApp.USER_ID;
+        return config;
     });
 
 
@@ -801,9 +804,9 @@ export default (props) => {
         })
         //setAddSpìnner(true)
         try {
-            const add = await axiosConfigs.get(`/customer/getExamenList`)
-            if (add.data) {
-                setExamenList(add.data)
+            const add = await axiosConfigs.get(`/customer/getExamen`)
+            if (add.data.success) {
+                setExamenList(add.data.response)
                 //setAddSpìnner(false)
                 dispatch({
                     type: DATA_APP_CONTEXT,

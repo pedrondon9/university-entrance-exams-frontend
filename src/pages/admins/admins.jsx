@@ -7,10 +7,10 @@ import { EXAMEN_ID, SPINNER_CARGAR_EXAMENES, URL_PDF, URL_SERVER } from '../../c
 import { ScaleLoader, MoonLoader, PulseLoader } from "react-spinners";
 import "./admins.css"
 import BarradeNavegacion from '../../components/navegacionBarAll/barradeNavegacion'
-import axiosConfigs from '../../components/axiosConfig'
+import Login from '../../components/login.register/login.regsiter'
 
 function Admins() {
-    const { dispatch, AddComent, GetDataComent, spinnerCargarExamenes } = useContext(AppContext)
+    const { dispatch, AddComent, GetDataComent, spinnerCargarExamenes,dataApp,axiosConfigs } = useContext(AppContext)
     const [addSpìnner, setAddSpìnner] = useState(false)
     const [changeExam, setChangeExam] = useState(false)
     const [examenList, setExamenList] = useState([])
@@ -23,11 +23,13 @@ function Admins() {
     //funcion para cargar los array de los examenes
 
     const LoadListExam = async () => {
+        console.log(dataApp.USER_ID,'hhhh')
         try {
-            const add = await axiosConfigs.get(`/customer/getExamenList`)
+            const add = await axiosConfigs.get(`/customer/auth/getExamenList/${dataApp.USER_ID}`)
+            //const add = await axiosConfigs.get(`/customer/getExamenList`)
             if (add.data) {
                 console.log(add.data)
-                setExamenList(add.data)
+                setExamenList(add.data.docs)
                 //setAddSpìnner(false)
             } else {
                 setExamenList([])
@@ -81,12 +83,11 @@ function Admins() {
             // expandable: true
         })
 
-
-
     }, [])
     return (
         <div>
             <BarradeNavegacion />
+            <Login />
             <ul className="collapsible collection-delete">
                 {examenList.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
                     <li key={i._id}>
