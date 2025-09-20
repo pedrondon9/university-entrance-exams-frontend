@@ -65,12 +65,12 @@ const SinavMat = () => {
                     {examenList?.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
 
                         <li className='item-materia' key={i._id}>
-                            <div className="collapsible-header menu-lateral-pg-cat side-nav-lat"><span>{i.name}</span></div>
+                            <div className="collapsible-header menu-lateral-pg-cat side-nav-lat"><span>{i.name} ({i.cantitie})</span></div>
                             <div className='collapsible-body menu-lateral-colapsible-body' >
                                 <ul className="collection">
                                     {i.examenUploadId?.map((a, b) =>//recorrer el array de años y dentro de este se encuentra los examenes segun su face , mes , estado"corregido o no" etc
                                         <div key={a.year}>
-                                            <li className="collection-item item-anos" onClick={() => { setAño(a.year); setId(i._id) }}>{a.year}</li>
+                                            <li className="collection-item item-anos" onClick={() => { setAño(a.year); setId(i._id) }}>{a.year} ({i.cantitie})</li>
                                             {a.exams.map((x, y) =>//recorrer los examenes
                                                 <div key={y.toString()}>
                                                     {a.year === año && i._id === id ?
