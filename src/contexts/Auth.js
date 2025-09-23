@@ -50,7 +50,7 @@ export default (props) => {
     const [dataComentario, setDataComentario] = useState([])
     const [dataRespComentarioResp, setDataRespComentarioResp] = useState([])
     const [dataComentarioResp, setDataComentarioResp] = useState([])
-    const [paginaNext, setPaginaNext] = useState("")
+    const [paginaNext, setPaginaNext] = useState(null)
     const [comentRespId, setComentRespId] = useState("")
     const [respComentRespId, setRespComentRespId] = useState("")
     const [more, setMore] = useState(false)
@@ -77,13 +77,14 @@ export default (props) => {
             })
             try {
 
-                if (paginaNext === "") {
+                if (paginaNext === null) {
                     const comments = await axiosConfigs({
                         method: "GET",
                         data: { "examenId": examenId },
-                        url: `/customer/getComent/${examenId}`
+                        url: `/customer/get_comment/${examenId}`
                     })
-                    if (comments.data.docs) {
+                    if (comments.data.success) {
+                        console.log(comments.data.response)
                         dispatch({
                             type: DATA_APP_CONTEXT,
                             payload: {
@@ -93,7 +94,7 @@ export default (props) => {
                             }
                         })
                         setPaginaNext(comments.data.nextPage)
-                        setDataComentario(comments.data.docs)
+                        setDataComentario(comments.data.response)
 
                     } else {
 
@@ -104,16 +105,16 @@ export default (props) => {
                         data: { "paginaNext": paginaNext, "examenId": "examenId" },
                         url: `/customer/getComent/${examenId}`
                     })
-                    if (comments.data.docs) {
+                    if (comments.data.success) {
                         dispatch({
                             type: DATA_APP_CONTEXT,
                             payload: {
-                                "PAGINA_SIGUIENTE": comments.data.nextPage,
+                                "PAGINA_SIGUIENTE": comments.data.response.nextPage,
                                 "CARGAR_COMMENT": false
                             }
                         })
-                        setPaginaNext(comments.data.nextPage)
-                        setDataComentario(comments.data.docs)
+                        setPaginaNext(comments.data.response.nextPage)
+                        setDataComentario(comments.response.data.docs)
 
                     } else {
 
@@ -313,32 +314,26 @@ export default (props) => {
     }
 
 
-    const AddComent = async (coment, userName, userPhoto, userId, comentCategory, examenId, imagen1, imagen2, imagen3, imagen4) => {
+    const AddComent = async (coment, userId, examenId,parentId ) => {
+        console.log(coment, userId, examenId)
         dispatch({
             type: DATA_APP_CONTEXT,
             payload: { "ADD_COMMENT_SPINNER": true }
         })
 
         const fs = new FormData()
-        fs.append("userName", userName)
-        fs.append("userPhoto", userPhoto)
-        fs.append("coment", coment)
+        fs.append("content", coment)
         fs.append("userId", userId)
-        fs.append("comentCategory", comentCategory)
         fs.append("examenId", examenId)
-        fs.append("imagen1", imagen1)
-        fs.append("imagen2", imagen2)
-        fs.append("imagen3", imagen3)
-        fs.append("imagen4", imagen4)
+        fs.append("parentId", JSON.stringify(parentId))
         try {
-            const add = await axiosConfigs.post(`/customer/auth/addComent`, fs, { headers: { "Content-Type": "multipart/form-data" } })
-            if (add.data == "publicado") {
-                GetDataComentAdd(examenId)//volver a cargar comentarios
-                var toastHTML = '<span className = "text-red">' + add.data + '</span>';
+            const add = await axiosConfigs.post(`/customer/auth/add_coment_resp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
+            if (add.data.success) {
+                GetDataComent(examenId)//volver a cargar comentarios
+                var toastHTML = '<span className = "text-red">' + add.data.message + '</span>';
                 M.toast({ html: toastHTML });
-
             } else {
-                var toastHTML = '<span className = "text-red">' + add.data + '</span>';
+                var toastHTML = '<span className = "text-red">' + add.data.message + '</span>';
                 M.toast({ html: toastHTML });
 
             }
@@ -495,17 +490,14 @@ export default (props) => {
 
 
 
-
-
     /***************** LOGIN PARA INICIO DE SESION *******************************/
     const Logins = async (email, password) => {
-        console.log(email, password)
+
         if (email !== "" && password !== "") {
             dispatch({
                 type: DATA_APP_REGISTER_CONTEXT,
                 payload: { "LOGIN_SPINNER": true, "ERROR_USER": false, "RESP_ERROR_LOGIN": "" }
             })
-
 
             try {
                 const user = await axiosConfigs({

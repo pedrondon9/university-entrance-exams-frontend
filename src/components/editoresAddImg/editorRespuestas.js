@@ -15,7 +15,7 @@ import "./editAddImage.css"
 
 //import "react-quill/dist/quill.bubble.css"
 
-function Editors() {
+function EditorsRespuestas({examenId,parentId}) {
 
     const quillRef = useRef(null);
 
@@ -80,7 +80,7 @@ function Editors() {
     // Función de compresión con canvas
 
     const resizeImg = (file) => {
-        const WIDTH = 600; // ancho 
+        const WIDTH = 300; // ancho 
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
 
@@ -151,7 +151,7 @@ function Editors() {
             console.log(dataApp.EXAMEN_ID)
             if (value) {
                 //AddComent(value, userName, userLinkPhoto, userId, "1", examId, imagen1, imagen2, imagen3, imagen4)
-                AddComent(value, dataApp.USER_ID, dataApp.EXAMEN_ID,null)
+                AddComent(value, dataApp.USER_ID, examenId,parentId)
 
                 //setValue("")
             } else {
@@ -197,10 +197,10 @@ function Editors() {
                             //     payload: value
                             // })
                             // console.log(value)
-                        }} className='btn-small addCommentseButton' >{!dataApp.ADD_COMMENT_SPINNER ? "Comentar" : <PulseLoader size={9} color="#212121" />}
+                        }} className='btn-small addResponseButton' >{!dataApp.ADD_COMMENT_SPINNER ? "Responder" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
-                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Comentar</Link>
+                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addResponseButton modal-trigger' data-target="modal1">Responder</Link>
                 }
 
             </div>
@@ -208,4 +208,4 @@ function Editors() {
     );
 }
 
-export default Editors
+export default EditorsRespuestas

@@ -1,0 +1,79 @@
+                                    {verResp1 == i._id ?
+                                      <>
+
+                                        {dataApp?.CARGAR_RESPONSE_COMENT ?
+                                          <div className='spinner-cargar-response-coment-principal-container'>
+                                            <MoonLoader size={25} color={"#212121"} />
+                                          </div>
+                                          :
+                                          <>
+                                          
+                                            {dataComentarioResp.map((e, q) =>
+
+                                              <div className='chat-user-response'>
+                                                {/* segundo comentario respuesta del comentario principal */}
+                                                <div className='chat-user-response-foto-perfil'><p>{e.userName[0]}</p><div className='i'></div></div>
+                                                <div className='chat-user-response-perfilName-descripAnounce'>
+                                                  <div className='response-user-perfilName-date'><p className='user-name-response'>{e.userName}</p><p className='anounce-date-response'>{e.comentTime}</p></div>
+                                                </div>
+                                                <div className='response-description'>
+                                                  <p>{e.coment == "" ? <></> : parse(e.coment)}</p>
+                                                </div>
+                                                <div className='response-icono'>
+                                                  <a style={{ display: "none" }} href='' className='response-respuestas-like'><span className='response-respuestas-like-num'>{e.comentLike}</span><AiOutlineLike className='response-respuestas-like-icon' size={20} color={"#000000"} /></a>
+                                                  {verResp2 == e._id ?
+                                                    <Link className='response-respuestas-num-conatainer' to='#!' onClick={() => VerResp2("")}><span className='response-respuestas-num'>{/*e.comentRepons*/}</span><IoChatboxOutline className='response-icono-respuestas' size={18} color={"blue"} /><span className='response-responder-text'>ocultar respuestas</span></Link>
+
+                                                    :
+                                                    <Link className='response-respuestas-num-conatainer' to='#!' onClick={() => VerResp2(e._id)}><span className='response-respuestas-num'>{/*e.comentRepons*/}</span><IoChatboxOutline className='response-icono-respuestas' size={18} color={"blue"} /><span className='response-responder-text'>respuestas</span></Link>
+                                                  }
+
+                                                </div>
+
+                                                {verResp2 == e._id ?
+                                                  <>
+                                                    {dataApp?.CARGAR_RESPONSE_RESPONSE ?
+                                                      <div className='spinner-cargar-response-coment-principal-container'>
+                                                        <MoonLoader size={25} color={"#212121"} />
+                                                      </div>
+                                                      :
+                                                      <>
+                                                        {dataRespComentarioResp.map((y, z) =>
+                                                          <>
+                                                            <div className='chat-user-response'>
+                                                              {/* tercer comentario respuesta del segundo comentario */}
+                                                              <div className='chat-user-response-foto-perfil'><p>{y.userName[0]}</p><div className='i'></div></div>
+                                                              <div className='chat-user-response-perfilName-descripAnounce'>
+                                                                <div className='response-user-perfilName-date'><p className='user-name-response'>{y.userName}</p><p className='anounce-date-response'>{y.comentTime}</p></div>
+                                                              </div>
+                                                              <div className='response-description'>
+                                                                {y.coment == "" ? <></> : parse(y.coment)}
+                                                              </div>
+
+                                                            </div>
+                                                          </>
+                                                        )
+
+                                                        }
+                                                      </>
+                                                    }
+                                                    <div className='editor-container'>
+                                                      {/* editor del tercer comentario */}
+                                                      <Editor3s comentId={e._id} />
+                                                    </div>
+                                                  </>
+                                                  :
+                                                  <></>
+                                                }
+                                              </div>
+                                            )}
+                                          </>
+                                        }
+                                        <div className='editor-container'>
+                                          {/* editor del segundo comentario */}
+                                          <Editor2s comentId={i._id} />
+                                        </div>
+                                      </>
+                                      :
+                                      <></>
+                                    }

@@ -10,6 +10,7 @@ import { ScaleLoader, MoonLoader, PulseLoader } from "react-spinners";
 
 function MenuLaterals() {
     const { dispatch, AddComent, GetDataComent, spinnerCargarExamenes, examenList } = useContext(AppContext)
+
     const [addSpìnner, setAddSpìnner] = useState(false)
     const [changeExam, setChangeExam] = useState(false)
     const [id, setId] = useState(false)
@@ -20,6 +21,8 @@ function MenuLaterals() {
 
     /********* cambiar pdf ***************** */
     const CambiarPdf = (pdf, id) => {
+
+        console.log(id, 'y id')
         dispatch({
             type: DATA_APP_CONTEXT,
             payload: {
@@ -70,7 +73,7 @@ function MenuLaterals() {
                                         <div key={y.toString()}>
                                             {a.year === año && i._id === id ?
                                                 <ul className="collection">
-                                                    <li onClick={() => { CambiarPdf(x.pdfLink, x.examenId) }} className="collection-item verExamen">{x.mes + " " + x.face + " " + x.estado}</li>
+                                                    <li onClick={() => { CambiarPdf(x.pdfLink, x._id) }} className="collection-item verExamen">{x.mes + " " + x.face + " " + x.estado}</li>
                                                 </ul>
                                                 :
                                                 <></>
