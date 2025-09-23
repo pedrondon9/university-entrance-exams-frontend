@@ -42,13 +42,13 @@ const Comentarios = ({ comentario }) => {
                         width: 35,
                         height: 35,
                         borderRadius: "50%",
-                        background: "#eee",
+                        background: "#fff",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         fontWeight: "bold",
                         marginRight: 8,
-                        border:"2px solid rgb(30, 182, 212)"
+                        border:"2px solid #212121"
 
                     }}
                 >
