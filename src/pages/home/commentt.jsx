@@ -24,14 +24,15 @@ const Comentarios = ({ comentario }) => {
         <div
             style={{
                 marginLeft: comentario?.parentId ? 10 : 0,
-                borderLeft: comentario?.parentId ? "2px solid rgb(159, 159, 159)" : "none",
+                borderLeft: comentario?.parentId ? "2px solid #616161" : "2px solid #616161",
                 paddingLeft: 10,
                 marginTop: 10,
-                borderRadius: comentario?.parentId ? '0px' : "5px",
+                borderRadius: comentario?.parentId ? '0px' : "0px",
                 boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
-                background: "#fff",
+                background: "transparent",
                 padding: "5px",
-                border:comentario?.parentId ?"none": "2px solid rgb(30, 182, 212)"
+                marginBottom:comentario?.parentId ?0: '40px',
+                //border:comentario?.parentId ?"none": "2px solid #ffe082"
             }}
         >
             {/* Header usuario */}
@@ -69,7 +70,7 @@ const Comentarios = ({ comentario }) => {
                 style={{ color: "blue", cursor: "pointer", fontSize: 14 }}
                 onClick={() => VerResp(comentario._id)}
             >
-                <p style={{fontWeight:600}}>💬 {showRespuestas ? "ocultar respuestas" : "respuestas"}</p>
+                <p style={{fontWeight:600}}>{showRespuestas ? "ocultar respuestas" : "respuestas"}</p>
             </div>
 
 
