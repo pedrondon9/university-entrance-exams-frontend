@@ -207,6 +207,10 @@ function EditorsRespuestas({ examenId, parentId }) {
                 value={value}
                 onChange={handleChange}
                 placeholder="Escribe algo aquí..."
+                style={{                
+                    border:"2px solid #ffd740",
+                    borderRadius:"5px",               
+                }}
             />
 
             <div className='containerButtonAddComment'>
