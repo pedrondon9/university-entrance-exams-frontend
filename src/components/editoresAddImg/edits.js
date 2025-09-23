@@ -19,9 +19,9 @@ function Editors() {
 
     const quillRef = useRef(null);
 
-    const { dispatch, AddComent, dataApp, axiosConfigs } = useContext(AppContext)
+    const { dispatch, AddComent, dataApp, axiosConfigs, GetDataComent } = useContext(AppContext)
     const [value, setValue] = useState("");
-    const [imagen1, setImagen1] = useState('')
+    const [spinner, setSpinner] = useState(false)
     const [imagen2, setImagen2] = useState('')
     const [imagen3, setImagen3] = useState('')
     const [imagen4, setImagen4] = useState('')
@@ -143,17 +143,40 @@ function Editors() {
         const quill = quillRef.current.getEditor(); // instancia real
         const html = quill.root.innerHTML;
         setValue(html);
-        
+
     };
 
-    const Add = () => {
+    const Add = async () => {
         if (dataApp.EXAMEN_ID) {
-            console.log(dataApp.EXAMEN_ID)
             if (value) {
-                //AddComent(value, userName, userLinkPhoto, userId, "1", examId, imagen1, imagen2, imagen3, imagen4)
-                AddComent(value, dataApp.USER_ID, dataApp.EXAMEN_ID,null)
 
-                //setValue("")
+                setSpinner(true)
+                const fs = new FormData()
+                fs.append("content", value)
+                fs.append("userId", dataApp.USER_ID)
+                fs.append("examenId", dataApp.EXAMEN_ID)
+                fs.append("parentId", JSON.stringify(null))
+
+                try {
+                    const add = await axiosConfigs.post(`/customer/auth/add_coment_resp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
+                    if (add.data.success) {
+                        GetDataComent(dataApp.EXAMEN_ID)//volver a cargar comentarios
+                        var toastHTML = '<span className = "text-red">' + add.data.message + '</span>';
+                        M.toast({ html: toastHTML });
+                        setValue("")
+                    } else {
+                        var toastHTML = '<span className = "text-red">' + add.data.message + '</span>';
+                        M.toast({ html: toastHTML });
+
+                    }
+                } catch (error) {
+
+                } finally {
+
+                    setSpinner(false)
+
+                }
+
             } else {
                 var toastHTML = '<span >' + "No se permite campos vacios" + '</span>';
                 M.toast({ html: toastHTML });
@@ -192,12 +215,7 @@ function Editors() {
                         to="#!"
                         onClick={() => {
                             Add();
-                            // dispatch({
-                            //     type: DATA_RICHE_TEXT,
-                            //     payload: value
-                            // })
-                            // console.log(value)
-                        }} className='btn-small addCommentseButton' >{!dataApp.ADD_COMMENT_SPINNER ? "Comentar" : <PulseLoader size={9} color="#212121" />}
+                        }} className='btn-small addCommentseButton' >{!spinner ? "Comentar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
                     <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Comentar</Link>

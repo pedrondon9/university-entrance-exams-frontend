@@ -29,7 +29,7 @@ const Comentarios = ({ comentario }) => {
                 marginTop: 10,
                 borderRadius: comentario?.parentId ? '0px' : "5px",
                 boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
-                background: "#fff",
+                background: "#fafafa",
                 padding: "10px",
             }}
         >
