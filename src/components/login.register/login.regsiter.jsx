@@ -34,7 +34,6 @@ function Login() {
 
 
     const Enviar = async (e) => {
-        console.log(dataAppRegister, "dataAppRegister")
         e.preventDefault();
         setErrors("")
         if (dataAppRegister?.SEND_EMAIL) {

@@ -1,5 +1,9 @@
 body {
   background-color: #eee;
+
+}
+body a{
+  text-decoration: none;  
 }
 /****** para react-simple-image-view******/
 .styles-module_wrapper__1I_qj{

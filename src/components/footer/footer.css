@@ -87,6 +87,7 @@
     justify-content: center;
     margin: 5px;
     width: 100px;
+    height: 35px;
     border: 2px solid #67D6ED;
     color: #000000;
     background-color: #67D6ED;
@@ -167,21 +168,15 @@
 
 .redes-items {
     text-decoration: none;
-    font-size: 30px;
+    font-size: 50px;
     /* margin: 5px; */
-    color: rgb(134, 134, 134);
     border-radius: 50%;
     border-color: rgb(137, 136, 135);
     border: 2px;
 }
 
 @media screen and (max-width:720px) {
-    .mumbexInfo-info-contact {
-        flex-direction: column;
-        padding-left: 10px;
-        width: 600px;
 
-    }
 
     .mumbexInfo>h2 {
         font-size: 28px;
@@ -201,34 +196,14 @@
     }
 }
 
-@media screen and (max-width:620px) {
-    .mumbexInfo-info-contact {
-        width: 500px;
 
-    }
-}
 
-@media screen and (max-width:520px) {
-    .mumbexInfo-info-contact {
-        width: 430px;
 
-    }
-}
-
-@media screen and (max-width:450px) {
-    .mumbexInfo-info-contact {
-        width: 350px;
-
-    }
-}
 
 
 
 @media screen and (max-width:450px) {
-    .mumbexInfo-info-contact {
-        flex-direction: column;
-        padding-left: 10px;
-    }
+
 
     .mumbexInfo>h2 {
         font-size: 25px;
@@ -247,12 +222,7 @@
         font-size: 15px;
     }
 }
-@media screen and (max-width:370px) {
-    .mumbexInfo-info-contact {
-        width: 100%;
 
-    }
-}
 /********* fin redes sociales y contactos************/
 
 
@@ -321,109 +291,3 @@
     }
 }
 
-/*
-
-
-
-
-
-
-/* --------------------- RESPONSIVE----------------------- */
-/*
-@media (max-width: 1024px) {
-    .footer{
-        
-        display: block;
-        padding-top: 20px;
-        margin-bottom: 0px;
-        height: 380px;
-        
-
-        
-    }
-    .mumbexInfo{
-       
-        height:auto;
-    }
-    .mumbexContacto{
-        
-        
-    }
-    .mumbexMensaje{
-        width: 100%;
-        margin-top: 3px;
-        margin: 0px;
-        padding: 10px;
-        
-    }
-    .formularioMensaje{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        height: 400px;
-    }
-    .inputForm{
-        width: 100%;
-        flex-direction: row;   
-
-    }
-
-    .inputForm > .correo{
-        margin-left: 5px;
-        margin-bottom: 10px;
-    }
-    .inputForm > .nombre{
-    
-        margin-bottom: 10px;
-    }
-    .input{
-        width: 100%;
-        margin: 0px;
-        
-    }
-    .textArea{
-        width: 100%;
-        height: 60px;
-        margin: 0px;
-    }
-    .botonEnviar{
-        margin: 10px 0px;
-        padding: 5px;
-        width: 25%;
-    }
-    .footerFinal{
-        display: flex;
-        justify-content: center;
-        flex-direction: column-reverse;
-        padding-top: 0px;
-        margin-top: 0px;
-        height: 100px;
-    }
-    .menuFooter{
-        padding: 0px 50px;
-    }
-
-    .copiright{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 25px;
-        font-size: 8px;
-    }
-}
-
-@media (max-width: 344px) {
-    .mumbexMensaje{
-        height: 250px;
-    }
-    .inputForm{
-        width: 100%;
-        flex-direction: column;
-        
-
-    }
-    .inputForm > .correo{
-        margin-left: 0px;
-    }
-}
-*/

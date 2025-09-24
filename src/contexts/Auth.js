@@ -48,11 +48,7 @@ export default (props) => {
 
     const [state, dispatch] = useReducer(AppReducer, InitialState);
     const [dataComentario, setDataComentario] = useState([])
-    const [dataRespComentarioResp, setDataRespComentarioResp] = useState([])
-    const [dataComentarioResp, setDataComentarioResp] = useState([])
     const [paginaNext, setPaginaNext] = useState(null)
-    const [comentRespId, setComentRespId] = useState("")
-    const [respComentRespId, setRespComentRespId] = useState("")
     const [more, setMore] = useState(false)
     const [examenList, setExamenList] = useState([])
 
@@ -137,185 +133,13 @@ export default (props) => {
 
     }
 
-    const GetDataComentAdd = async (examenId) => {
-        setMore(true)
-        //console.log("WWWWWWWWWWWWWW", examenId)
-        //activar spinner de carga de comentarios
-        try {
-
-            if (paginaNext == "") {
-                const comments = await axiosConfigs({
-                    method: "GET",
-                    data: { "examenId": examenId },
-                    url: `/customer/getComent/${examenId}`
-                })
-                if (comments.data.docs) {
-                    console.log(comments.data.docs)
-                    dispatch({
-                        type: DATA_APP_CONTEXT,
-                        payload: {
-                            "PAGINA_SIGUIENTE": comments.data.nextPage,
-
-                        }
-                    })
-                    setPaginaNext(comments.data.nextPage)
-                    setDataComentario(comments.data.docs)
-
-                } else {
-
-                }
-            } else {
-                const comments = await axiosConfigs({
-                    method: "GET",
-                    data: { "paginaNext": paginaNext, "examenId": "examenId" },
-                    url: `/customer/getComent/${examenId}`
-                })
-                if (comments.data.docs) {
-                    console.log(comments.data.docs)
-                    dispatch({
-                        type: DATA_APP_CONTEXT,
-                        payload: { "PAGINA_SIGUIENTE": comments.data.nextPage }
-                    })
-                    setPaginaNext(comments.data.nextPage)
-                    setDataComentario(comments.data.docs)
-
-                } else {
-
-                }
-            }
 
 
-
-        } catch (error) {
-        } finally {
-            dispatch({
-                type: DATA_APP_CONTEXT,
-                payload: { "CARGAR_COMMENT": false }
-            })
-
-        }
-    }
-
-    const GetDataComentResponse = async (comentId) => {
-        console.log(comentId, "el id llega")
-        dispatch({
-            type: DATA_APP_CONTEXT,
-            payload: { "CARGAR_RESPONSE_COMENT": true }
-        })
-        try {
-            const comments = await axiosConfigs({
-                method: "GET",
-                data: { "id": comentId },
-                url: `/customer/getComentResp/${comentId}`
-            })
-
-            console.log(comments)
-
-
-
-            if (comments.data.docs) {
-                setComentRespId(comentId)
-                console.log(comments.data.docs)
-                setDataComentarioResp(comments.data.docs)
-
-            } else {
-
-            }
-        } catch (error) {
-
-        } finally {
-            dispatch({
-                type: DATA_APP_CONTEXT,
-                payload: { "CARGAR_RESPONSE_COMENT": false }
-
-            })
-        }
-    }
-
-    const GetDataComentResponseAdd = async (comentId) => {
-        console.log(comentId, "el id llega")
-
-        try {
-            const comments = await axiosConfigs({
-                method: "GET",
-                data: { "id": comentId },
-                url: `/customer/getComentResp/${comentId}`
-            })
-
-            console.log(comments)
-
-
-
-            if (comments.data.docs) {
-                setComentRespId(comentId)
-                console.log(comments.data.docs)
-                setDataComentarioResp(comments.data.docs)
-
-            } else {
-
-            }
-        } catch (error) {
-
-        }
-    }
-
-    const GetDataRespComentResponse = async (comentId) => {
-        dispatch({
-            type: DATA_APP_CONTEXT,
-            payload: { "CARGAR_RESPONSE_RESPONSE": true }
-        })
-        try {
-            const comments = await axiosConfigs({
-                method: "GET",
-                data: { "id": comentId },
-                url: `/customer/getRespComentResp/${comentId}`
-            })
-
-
-
-
-            if (comments.data.docs) {
-                setRespComentRespId(comentId)
-                setDataRespComentarioResp(comments.data.docs)
-
-            } else {
-
-            }
-        } catch (error) {
-
-        } finally {
-            dispatch({
-                type: DATA_APP_CONTEXT,
-                payload: { "CARGAR_RESPONSE_RESPONSE": false }
-
-            })
-        }
-    }
-    const GetDataRespComentResponseAdd = async (comentId) => {
-        try {
-            const comments = await axiosConfigs({
-                method: "GET",
-                data: { "id": comentId },
-                url: `/customer/getRespComentResp/${comentId}`
-            })
-
-
-
-
-            if (comments.data.docs) {
-                setRespComentRespId(comentId)
-                setDataRespComentarioResp(comments.data.docs)
-            } else {
-
-            }
-        } catch (error) {
-
-        }
-    }
 
 
     const AddComent = async (coment, userId, examenId,parentId ) => {
-        console.log(coment, userId, examenId)
+
+        
         dispatch({
             type: DATA_APP_CONTEXT,
             payload: { "ADD_COMMENT_SPINNER": true }
@@ -347,93 +171,6 @@ export default (props) => {
             })
         }
     }
-
-    const AddComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId, imagen1, imagen2, imagen3, imagen4) => {
-        dispatch({
-            type: DATA_APP_CONTEXT,
-            payload: true
-        })
-        const fs = new FormData()
-        fs.append("userName", userName)
-        fs.append("userPhoto", userPhoto)
-        fs.append("coment", coment)
-        fs.append("userId", userId)
-        fs.append("comentCategory", comentCategory)
-        fs.append("comentId", comentId)
-        fs.append("imagen1", imagen1)
-        fs.append("imagen2", imagen2)
-        fs.append("imagen3", imagen3)
-        fs.append("imagen4", imagen4)
-        try {
-            const add = await axiosConfigs.post(`/customer/auth/addComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
-            if (add.data == "publicado") {
-                GetDataComentResponseAdd(comentRespId)
-                comentRespId(comentRespId)
-                var toastHTML = '<span className = "text-red">' + add.data + '</span>';
-                M.toast({ html: toastHTML });
-
-            } else {
-                var toastHTML = '<span className = "text-red">' + add.data + '</span>';
-                M.toast({ html: toastHTML });
-
-            }
-        } catch (error) {
-
-        } finally {
-            dispatch({
-                type: DATA_APP_CONTEXT,
-                payload: { "ADD_COMMENT_RESPONSE_SPINNER": false }
-
-            })
-        }
-    }
-
-    const AddRespComentResponse = async (coment, userName, userPhoto, userId, comentCategory, comentId, imagen1, imagen2, imagen3, imagen4) => {
-        dispatch({
-            type: DATA_APP_CONTEXT,
-            payload: { "ADD_RESPONSE_RESPONSE_SPINNER": true }
-        })
-        const fs = new FormData()
-        fs.append("userName", userName)
-        fs.append("userPhoto", userPhoto)
-        fs.append("coment", coment)
-        fs.append("userId", userId)
-        fs.append("comentCategory", comentCategory)
-        fs.append("comentId", comentId)
-        fs.append("imagen1", imagen1)
-        fs.append("imagen2", imagen2)
-        fs.append("imagen3", imagen3)
-        fs.append("imagen4", imagen4)
-        try {
-            const add = await axiosConfigs.post(`/customer/auth/addRespComentResp`, fs, { headers: { "Content-Type": "multipart/form-data" } })
-            if (add.data == "publicado") {
-                GetDataRespComentResponseAdd(respComentRespId)
-                comentRespId(comentRespId)
-                var toastHTML = '<span className = "text-red">' + add.data + '</span>';
-                M.toast({ html: toastHTML });
-                dispatch({
-                    type: DATA_APP_CONTEXT,
-                    payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
-
-                })
-            } else {
-                var toastHTML = '<span className = "text-red">' + add.data + '</span>';
-                M.toast({ html: toastHTML });
-                dispatch({
-                    type: DATA_APP_CONTEXT,
-                    payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
-
-                })
-            }
-        } catch (error) {
-            dispatch({
-                type: DATA_APP_CONTEXT,
-                payload: { "ADD_RESPONSE_RESPONSE_SPINNER": false }
-
-            })
-        }
-    }
-
 
 
     const ScrollInfinito = async (examenId) => {
@@ -609,7 +346,6 @@ export default (props) => {
                     url: `/customer/registro_post`
                 })
 
-                console.log(user)
                 if (user.data.success) {
                     const dataLogUp = {
                         "LOGIN_SPINNER": false,
@@ -649,7 +385,6 @@ export default (props) => {
                 }
 
             } catch (error) {
-                console.log("error", error)
                 ErrorG(dispatch, error)
 
             }
@@ -674,7 +409,6 @@ export default (props) => {
     const resendEmail = async () => {
         const userData = JSON.parse(window.sessionStorage.getItem('logUp'));
 
-        console.log("userData", userData)
 
         dispatch({
             type: DATA_APP_REGISTER_CONTEXT,
@@ -727,7 +461,6 @@ export default (props) => {
     }
     const changePasswordContext = async (data) => {
 
-        console.log("userData", data)
 
         dispatch({
             type: DATA_APP_REGISTER_CONTEXT,
@@ -833,16 +566,6 @@ export default (props) => {
             dispatch,
             GetDataComent,
             AddComent,
-            AddComentResponse,
-            GetDataComentResponse,
-            dataComentario,
-            dataComentarioResp,
-            dataRespComentarioResp,
-            respComentRespId,
-            comentRespId,
-            respComentRespId,
-            GetDataRespComentResponse,
-            AddRespComentResponse,
             /******************************* */
             ScrollInfinito,
             more: more,//para activar el infinityScroll
@@ -854,7 +577,8 @@ export default (props) => {
             dataAppRegister: state.dataAppRegister,
             resendEmail,
             changePasswordContext,
-            axiosConfigs
+            axiosConfigs,
+            dataComentario
 
         }}>
             {props.children}

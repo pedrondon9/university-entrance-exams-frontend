@@ -31,9 +31,8 @@ const Footer = () => {
                             </div>
                         </div>
                         <div className="redesSociales">
-                            <Link className="redes-items" to="/"><AiFillYoutube /></Link>
-                            <Link className="redes-items" to="/"><AiFillInstagram /></Link>
-                            <Link className="redes-items" to="/"><AiFillLinkedin /></Link>
+                            <Link style={{color:"red"}} className="redes-items" to="/"><AiFillYoutube /></Link>
+                            <Link className="redes-items" to="https://linkedin.com/in/pedro-ndong-ondo-avomo-115401354"><AiFillLinkedin /></Link>
                         </div>
                     </div> 
                     }

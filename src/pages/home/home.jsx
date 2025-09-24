@@ -1,28 +1,19 @@
-import { useEffect, useRef, useMemo, useState, useContext, useCallback } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import "./home.css"
-import { IoChatboxOutline } from "react-icons/io5"
 import { Link } from 'react-router-dom';
-import { AiOutlineLike } from "react-icons/ai"
-import parse from 'html-react-parser';
 import AppContext from '../../contexts/ServiceContext';
-import Editor2s from '../../components/edit2';
-import Editor3s from '../../components/edit3';
+
 import VerPdf from '../../components/pdf/verPdf';
 import MenuLaterals from '../../components/menuLateral/menuLaterals';
 import BarradeNavegacion from '../../components/navegacionBarAll/barradeNavegacion';
-import ImageViewer from 'react-simple-image-viewer';
-import Sinav from '../../components/navegacionBarAll/sideNav';
-import Elegir from '../../components/elegirTipo/elegir';
-import { ScaleLoader, MoonLoader, PulseLoader } from "react-spinners";
+
+import { MoonLoader, PulseLoader } from "react-spinners";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { DATA_APP_CONTEXT, URL_SERVER } from '../../contexts/constantesVar';
+import { DATA_APP_CONTEXT } from '../../contexts/constantesVar';
 import SinavMat from '../../components/sinavMaterias/sinavMat';
 import Login from '../../components/login.register/login.regsiter';
-import axios from 'axios';
 import Editors from '../../components/editoresAddImg/edits';
-import ImageView from '../../components/viewImagesComments/imageView';
 import Footer from '../../components/footer/footer';
-import Comentario from './comment';
 import Comentarios from './commentt';
 
 
@@ -32,56 +23,18 @@ import Comentarios from './commentt';
 
 
 export default function Home() {
-  const { dataRicheText, GetDataComent, dataComentario, GetDataComentResponse, ScrollInfinito, dispatch, LoadListExam,
-    datosGetComentResponse, dataComentarioResp, GetDataRespComentResponse, examId, more, spinnerCargarExamenes,
-    dataRespComentarioResp, spinnerComment, spinnerCargarCommentRespons, spinnerCargarResponsRespons, pdfUrl, dataApp } = useContext(AppContext)
-  const [text, setText] = useState("")
-  const code = window.localStorage.getItem("code")
-  const [verResp1, setverResp1] = useState("")
-  const [imageArray, setImageArray] = useState([])
-  const [verResp2, setverResp2] = useState("")
-  const [datos, setDatos] = useState("")
-  const [currentImage, setCurrentImage] = useState(0);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-
-
-  const openImageViewer = useCallback((index) => {
-    console.log(index)
-    setCurrentImage(index);
-    setIsViewerOpen(true);
-  }, []);
-
-  const closeImageViewer = () => {
-    setCurrentImage(0);
-    setIsViewerOpen(false);
-  };
+  const { dataComentario, ScrollInfinito, dispatch, LoadListExam,
+    examId, more,
+    dataApp } = useContext(AppContext)
 
 
 
 
 
 
-  const VerResp1 = (id) => {
-    if (id) {
-      GetDataComentResponse(id)
-      setverResp1(id)
-      setverResp2("")
-    } else {
-      setverResp1(id)
-      setverResp2("")
-    }
 
-  }
 
-  const VerResp2 = (id) => {
-    if (id) {
-      GetDataRespComentResponse(id)
-      setverResp2(id)
-    } else {
-      setverResp2("")
-    }
 
-  }
 
   const PaginationInfiniScroll = async () => {
     ScrollInfinito(examId)
@@ -174,7 +127,7 @@ export default function Home() {
 
                             {dataComentario.map((i, x) =>
 
-                            <Comentarios comentario={i} key={i._id} />
+                              <Comentarios comentario={i} key={i._id} />
 
                             )}
                           </div>
