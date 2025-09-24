@@ -24,7 +24,7 @@ const Comentarios = ({ comentario }) => {
         <div
             style={{
                 marginLeft: comentario?.parentId ? 10 : 0,
-                borderLeft: comentario?.parentId ? "2px solid #616161" : "2px solid #616161",
+                borderLeft: comentario?.parentId ? "2px solid #e0e0e0" : "2px solid #e0e0e0",
                 paddingLeft: 10,
                 marginTop: 10,
                 borderRadius: comentario?.parentId ? '0px' : "0px",
@@ -42,7 +42,7 @@ const Comentarios = ({ comentario }) => {
                         width: 35,
                         height: 35,
                         borderRadius: "50%",
-                        background: "#fff",
+                        background: "transparent",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
