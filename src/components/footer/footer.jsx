@@ -23,25 +23,39 @@ const Footer = () => {
                         </form>
                     </div>
                     {
-                    <div className="footer-redesSociales-contact">
-                        <div className="mumbexInfo-info-contact ">
-                            <div className="mumbexInfo ">
-                            <h2>Pedro Ndong Ondo Avomo</h2>
-                            <h3>Building by Pedro Ndong Ondo Avomo</h3>
+                        <div className="footer-redesSociales-contact">
+                            <div className="mumbexInfo-info-contact ">
+                                <div className="mumbexInfo ">
+                                    <h2>Pedro Ndong Ondo Avomo</h2>
+                                    <h3>Building by Pedro Ndong Ondo Avomo</h3>
+                                </div>
+                            </div>
+                            <div className="redesSociales">
+                                <a
+                                    className="redes-items"
+                                    href="https://www.youtube.com/@pedrondon9"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <AiFillYoutube />
+                                </a>
+                                <a
+                                    className="redes-items"
+                                    href="https://linkedin.com/in/pedro-ndong-ondo-avomo-115401354"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <AiFillLinkedin />
+                                </a>
                             </div>
                         </div>
-                        <div className="redesSociales">
-                            <Link style={{color:"red"}} className="redes-items" to="/"><AiFillYoutube /></Link>
-                            <Link className="redes-items" to="https://linkedin.com/in/pedro-ndong-ondo-avomo-115401354"><AiFillLinkedin /></Link>
-                        </div>
-                    </div> 
                     }
 
                 </div>
 
 
             </div>
-            { <div className="footerFinal">
+            {<div className="footerFinal">
                 <div className="copiright">
                     mumbeX todos los derechos reservados © 2025 (Pedro Ndong Ondo Avomo)
                 </div>
@@ -52,7 +66,7 @@ const Footer = () => {
                     <Link className='items' to="/nosotros">Nosotros</Link>
                     <Link className='items' to="/blog">Blog</Link>
                 </div>
-            </div> }
+            </div>}
         </div>
     )
 }
