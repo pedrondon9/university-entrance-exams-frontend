@@ -170,20 +170,23 @@ function Login() {
                                     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", insetInline: "0px" }}>
                                         <p style={{ marginBlock: "3px", fontSize: "15px", fontWeight: "bold", marginBottom: 18 }}>Volver atras
                                             <Link style={{ marginLeft: 6 }} onClick={() => {
+                                                const dataLogUp = {
+                                                    RESP_ERROR_LOGIN: "",
+                                                    ERROR_USER: false,
+                                                    LOGIN_SPINNER: false,
+                                                    SEND_EMAIL: false,
+                                                    token: "",
+                                                }
                                                 dispatch({
                                                     type: DATA_APP_REGISTER_CONTEXT,
-                                                    payload: {
-                                                        RESP_ERROR_LOGIN: "",
-                                                        ERROR_USER: false,
-                                                        "LOGIN_SPINNER": false,
-                                                        "SEND_EMAIL": false,
-                                                        "token": "",
-                                                    }
+                                                    payload: dataLogUp
                                                 })
+                                                window.localStorage.setItem("logUp", JSON.stringify(dataLogUp))
+
                                                 setCambiarFormulario(true)
                                                 setTextBottonSubmit("(Volver)")
                                                 setCambiarFormulario("signUp")
-                                            }} to="#!">Iniciar sesion !</Link>
+                                            }} to="#!">Aqui !</Link>
                                         </p >
 
                                     </div>

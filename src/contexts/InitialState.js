@@ -53,7 +53,7 @@ export const InitialState = {
 
     },
 
-        dataAppRegister: JSON.parse(window.sessionStorage.getItem('logUp')) ? JSON.parse(window.sessionStorage.getItem('logUp')) : {
+        dataAppRegister: JSON.parse(window.localStorage.getItem('logUp')) ? JSON.parse(window.localStorage.getItem('logUp')) : {
         token: "",
         VERIFICAR_EMAIL: false,
         SEND_EMAIL: false,

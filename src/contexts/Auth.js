@@ -137,9 +137,9 @@ export default (props) => {
 
 
 
-    const AddComent = async (coment, userId, examenId,parentId ) => {
+    const AddComent = async (coment, userId, examenId, parentId) => {
 
-        
+
         dispatch({
             type: DATA_APP_CONTEXT,
             payload: { "ADD_COMMENT_SPINNER": true }
@@ -360,7 +360,7 @@ export default (props) => {
 
                     })
 
-                    window.sessionStorage.setItem("logUp", JSON.stringify(dataLogUp))
+                    //window.localStorage.setItem("logUp", JSON.stringify(dataLogUp))
 
                     //navigate("/resendEmail")
 
@@ -407,7 +407,7 @@ export default (props) => {
 
 
     const resendEmail = async () => {
-        const userData = JSON.parse(window.sessionStorage.getItem('logUp'));
+        const userData = state.dataAppRegister //JSON.parse(window.sessionStorage.getItem('logUp'));
 
 
         dispatch({
@@ -486,7 +486,7 @@ export default (props) => {
 
                 })
 
-                window.sessionStorage.setItem("logUp", JSON.stringify(dataLogUp))
+                // window.localStorage.setItem("logUp", JSON.stringify(dataLogUp))
 
             } else {
 
@@ -505,15 +505,13 @@ export default (props) => {
         } catch (error) {
             ErrorG(dispatch, error)
         } finally {
+            const dataLogUp = {
+                "LOGIN_SPINNER": false,
+                "ERROR_USER": true,
+            }
             dispatch({
                 type: DATA_APP_REGISTER_CONTEXT,
-                payload: {
-                    "LOGIN_SPINNER": false,
-                    "ERROR_USER": true,
-                    "RESP_ERROR_LOGIN": "Comprueba tu coneccion a internet",
-                    "SEND_EMAIL": false,
-                    "token": '',
-                }
+                payload: dataLogUp
             })
         }
 
