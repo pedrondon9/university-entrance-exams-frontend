@@ -22,7 +22,6 @@ function MenuLaterals() {
     /********* cambiar pdf ***************** */
     const CambiarPdf = (pdf, id) => {
 
-        console.log(id, 'y id')
         dispatch({
             type: DATA_APP_CONTEXT,
             payload: {

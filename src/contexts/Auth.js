@@ -80,7 +80,6 @@ export default (props) => {
                         url: `/customer/get_comment/${examenId}`
                     })
                     if (comments.data.success) {
-                        console.log(comments.data.response)
                         dispatch({
                             type: DATA_APP_CONTEXT,
                             payload: {

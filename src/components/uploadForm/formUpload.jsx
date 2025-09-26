@@ -27,16 +27,26 @@ function FormUpload() {
 
     //funcion para obtener el pdf y leerlo
     const PdfFile = (e) => {
-        setPdf(e.target.files[0])//guardar el pdf en la variable pdf
         let reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0])
-        reader.onloadend = (e) => {
-            //insertar o cambiar el pdf que se muestra
-            dispatch({
-                type: DATA_APP_CONTEXT,
-                payload: { "PDF_VIEW_FORM": e.target.result }
-            })
+
+        try{
+
+            if (e.target.files?.[0]) {
+                setPdf(e.target.files[0])//guardar el pdf en la variable pdf
+                reader.readAsDataURL(e.target.files[0])
+                reader.onloadend = (e) => {
+                    //insertar o cambiar el pdf que se muestra
+                    dispatch({
+                        type: DATA_APP_CONTEXT,
+                        payload: { "PDF_VIEW_FORM": e.target.result }
+                    })
+                } 
+            }
+
+        }catch(error){
+
         }
+
     }
 
     const get_materias = async () => {
@@ -44,14 +54,12 @@ function FormUpload() {
             const materias = await axiosConfigs.get(`/customer/getMaterias`)
 
             if (materias.data.success) {
-                console.log(materias.data.response.docs)
                 setMaterias(materias.data.response.docs)
             }else{
                 setMaterias([])
             }
         } catch (error) {
             setMaterias([])
-            console.log(error)
         }
     }
 

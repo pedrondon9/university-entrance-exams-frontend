@@ -23,14 +23,12 @@ function Admins() {
     //funcion para cargar los array de los examenes
 
     const LoadListExam = async () => {
-        console.log(dataApp.USER_ID, 'hhhh')
 
         try {
             setSpìnner(true)
             const add = await axiosConfigs.get(`/customer/auth/get_exams_upload_iduser/${dataApp.USER_ID}`)
             //const add = await axiosConfigs.get(`/customer/getExamenList`)
             if (add.data.success) {
-                console.log(add.data)
                 setExamenList(add.data.response)
                 //setAddSpìnner(false)
             } else {
