@@ -2,7 +2,6 @@ const { LOGIN_SPINNER, ERROR_USER, RESP_ERROR_LOGIN, DATA_APP_CONTEXT, DATA_APP_
 
 const ErrorG = (dispatch, error) => {
 
-    console.log("ErrorG", error)
 
     if (error.response?.status === 401) {
 

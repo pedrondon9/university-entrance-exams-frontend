@@ -44,25 +44,25 @@ function Admins() {
 
     }
 
-    const DeleteExam = async (id, año, mes, estado, face) => {
+    const DeleteExam = async (id) => {
         //console.log(id,año,mes,estado,face)
         const confirmar = window.confirm("Seguro que quieres borrar este examen")
         //console.log(confirmar)
         if (confirmar) {
             try {
-                const borrar = await axios({
+                const borrar = await axiosConfigs({
                     method: "post",
-                    data: { "id": id, "año": año, "mes": mes, "estado": estado, "face": face },
-                    url: `${URL_SERVER}/deleteExam`
+                    data: { "id": id},
+                    url: `${URL_SERVER}/customer/auth/deleteExam`
                 })
                 //console.log(borrar.data,"wwwwwwwwwwwwwwwwwwwwwww")
-                if (borrar.data === "borrado") {
+                if (borrar.data.success) {
                     LoadListExam()
-                    var toastHTML = '<span className = "text-red">' + borrar.data + '</span>';
+                    var toastHTML = '<span className = "text-red">' + borrar.data.message + '</span>';
                     M.toast({ html: toastHTML });
                     //setBorrarSpìnner(false)
                 } else {
-                    var toastHTML = '<span className = "text-red">' + borrar.data + '</span>';
+                    var toastHTML = '<span className = "text-red">' + borrar.data.message + '</span>';
                     M.toast({ html: toastHTML });
                 }
             } catch (error) {
@@ -115,7 +115,7 @@ function Admins() {
                                                                         <li className="collection-item verExamen">{x.mes + " " + x.face + " " + x.estado}
                                                                             <button
                                                                                 className='btn-small boton-borrar'
-                                                                                onClick={() => { DeleteExam(i._id, a.year, x.mes, x.estado, x.face) }}
+                                                                                onClick={() => { DeleteExam(x._id) }}
                                                                             >Borrar examen</button>
                                                                         </li>
                                                                     </ul>
