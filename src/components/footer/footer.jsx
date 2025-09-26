@@ -35,6 +35,7 @@ const Footer = () => {
                                     className="redes-items"
                                     href="https://www.youtube.com/@pedrondon9"
                                     target="_blank"
+                                    style={{color:"red"}}
                                     rel="noopener noreferrer"
                                 >
                                     <AiFillYoutube />
@@ -57,14 +58,12 @@ const Footer = () => {
             </div>
             {<div className="footerFinal">
                 <div className="copiright">
-                    mumbeX todos los derechos reservados © 2025 (Pedro Ndong Ondo Avomo)
+                    Todos los derechos reservados ©  (Pedro Ndong Ondo Avomo)
                 </div>
                 <div className="menuFooter">
                     <Link className='items' to="/">Inicio</Link>
-                    <Link className='items' to="/servicios">Servicios</Link>
-                    <Link className='items' to="/productos">Productos</Link>
-                    <Link className='items' to="/nosotros">Nosotros</Link>
-                    <Link className='items' to="/blog">Blog</Link>
+                    <Link className='items' to="/upload">Subir examen</Link>
+                    <Link className='items' to="/deleteExammm">Tus examenes</Link>
                 </div>
             </div>}
         </div>

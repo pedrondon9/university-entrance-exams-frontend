@@ -98,41 +98,53 @@ function Admins() {
                     <div style={{ marginTop: "90px" }}>
                         <h3 >Tus examnes subidos </h3>
                     </div>
-
                     <ul className="collapsible collection-delete">
-                        {examenList.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
-                            <li key={i._id}>
-                                <div className="collapsible-header menu-lateral-pg-cat"><span>{i.name} ({i.cantitie})</span></div>
-                                <div className='collapsible-body menu-lateral-colapsible-body' >
-                                    <ul className="collection">
-                                        {i.examenUploadId.map((a, b) =>//recorrer el array de años y dentro de este se encuentra los examenes segun su face , mes , estado"corregido o no" etc
-                                            <div key={a.year}>
-                                                <li className="collection-item" onClick={() => { setAño(a.year); setId(i._id) }}>{a.year} ({a.cantitie})</li>
-                                                {a.exams.map((x, y) =>//recorrer los examenes
-                                                    <div key={y.toString()}>
-                                                        {a.year === año && i._id === id ?
-                                                            <ul className="collection">
-                                                                <li className="collection-item verExamen">{x.mes + " " + x.face + " " + x.estado}
-                                                                    <button
-                                                                        className='btn-small boton-borrar'
-                                                                        onClick={() => { DeleteExam(i._id, a.year, x.mes, x.estado, x.face) }}
-                                                                    >Borrar examen</button>
-                                                                </li>
-                                                            </ul>
-                                                            :
-                                                            <></>
-                                                        }
+
+                        {!spìnner ?
+                            <>
+                                {examenList.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
+                                    <li key={i._id}>
+                                        <div className="collapsible-header menu-lateral-pg-cat"><span>{i.name} ({i.cantitie})</span></div>
+                                        <div className='collapsible-body menu-lateral-colapsible-body' >
+                                            <ul className="collection">
+                                                {i.examenUploadId.map((a, b) =>//recorrer el array de años y dentro de este se encuentra los examenes segun su face , mes , estado"corregido o no" etc
+                                                    <div key={a.year}>
+                                                        <li className="collection-item" onClick={() => { setAño(a.year); setId(i._id) }}>{a.year} ({a.cantitie})</li>
+                                                        {a.exams.map((x, y) =>//recorrer los examenes
+                                                            <div key={y.toString()}>
+                                                                {a.year === año && i._id === id ?
+                                                                    <ul className="collection">
+                                                                        <li className="collection-item verExamen">{x.mes + " " + x.face + " " + x.estado}
+                                                                            <button
+                                                                                className='btn-small boton-borrar'
+                                                                                onClick={() => { DeleteExam(i._id, a.year, x.mes, x.estado, x.face) }}
+                                                                            >Borrar examen</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                    :
+                                                                    <></>
+                                                                }
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 )}
-                                            </div>
-                                        )}
-                                    </ul>
-                                </div>
-                            </li>
-                        )}
+                                            </ul>
+                                        </div>
+                                    </li>
+                                )}
 
+                            </>
 
+                            :
+
+                            <div style={{ marginTop: "50px", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                                <MoonLoader size={35} color={"#212121"} />
+                                <p>Cargando archivos ...</p>
+                            </div>
+
+                        }
                     </ul>
+
 
                 </div>
             </div>

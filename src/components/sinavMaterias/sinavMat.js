@@ -70,7 +70,7 @@ const SinavMat = () => {
                                 <ul className="collection">
                                     {i.examenUploadId?.map((a, b) =>//recorrer el array de años y dentro de este se encuentra los examenes segun su face , mes , estado"corregido o no" etc
                                         <div key={a.year}>
-                                            <li className="collection-item item-anos" onClick={() => { setAño(a.year); setId(i._id) }}>{a.year} ({i.cantitie})</li>
+                                            <li className="collection-item item-anos" onClick={() => { setAño(a.year); setId(i._id) }}>{a.year} ({a.cantitie})</li>
                                             {a.exams.map((x, y) =>//recorrer los examenes
                                                 <div key={y.toString()}>
                                                     {a.year === año && i._id === id ?

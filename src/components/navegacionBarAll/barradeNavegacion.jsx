@@ -54,11 +54,16 @@ function BarradeNavegacion() {
                     </div>
                     <div className='nav-link-container'>
                         <div className='nav-container'>
-                            <Link style={{color:currentSegment === '/'?'#dd2c00':'#212121',textDecoration:currentSegment === '/'?'underline':"none"}} to="/">Inicio</Link>
-                            <Link style={{color:currentSegment === '/upload'?'#dd2c00':'#212121',textDecoration:currentSegment === '/upload'?'underline':"none"}} to="/upload">Subir</Link>
-                            <Link style={{color:currentSegment === '/deleteExammm'?'#dd2c00':'#212121',textDecoration:currentSegment === '/deleteExammm'?'underline':"none"}} to="/deleteExammm">Tus  Examenes</Link>
+                            <Link style={{ color: currentSegment === '/' ? '#dd2c00' : '#212121', textDecoration: currentSegment === '/' ? 'underline' : "none" }} to="/">Inicio</Link>
+                            <Link style={{ color: currentSegment === '/upload' ? '#dd2c00' : '#212121', textDecoration: currentSegment === '/upload' ? 'underline' : "none" }} to="/upload">Subir</Link>
+                            {dataApp.VALIDAR_USER &&
+                                <>
+                                    <Link style={{ color: currentSegment === '/deleteExammm' ? '#dd2c00' : '#212121', textDecoration: currentSegment === '/deleteExammm' ? 'underline' : "none" }} to="/deleteExammm">Tus  Examenes</Link>
+
+                                </>
+                            }
                             {dataApp?.VALIDAR_USER ?
-                                <Link onClick={LogOut } style={{ marginLeft: "50px" }} to="#">Cerrar</Link>
+                                <Link onClick={LogOut} style={{ marginLeft: "50px" }} to="#">Cerrar</Link>
 
                                 :
                                 <Link className='modal-trigger' data-target="modal1" style={{ marginLeft: "50px" }} to="#">Login</Link>
