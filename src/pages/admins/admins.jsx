@@ -11,7 +11,8 @@ import Login from '../../components/login.register/login.regsiter'
 
 function Admins() {
     const { dispatch, AddComent, GetDataComent, spinnerCargarExamenes, dataApp, axiosConfigs } = useContext(AppContext)
-    const [spìnner, setSpìnner] = useState(false)
+    const [spinner, setSpinner] = useState(false)
+    const [spinnerDelete, setSpinnerDelete] = useState(false)
     const [changeExam, setChangeExam] = useState(false)
     const [examenList, setExamenList] = useState([])
     const [borrarSpìnner, setBorrarSpìnner] = useState(false)
@@ -25,7 +26,7 @@ function Admins() {
     const LoadListExam = async () => {
 
         try {
-            setSpìnner(true)
+            setSpinner(true)
             const add = await axiosConfigs.get(`/customer/auth/get_exams_upload_iduser/${dataApp.USER_ID}`)
             //const add = await axiosConfigs.get(`/customer/getExamenList`)
             if (add.data.success) {
@@ -39,7 +40,7 @@ function Admins() {
             setExamenList([])
             //setAddSpìnner(false)
         } finally {
-            setSpìnner(false)
+            setSpinner(false)
         }
 
     }
@@ -50,6 +51,7 @@ function Admins() {
         //console.log(confirmar)
         if (confirmar) {
             try {
+                setSpinnerDelete(true)
                 const borrar = await axiosConfigs({
                     method: "post",
                     data: { "id": id},
@@ -69,6 +71,8 @@ function Admins() {
                 //console.log(error)
                 var toastHTML = '<span className = "text-red">' + "hay un problema !" + '</span>';
                 M.toast({ html: toastHTML });
+            }finally {
+                setSpinnerDelete(false)
             }
         } else {
 
@@ -98,7 +102,7 @@ function Admins() {
                     </div>
                     <ul className="collapsible collection-delete">
 
-                        {!spìnner ?
+                        {!spinner ?
                             <>
                                 {examenList.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
                                     <li key={i._id}>
@@ -116,7 +120,9 @@ function Admins() {
                                                                             <button
                                                                                 className='btn-small boton-borrar'
                                                                                 onClick={() => { DeleteExam(x._id) }}
-                                                                            >Borrar examen</button>
+                                                                            >
+                                                                                {!spinnerDelete ? "Borrar" : <ScaleLoader height={10} width={2} radius={2} margin={2} color="#ffffff" />}
+                                                                            </button>
                                                                         </li>
                                                                     </ul>
                                                                     :
