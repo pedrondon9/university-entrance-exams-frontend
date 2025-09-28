@@ -100,9 +100,9 @@ export default function Home() {
               <div className='block-chat-container'>
 
                 <div className='block-chat-container-resp'>
-                  <div>
-                    <h3>Publica tu duda</h3>
-                    <h6>Para recibir ayuda de los demas !</h6>
+                  <div className='titulo-chat-home'>
+                    <h4 className='titulo-3'>Publica tu duda</h4>
+                    <p className='parafo'>Para recibir ayuda de los demas !</p>
                   </div>
 
                   {/* editor del comentrio principal */}

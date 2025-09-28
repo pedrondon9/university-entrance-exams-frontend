@@ -222,7 +222,7 @@ function Editors() {
                         }} className='btn-small addCommentseButton' >{!spinner ? "Comentar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
-                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addCommentseButton modal-trigger' data-target="modal1">Comentar</Link>
+                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small boton  modal-trigger' data-target="modal1">Publicar duda</Link>
                 }
 
             </div>

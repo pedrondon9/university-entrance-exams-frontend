@@ -13,7 +13,11 @@
     height: 300px;
 }
 .side-nav-lat span{
-    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    font-size: 16px;
+    line-height: 45px;
 }
 .item-anos{
     font-size: 18px;
