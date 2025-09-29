@@ -200,7 +200,7 @@ function Editors() {
 
     return (
         <div className='card edit-container' style={{
-            border: "2px solid #333",
+            //border: "2px solid #333",
         }}>
             <ReactQuill
                 ref={quillRef}
