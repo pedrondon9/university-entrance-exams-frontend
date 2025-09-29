@@ -199,7 +199,9 @@ function Editors() {
 
 
     return (
-        <div className='card edit-container'>
+        <div className='card edit-container' style={{
+            border: "2px solid #333",
+        }}>
             <ReactQuill
                 ref={quillRef}
 
@@ -208,9 +210,8 @@ function Editors() {
                 value={value}
                 onChange={handleChange}
                 placeholder="Escribe algo aquí..."
-                style={{                
-                    //border:"2px solid #333",
-                    borderRadius:"5px",               
+                style={{
+                    borderRadius: "5px",
                 }}
             />
 

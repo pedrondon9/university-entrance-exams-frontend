@@ -389,7 +389,7 @@ a{
 @media screen and (max-width:260px){
   .response-description .imagenes-view-big{
     width: 150px;
-    height: 100px;
+    height: 100px; 
   }
 }
 

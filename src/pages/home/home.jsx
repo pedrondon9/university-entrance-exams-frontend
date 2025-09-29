@@ -101,7 +101,7 @@ export default function Home() {
 
                 <div className='block-chat-container-resp'>
                   <div className='titulo-chat-home'>
-                    <h3 className='titulo-3'>Publica tu duda</h3>
+                    <h3 className='titulo-3' style={{fontWeight:"600"}}>Publica tu duda</h3>
                     <p className='parafo'>Para recibir ayuda de los demas !</p>
                   </div>
 
