@@ -9,6 +9,7 @@ import M from 'materialize-css';
 import { Link } from 'react-router-dom';
 import { FiCamera } from 'react-icons/fi'
 import "./editAddImage.css"
+import "./edit.css"
 
 
 
@@ -198,7 +199,7 @@ function EditorsRespuestas({ examenId, parentId }) {
 
 
     return (
-        <div>
+        <div className='card'>
             <ReactQuill
                 ref={quillRef}
 
@@ -208,7 +209,7 @@ function EditorsRespuestas({ examenId, parentId }) {
                 onChange={handleChange}
                 placeholder="Escribe algo aquí..."
                 style={{                
-                    border:"2px solid #ffd740",
+                    //border:"2px solid #ffd740",
                     borderRadius:"5px",               
                 }}
             />
@@ -227,7 +228,7 @@ function EditorsRespuestas({ examenId, parentId }) {
                         }} className='btn-small addResponseButton' >{!spinner ? "Responder" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
-                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small addResponseButton modal-trigger' data-target="modal1">Responder</Link>
+                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small boton-edit modal-trigger' data-target="modal1">Responder</Link>
                 }
 
             </div>

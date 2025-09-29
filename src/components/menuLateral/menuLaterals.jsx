@@ -59,7 +59,7 @@ function MenuLaterals() {
     return (
 
 
-        <ul className="collapsible menu-lateral-pg">
+        <ul className="collapsible menu-lateral-pg card">
             {examenList?.map((i, x) =>//recorrer el array de materia y dentro de este se encuaentra el array de los años de convocatoria
                 <li key={i._id}>
                     <div className="collapsible-header menu-lateral-pg-cat"><span>{i.name} ({i.cantitie})</span></div>

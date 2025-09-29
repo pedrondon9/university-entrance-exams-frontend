@@ -9,6 +9,7 @@ import M from 'materialize-css';
 import { Link } from 'react-router-dom';
 import { FiCamera } from 'react-icons/fi'
 import "./editAddImage.css"
+import "./edit.css"
 
 
 
@@ -198,7 +199,7 @@ function Editors() {
 
 
     return (
-        <div>
+        <div className='card edit-container'>
             <ReactQuill
                 ref={quillRef}
 
@@ -208,7 +209,7 @@ function Editors() {
                 onChange={handleChange}
                 placeholder="Escribe algo aquí..."
                 style={{                
-                    border:"2px solid #ffd740",
+                    //border:"2px solid #333",
                     borderRadius:"5px",               
                 }}
             />
@@ -222,7 +223,7 @@ function Editors() {
                         }} className='btn-small addCommentseButton' >{!spinner ? "Comentar" : <PulseLoader size={9} color="#212121" />}
                     </Link>
                     :
-                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small boton  modal-trigger' data-target="modal1">Publicar duda</Link>
+                    <Link to="#!" onClick={() => { LimpiarError() }} className='btn-small boton-edit  modal-trigger' data-target="modal1">Publicar duda</Link>
                 }
 
             </div>
